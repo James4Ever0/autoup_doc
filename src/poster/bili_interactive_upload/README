@@ -1,0 +1,39 @@
+# General Interactive Video Upload Automation
+
+## Basic routine
+
+1. upload videos via https://member.bilibili.com/preupload, and along with the only cover.
+
+2. upload skeleton via https://member.bilibili.com/x/vu/web/add?csrf=, according to this format:
+
+```json
+{"copyright":1, // 1 for copyright, 2 for copyleft
+"videos":
+[{"filename":"m201214(no file extension)","title":"pic","desc":"","cid":0},{"filename":"mfilename","title": "final","desc":"","cid":0},{"filename": "mxx","title":"sxx","desc":"","cid":0}] //the cid will be assigned later by bilibili.
+,"no_reprint":1,
+"interactive":1,
+"tid":171,
+"cover":"//i0.xx.com/xx.jpg",
+"title":"interactive_video_final",
+"tag":"互动视频",
+"desc_format_id":39, // not sure about this one. it says we can use chinese downtick to specify the game names prefixed by "related games:".
+"desc":"",
+"dynamic":"#互动视频#",
+"open_elec":1, //allow to get financial support.
+"subtitle":{"open":1,"lan":""}, //language not specified.
+"up_close_reply":false,
+"up_close_danmu":false
+}
+```
+
+3. **GET** cids from https://member.bilibili.com/x/web/archive/view?bvid=<bv_id>
+
+4. edit and **POST** the final worldline to https://api.bilibili.com/x/stein/graph/save
+
+## Workflow
+
+Basically we need a template to handle network requests.
+
+And we need all cookies be prepared beforehand. If it is not necessary to use extra cookies then we are good, leaving the collective work out.
+
+Finally, a template to do worldline script assignments.

@@ -1,0 +1,10 @@
+{
+    "summary": "This code runs a Python script to upload a video file and its metadata to Bilibili using bilibili.py, specifying cookies, video file path, and metadata file path as arguments.",
+    "details": [
+        {
+            "comment": "This code runs a Python script to upload a video file and its metadata to Bilibili using bilibili.py, specifying cookies, video file path, and metadata file path as arguments.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/demo_post.sh\":0-1",
+            "content": "#!/bin/bash\npython3 poster/uploader/bilibili.py -k $PWD/.confidential/bilibili_cookies_full.json -f $PWD/generator/video_output/jojo\u5927\u6218\u5185\u9a6c\u5c14_final.mp4 -m $PWD/generator/sample_metadata.json"
+        }
+    ]
+}

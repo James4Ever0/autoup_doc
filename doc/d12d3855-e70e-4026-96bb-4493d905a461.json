@@ -1,0 +1,10 @@
+{
+    "summary": "This code suggests changing the default file manager in Linux and mentions mc (Midnight Commander) and ranger as alternatives. Multiupload is considered irrelevant to the platform, so it should be disregarded.",
+    "details": [
+        {
+            "comment": "This code suggests changing the default file manager in Linux and mentions mc (Midnight Commander) and ranger as alternatives. Multiupload is considered irrelevant to the platform, so it should be disregarded.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bili_interactive_upload/BRIEF\":0-4",
+            "content": "to upload the thing, you need to change your default file manager, which is not very hard to do in linux.\n-> mc, ranger\nmultiupload is nonrelevent to the platform. cut the shit."
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "summary": "Code imports required libraries, loads a sample audio file, prints the loaded waveform and its properties, estimates pitch tuning, applies pitch shift, saves shifted audio to a new file, and plots the original waveform.",
+    "details": [
+        {
+            "comment": "Code imports required libraries, loads a sample audio file, prints the loaded waveform and its properties, estimates pitch tuning, applies pitch shift, saves shifted audio to a new file, and plots the original waveform.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/generator/singing/demo_song.py\":0-33",
+            "content": "import librosa\ntarget = \"sample.wav\"\ntrumpet = librosa.ex('trumpet')\nprint(trumpet)\n# along with sample rate.\nsample = librosa.load(target)\nprint(sample)\narray, sample_rate = sample\nprint(type(array), type(sample_rate))\n# numpy array.\npitch_estimate = librosa.pitch.estimate_tuning(array,sr=sample_rate)\nprint(pitch_estimate)\nshifted = librosa.effects.pitch_shift(sample[0],sample[1],2)\nchannels = len(shifted.shape)\n# next is to crop the audio file?\nimport soundfile\nwith soundfile.SoundFile(\"shifted.wav\",\"w\",sample[1],channels,\"PCM_24\") as f:\n    f.write(shifted)\nimport matplotlib.pyplot as plt\nimport librosa.display\nplot = librosa.display.waveplot(sample[0], sample[1])\nplt.show()"
+        }
+    ]
+}

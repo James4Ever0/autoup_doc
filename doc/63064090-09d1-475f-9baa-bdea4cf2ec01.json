@@ -1,0 +1,10 @@
+{
+    "summary": "This script imports the debug_flv module from flvlib3 and executes its main function. It is part of a larger codebase in the auto-up/tools directory, potentially related to handling FLV files.",
+    "details": [
+        {
+            "comment": "This script imports the debug_flv module from flvlib3 and executes its main function. It is part of a larger codebase in the auto-up/tools directory, potentially related to handling FLV files.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/tools/debug-flv\":0-3",
+            "content": "#!/usr/bin/python3\nfrom flvlib3.scripts import debug_flv\ndebug_flv.main()"
+        }
+    ]
+}

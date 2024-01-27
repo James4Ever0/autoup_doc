@@ -1,0 +1,533 @@
+{
+    "100": {
+        "file_id": 14,
+        "content": "/collector/qq_mirai_bot/build.sh",
+        "type": "filepath"
+    },
+    "101": {
+        "file_id": 14,
+        "content": "This code sets up a directory for dependencies, navigates to the MiraiGo folder, and configures the GOPATH and GOPROXY environment variables. It then uses \"go build\" to compile the Go program.",
+        "type": "summary"
+    },
+    "102": {
+        "file_id": 14,
+        "content": "#!/bin/bash\nmkdir deps\ncd MiraiGo\nGOPATH=$PWD/../deps GOPROXY=https://goproxy.cn,direct go build ",
+        "type": "code",
+        "location": "/collector/qq_mirai_bot/build.sh:1-4"
+    },
+    "103": {
+        "file_id": 14,
+        "content": "This code sets up a directory for dependencies, navigates to the MiraiGo folder, and configures the GOPATH and GOPROXY environment variables. It then uses \"go build\" to compile the Go program.",
+        "type": "comment"
+    },
+    "104": {
+        "file_id": 15,
+        "content": "/collector/qq_mirai_bot/build_main.sh",
+        "type": "filepath"
+    },
+    "105": {
+        "file_id": 15,
+        "content": "This script creates a directory named \"deps\", navigates to the \"go-cqhttp\" folder, sets GOPATH and GOPROXY variables, then builds the code using go build.",
+        "type": "summary"
+    },
+    "106": {
+        "file_id": 15,
+        "content": "#!/bin/bash\nmkdir deps\ncd go-cqhttp\nGOPATH=$PWD/../deps GOPROXY=https://goproxy.cn,direct go build ",
+        "type": "code",
+        "location": "/collector/qq_mirai_bot/build_main.sh:1-4"
+    },
+    "107": {
+        "file_id": 15,
+        "content": "This script creates a directory named \"deps\", navigates to the \"go-cqhttp\" folder, sets GOPATH and GOPROXY variables, then builds the code using go build.",
+        "type": "comment"
+    },
+    "108": {
+        "file_id": 16,
+        "content": "/collector/qq_mirai_bot/build_template.sh",
+        "type": "filepath"
+    },
+    "109": {
+        "file_id": 16,
+        "content": "This script creates a \"deps\" directory, changes to the \"MiraiGo-Template\" directory, sets GOPATH and GOPROXY environment variables for Go build commands, and then builds the project using \"go build\".",
+        "type": "summary"
+    },
+    "110": {
+        "file_id": 16,
+        "content": "#!/bin/bash\nmkdir deps\ncd MiraiGo-Template\nGOPATH=$PWD/../deps GOPROXY=https://goproxy.cn,direct go build ",
+        "type": "code",
+        "location": "/collector/qq_mirai_bot/build_template.sh:1-4"
+    },
+    "111": {
+        "file_id": 16,
+        "content": "This script creates a \"deps\" directory, changes to the \"MiraiGo-Template\" directory, sets GOPATH and GOPROXY environment variables for Go build commands, and then builds the project using \"go build\".",
+        "type": "comment"
+    },
+    "112": {
+        "file_id": 17,
+        "content": "/cookie_dumper.py",
+        "type": "filepath"
+    },
+    "113": {
+        "file_id": 17,
+        "content": "This Python script, using Twisted library, creates a cookie dumper for \"bilibili.com\" with optional chatroom control and stores cookies in multiple formats, functioning as part of a monitoring program. It handles exceptions, executes methods based on changes, and runs event handling in an infinite loop.",
+        "type": "summary"
+    },
+    "114": {
+        "file_id": 17,
+        "content": "from twisted.internet import protocol, reactor\nimport time\nimport threading\nfrom threading import Event\nimport sys\nimport os\nimport re\nimport json\nimport traceback\nos.system(\"mkdir .confidential\")\nglobal_event = Event()\nquestloop=[\"bilibili.com\"]\n# do not quest these shits.\nquestpack= lambda x: [\"0\",\"background: query_cookies:{\\\"domain\\\":\\\"\"+x+\"\\\"}\"]\n# reformat and get all shits?\nquests=[x for z in questloop for x in questpack(z)]\nprevious_length = 0\n# shall we leave this computer partially controllable?\n# automatically run programs when not disturbed.\n# the default way of building this is about making a chatroom, broadcasting all results to connected clients.\nglobal_cookies = {}\nstd_cookies= []\nconf_prefix = \"./.confidential\"\ndef cred_dump_std(obj):\n    obj_str = json.dumps(obj)\n    # this is not.\n    with open(conf_prefix+\"/bilibili_cookies_std.json\",\"w+\") as f:\n        f.write(obj_str+\"\\n\")\ndef cred_dump(obj):\n    obj_str = json.dumps(obj)\n    # this is not.\n    with open(conf_prefix+\"/bilibili_cookies_full.json\",\"w+\") as f:",
+        "type": "code",
+        "location": "/cookie_dumper.py:1-34"
+    },
+    "115": {
+        "file_id": 17,
+        "content": "This code is a Python script using the Twisted library to create a cookie dumper for the domain \"bilibili.com\". It creates a confidential directory, stores cookies in two formats (full and standard), and allows optional control of the computer through a chatroom feature. The script also includes a function to dump standard cookies in JSON format and another function to dump all cookies.",
+        "type": "comment"
+    },
+    "116": {
+        "file_id": 17,
+        "content": "        f.write(obj_str+\"\\n\")\n    # also execute the replace string?\nclass MyPP(protocol.ProcessProtocol):\n    def connectionMade(self):\n        pass\n    def write(self, a):\n        sys.stdout.buffer.write(a)\n        # must display the content.\n        self.transport.write(a)\n    def processExited(self, reason):\n        print(\"processExited, status %s\" % (reason.value.exitCode,))\n    def outReceived(self, data):\n        global std_cookies, global_cookies, global_event, previous_length\n        print(data)\n        # here's the key.\n        decoded=data.decode()\n        mreceived = \"Message Received: \"\n        if decoded.startswith(mreceived):\n            decoded = decoded[len(mreceived):-1]\n            try:\n                structure = json.loads(decoded)\n                if \"cookies\" in structure.keys():\n                    cookies = structure[\"cookies\"]\n                    for cookie in cookies:\n                        if cookie[\"name\"] not in global_cookies.keys():\n                            std_cookies.append(cookie)",
+        "type": "code",
+        "location": "/cookie_dumper.py:35-62"
+    },
+    "117": {
+        "file_id": 17,
+        "content": "The code appears to be part of a larger program that monitors and collects cookies from various sources. It defines a class called MyPP which handles connection, writing data, and process output. When it receives a message containing \"cookies\" in its payload, it extracts the cookie information and adds them to a list if they are not already present.",
+        "type": "comment"
+    },
+    "118": {
+        "file_id": 17,
+        "content": "                            global_cookies[cookie[\"name\"]]=cookie[\"value\"]\n                    this_length = len(global_cookies.keys())\n                    if this_length != 0  and this_length == previous_length:\n                            # do not set that shit.\n                        global_event.set()\n                    if this_length > previous_length:\n                        previous_length = this_length\n                                # execute finalize method.\n            except:\n                traceback.print_exc()\n            # try to decode shit.\n    def errReceived(self, data):\n        print(\"errReceived!\", data)\nif __name__ == \"__main__\":\n    # multiprocessing.freeze_support()\n    pp = MyPP()\n    command=['./debug_init.sh']\n    # check for path.\n    def theFunc(a):\n        a.run()\n    reactor.spawnProcess(pp, command[0], command, env=os.environ, usePTY=False)\n    p =threading.Thread(target=theFunc,args=(reactor,))\n    p.setDaemon(True) # the whole shit.\n    p.start() # not RUN!\n    time.sleep(1)",
+        "type": "code",
+        "location": "/cookie_dumper.py:63-88"
+    },
+    "119": {
+        "file_id": 17,
+        "content": "This code is part of a script for managing cookies and events. It initializes an event setter, counts the number of cookies, compares the current count with previous ones, executes methods based on changes, handles exceptions, defines a function to run a process, and starts a new thread for event handling.",
+        "type": "comment"
+    },
+    "120": {
+        "file_id": 17,
+        "content": "    ik = 0\n    while True:\n        if global_event.is_set():\n            cred_dump(global_cookies)\n            cred_dump_std(std_cookies)\n            break\n            # finalize.\n        if ik>=len(quests):\n            ik%=len(quests)\n        pp.write((quests[ik]+\"\\n\").encode())\n        time.sleep(1)\n        ik+=1\n    print(\"__EOL__\")\n    # sys.exit()\n    exit()",
+        "type": "code",
+        "location": "/cookie_dumper.py:89-103"
+    },
+    "121": {
+        "file_id": 17,
+        "content": "The code is in an infinite loop, waiting for a global event to occur. If the event happens, it calls cred_dump and cred_dump_std functions. If the counter 'ik' exceeds the length of quests list, it wraps around to 0. It writes each quest line to pp file with a newline character encoding, sleeps for one second, and increments 'ik'. The code prints \"__EOL__\" after the loop ends and exits the program.",
+        "type": "comment"
+    },
+    "122": {
+        "file_id": 18,
+        "content": "/cookie_dumper.sh",
+        "type": "filepath"
+    },
+    "123": {
+        "file_id": 18,
+        "content": "This code executes a Python script named \"cookie_dumper.py\" and then uses sed command to replace specific configurations in \"config_demo.yaml\" file with the ones found in \"bilibili_cookies.sed\". The updated configuration is saved as \"config.yaml\" under the \"$poster_prefix\".",
+        "type": "summary"
+    },
+    "124": {
+        "file_id": 18,
+        "content": "#!/bin/bash\n#config_prefix=poster/bilibiliupload\npython3 cookie_dumper.py\n#sed -f .confidential/bilibili_cookies.sed $config_prefix/config_demo.yaml > $poster_prefix/config.yaml ",
+        "type": "code",
+        "location": "/cookie_dumper.sh:1-4"
+    },
+    "125": {
+        "file_id": 18,
+        "content": "This code executes a Python script named \"cookie_dumper.py\" and then uses sed command to replace specific configurations in \"config_demo.yaml\" file with the ones found in \"bilibili_cookies.sed\". The updated configuration is saved as \"config.yaml\" under the \"$poster_prefix\".",
+        "type": "comment"
+    },
+    "126": {
+        "file_id": 19,
+        "content": "/cookie_dumper_deprecated.py",
+        "type": "filepath"
+    },
+    "127": {
+        "file_id": 19,
+        "content": "This code imports libraries, sets up variables and functions for credential dumping, captures cookies from process output, avoids duplicate events, and monitors a process. It defines a class with error handling, finalize method, file writing functionality using multiprocessing, threading, and global event triggers. The exit() function abruptly ends the program without proper cleanup or resource management.",
+        "type": "summary"
+    },
+    "128": {
+        "file_id": 19,
+        "content": "from twisted.internet import protocol, reactor\nimport time\nimport threading\nfrom threading import Event\nimport sys\nimport os\nimport re\nimport json\nimport traceback\nos.system(\"mkdir .confidential\")\nglobal_event = Event()\nquestloop=[\"bilibili.com\"]\n# do not quest these shits.\nquestpack= lambda x: [\"0\",\"background: query_cookies:{\\\"domain\\\":\\\"\"+x+\"\\\"}\"]\n# reformat and get all shits?\nquests=[x for z in questloop for x in questpack(z)]\nprevious_length = 0\n# shall we leave this computer partially controllable?\n# automatically run programs when not disturbed.\n# the default way of building this is about making a chatroom, broadcasting all results to connected clients.\nglobal_cookies = {}\nconf_prefix = \"./.confidential\"\ndef cred_dump(obj):\n    obj_str = json.dumps(obj)\n    with open(conf_prefix+\"/bilibili_cookies_full.json\",\"w+\") as f:\n        f.write(obj_str+\"\\n\")\n    # also execute the replace string?\nclass MyPP(protocol.ProcessProtocol):\n    def connectionMade(self):\n        pass\n    def write(self, a):\n        sys.stdout.buffer.write(a)",
+        "type": "code",
+        "location": "/cookie_dumper_deprecated.py:1-33"
+    },
+    "129": {
+        "file_id": 19,
+        "content": "This code imports necessary libraries, sets up event and loop variables, defines a list of domains to avoid querying, creates a list of queries, initializes a global cookie dictionary, and defines a function for credential dumping. The code also includes a class that extends the ProcessProtocol from the twisted library for handling connections.",
+        "type": "comment"
+    },
+    "130": {
+        "file_id": 19,
+        "content": "        # must display the content.\n        self.transport.write(a)\n    def processExited(self, reason):\n        print(\"processExited, status %s\" % (reason.value.exitCode,))\n    def outReceived(self, data):\n        global global_cookies, global_event, previous_length\n        print(data)\n        # here's the key.\n        decoded=data.decode()\n        mreceived = \"Message Received: \"\n        if decoded.startswith(mreceived):\n            decoded = decoded[len(mreceived):-1]\n            try:\n                structure = json.loads(decoded)\n                if \"cookies\" in structure.keys():\n                    cookies = structure[\"cookies\"]\n                    for cookie in cookies:\n                        if cookie[\"name\"] not in global_cookies.keys():\n                            global_cookies[cookie[\"name\"]]=cookie[\"value\"]\n                    this_length = len(global_cookies.keys())\n                    if this_length != 0  and this_length == previous_length:\n                            # do not set that shit.\n                        global_event.set()",
+        "type": "code",
+        "location": "/cookie_dumper_deprecated.py:34-58"
+    },
+    "131": {
+        "file_id": 19,
+        "content": "The code is monitoring a process and capturing cookies from its output. It checks for the \"Message Received\" string, decodes the data, parses it as JSON, and extracts the cookie information to store in the global_cookies dictionary. The code also keeps track of previous cookie counts to avoid unnecessary event setting.",
+        "type": "comment"
+    },
+    "132": {
+        "file_id": 19,
+        "content": "                    if this_length > previous_length:\n                        previous_length = this_length\n                                # execute finalize method.\n            except:\n                traceback.print_exc()\n            # try to decode shit.\n    def errReceived(self, data):\n        print(\"errReceived!\", data)\nif __name__ == \"__main__\":\n    # multiprocessing.freeze_support()\n    pp = MyPP()\n    command=['./debug_init.sh']\n    # check for path.\n    def theFunc(a):\n        a.run()\n    reactor.spawnProcess(pp, command[0], command, env=os.environ, usePTY=False)\n    p =threading.Thread(target=theFunc,args=(reactor,))\n    p.setDaemon(True) # the whole shit.\n    p.start() # not RUN!\n    time.sleep(1)\n    ik = 0\n    while True:\n        if global_event.is_set():\n            cred_dump(global_cookies)\n            break\n            # finalize.\n        if ik>=len(quests):\n            ik%=len(quests)\n        pp.write((quests[ik]+\"\\n\").encode())\n        time.sleep(1)\n        ik+=1\n    print(\"__EOL__\")\n    # sys.exit()",
+        "type": "code",
+        "location": "/cookie_dumper_deprecated.py:59-92"
+    },
+    "133": {
+        "file_id": 19,
+        "content": "This code defines a class and its methods for handling errors, executing finalize method, and continuously writing to a file. It also includes multiprocessing using threading and spawns a process to run a command. The code contains error handling and checks for global events to trigger cookie dumping.",
+        "type": "comment"
+    },
+    "134": {
+        "file_id": 19,
+        "content": "    exit()",
+        "type": "code",
+        "location": "/cookie_dumper_deprecated.py:93-93"
+    },
+    "135": {
+        "file_id": 19,
+        "content": "The code exit() function is used to terminate the program abruptly. This action ends the current execution of a program and returns control to the operating system. It should be used with caution as it does not allow for any cleanup tasks or proper resource management before exiting, which can lead to potential issues in complex applications.",
+        "type": "comment"
+    },
+    "136": {
+        "file_id": 20,
+        "content": "/cookie_getter.py",
+        "type": "filepath"
+    },
+    "137": {
+        "file_id": 20,
+        "content": "This Python script uses Twisted to extract bilibili.com account cookies for chatrooms, storing data in a .confidential directory using .sed and JSON files. The code is part of a process control system creating a new thread and process while handling exceptions and performing finalization routines on specific events.",
+        "type": "summary"
+    },
+    "138": {
+        "file_id": 20,
+        "content": "from twisted.internet import protocol, reactor\nimport time\nimport threading\nfrom threading import Event\nimport sys\nimport os\nimport re\nimport json\nimport traceback\nos.system(\"mkdir .confidential\")\nglobal_event = Event()\nquestloop=[\"SESSDATA\",\"bili_jct\",\"DedeUserID\"]\nquestpack= lambda x: [\"0\",\"background: query_cookies:{\\\"name\\\":\\\"\"+x+\"\\\"}\"]\nquests=[x for z in questloop for x in questpack(z)]\n# shall we leave this computer partially controllable?\n# automatically run programs when not disturbed.\n# the default way of building this is about making a chatroom, broadcasting all results to connected clients.\nglobal_cookies = {}\nconf_prefix = \"./.confidential\"\ndef config(obj):\n    with open(conf_prefix+\"/bilibili_cookies.sed\",\"w+\") as f:\n        for key in obj.keys():\n            sed = \"s/your \"+key+\"/\"+obj[key]+\"/\\n\"\n            f.write(sed)\ndef cred_dump(obj):\n    obj_str = json.dumps(obj)\n    with open(conf_prefix+\"/bilibili_cookies.json\",\"w+\") as f:\n        f.write(obj_str+\"\\n\")\n    # also execute the replace string?\nclass MyPP(protocol.ProcessProtocol):",
+        "type": "code",
+        "location": "/cookie_getter.py:1-31"
+    },
+    "139": {
+        "file_id": 20,
+        "content": "This Python script appears to be an automated tool for extracting and storing cookies from a user's browser associated with a bilibili.com account, potentially for use in a chatroom context. It utilizes the Twisted networking framework and creates a directory named \".confidential\" for storing the extracted data. The code defines functions for writing the cookie information to both a .sed file and a JSON file within this directory.",
+        "type": "comment"
+    },
+    "140": {
+        "file_id": 20,
+        "content": "    def connectionMade(self):\n        pass\n    def write(self, a):\n        sys.stdout.buffer.write(a)\n        # must display the content.\n        self.transport.write(a)\n    def processExited(self, reason):\n        print(\"processExited, status %s\" % (reason.value.exitCode,))\n    def outReceived(self, data):\n        global global_cookies, global_event\n        print(data)\n        # here's the key.\n        decoded=data.decode()\n        mreceived = \"Message Received: \"\n        if decoded.startswith(mreceived):\n            decoded = decoded[len(mreceived):-1]\n            try:\n                structure = json.loads(decoded)\n                if \"cookies\" in structure.keys():\n                    cookies = structure[\"cookies\"]\n                    for cookie in cookies:\n                        if cookie[\"domain\"] == \".bilibili.com\":\n                            if cookie[\"name\"] not in global_cookies.keys():\n                                global_cookies[cookie[\"name\"]]=cookie[\"value\"]\n                            elif len(global_cookies.keys()) == len(questloop):",
+        "type": "code",
+        "location": "/cookie_getter.py:32-58"
+    },
+    "141": {
+        "file_id": 20,
+        "content": "Function `connectionMade` is called when a connection is made. The `write` function writes the given `a` to stdout buffer and then to the transport stream. When a process exits, `processExited` is called with its exit code as argument. `outReceived` decodes received data, checks if it starts with \"Message Received:\", extracts cookies for domain \".bilibili.com\", and updates global_cookies dictionary.",
+        "type": "comment"
+    },
+    "142": {
+        "file_id": 20,
+        "content": "                                global_event.set()\n                                # execute finalize method.\n            except:\n                traceback.print_exc()\n            # try to decode shit.\n    def errReceived(self, data):\n        print(\"errReceived!\", data)\nif __name__ == \"__main__\":\n    # multiprocessing.freeze_support()\n    pp = MyPP()\n    command=['./debug_init.sh']\n    # check for path.\n    def theFunc(a):\n        a.run()\n    reactor.spawnProcess(pp, command[0], command, env=os.environ, usePTY=False)\n    p =threading.Thread(target=theFunc,args=(reactor,))\n    p.setDaemon(True) # the whole shit.\n    p.start() # not RUN!\n    time.sleep(1)\n    ik = 0\n    while True:\n        if global_event.is_set():\n            cred_dump(global_cookies)\n            config(global_cookies)\n            break\n            # finalize.\n        if ik>=len(quests):\n            ik%=len(quests)\n        pp.write((quests[ik]+\"\\n\").encode())\n        time.sleep(1)\n        ik+=1\n    print(\"__EOL__\")\n    # sys.exit()\n    exit()",
+        "type": "code",
+        "location": "/cookie_getter.py:59-93"
+    },
+    "143": {
+        "file_id": 20,
+        "content": "This code appears to be part of a process control system. It creates a new thread (using the `threading` module), spawns a process (with the `multiprocessing` module), and repeatedly writes to an external entity while checking for certain events. If a specific event occurs, it executes finalization routines and performs additional operations. The code also handles any potential exceptions and prints error messages.",
+        "type": "comment"
+    },
+    "144": {
+        "file_id": 21,
+        "content": "/cookie_getter.sh",
+        "type": "filepath"
+    },
+    "145": {
+        "file_id": 21,
+        "content": "This script runs a Python program to fetch cookies, then uses sed to replace the config file's demo values with actual ones from the generated cookie file.",
+        "type": "summary"
+    },
+    "146": {
+        "file_id": 21,
+        "content": "#!/bin/bash\nconfig_prefix=poster/bilibiliupload\npython3 cookie_getter.py\nsed -f .confidential/bilibili_cookies.sed $config_prefix/config_demo.yaml > $config_prefix/config.yaml ",
+        "type": "code",
+        "location": "/cookie_getter.sh:1-4"
+    },
+    "147": {
+        "file_id": 21,
+        "content": "This script runs a Python program to fetch cookies, then uses sed to replace the config file's demo values with actual ones from the generated cookie file.",
+        "type": "comment"
+    },
+    "148": {
+        "file_id": 22,
+        "content": "/debug_init.sh",
+        "type": "filepath"
+    },
+    "149": {
+        "file_id": 22,
+        "content": "This script checks if the background processes are running, and if not, it kills them (node chrome_receive.js and node chrome_console.js) before restarting them in collector directory.",
+        "type": "summary"
+    },
+    "150": {
+        "file_id": 22,
+        "content": "#!/bin/bash\n# the shit must be running on the background.\n# how to prove?\nps aux | cat | grep node | grep chrome_receive | awk '{print $2}' | xargs -iabc  kill -s SIGKILL abc &>/dev/null\nps aux | cat | grep node | grep chrome_console | awk '{print $2}' | xargs -iabc kill -s SIGKILL abc &>/dev/null\ncd collector && node chrome_receive.js &\ncd collector && node chrome_console.js\ncd ../",
+        "type": "code",
+        "location": "/debug_init.sh:1-8"
+    },
+    "151": {
+        "file_id": 22,
+        "content": "This script checks if the background processes are running, and if not, it kills them (node chrome_receive.js and node chrome_console.js) before restarting them in collector directory.",
+        "type": "comment"
+    },
+    "152": {
+        "file_id": 23,
+        "content": "/demo_collect.sh",
+        "type": "filepath"
+    },
+    "153": {
+        "file_id": 23,
+        "content": "This script downloads a video using the Bilibili_video_download tool, saves it to the collector/video_download folder, and sets the quality level to 80. The metadata is planned to be collected later.",
+        "type": "summary"
+    },
+    "154": {
+        "file_id": 23,
+        "content": "#!/bin/bash\n#seedme=$(cat .seed)\n#hackme=$(node tools/bv2av.js -bv2av $seedme)\n#echo about to download $hackme\nmkdir -p collector/video_download\n# what about the metadata?\n# collect later.\ncat .seed | xargs -iwhatever python3 collector/Bilibili_video_download/bilibili_video_download_v1.py -p whatever -o $PWD/collector/video_download -q 80 ",
+        "type": "code",
+        "location": "/demo_collect.sh:1-8"
+    },
+    "155": {
+        "file_id": 23,
+        "content": "This script downloads a video using the Bilibili_video_download tool, saves it to the collector/video_download folder, and sets the quality level to 80. The metadata is planned to be collected later.",
+        "type": "comment"
+    },
+    "156": {
+        "file_id": 24,
+        "content": "/demo_post.sh",
+        "type": "filepath"
+    },
+    "157": {
+        "file_id": 24,
+        "content": "This code runs a Python script to upload a video file and its metadata to Bilibili using bilibili.py, specifying cookies, video file path, and metadata file path as arguments.",
+        "type": "summary"
+    },
+    "158": {
+        "file_id": 24,
+        "content": "#!/bin/bash\npython3 poster/uploader/bilibili.py -k $PWD/.confidential/bilibili_cookies_full.json -f $PWD/generator/video_output/jojo大战内马尔_final.mp4 -m $PWD/generator/sample_metadata.json",
+        "type": "code",
+        "location": "/demo_post.sh:1-2"
+    },
+    "159": {
+        "file_id": 24,
+        "content": "This code runs a Python script to upload a video file and its metadata to Bilibili using bilibili.py, specifying cookies, video file path, and metadata file path as arguments.",
+        "type": "comment"
+    },
+    "160": {
+        "file_id": 25,
+        "content": "/gencommit.sh",
+        "type": "filepath"
+    },
+    "161": {
+        "file_id": 25,
+        "content": "This script retrieves the system name and timestamp, then echoes them for logging purposes.",
+        "type": "summary"
+    },
+    "162": {
+        "file_id": 25,
+        "content": "#!/bin/bash\nsystemname=$(uname -a)\ntstamp=$(date)\necho $tstamp \"@\" $systemname",
+        "type": "code",
+        "location": "/gencommit.sh:1-4"
+    },
+    "163": {
+        "file_id": 25,
+        "content": "This script retrieves the system name and timestamp, then echoes them for logging purposes.",
+        "type": "comment"
+    },
+    "164": {
+        "file_id": 26,
+        "content": "/generator/README.md",
+        "type": "filepath"
+    },
+    "165": {
+        "file_id": 26,
+        "content": "This code provides a brief overview of the text generation process, mentioning the use of Markov chains, NLTK, machine translation, GPT2, BERT, and deep learning.",
+        "type": "summary"
+    },
+    "166": {
+        "file_id": 26,
+        "content": "# brief\n## text generation\n- markov chain/nltk\n- machine translation\n- gpt2/bert/deeplearning",
+        "type": "code",
+        "location": "/generator/README.md:1-7"
+    },
+    "167": {
+        "file_id": 26,
+        "content": "This code provides a brief overview of the text generation process, mentioning the use of Markov chains, NLTK, machine translation, GPT2, BERT, and deep learning.",
+        "type": "comment"
+    },
+    "168": {
+        "file_id": 27,
+        "content": "/generator/danmaku_filter/extract_danmaku.py",
+        "type": "filepath"
+    },
+    "169": {
+        "file_id": 27,
+        "content": "This code filters and manipulates time intervals from CSV data, calculating skipped range percentages and applying conditions to merge or skip ranges. It adjusts rates until reaching target percentage or exhausting all possible rates, then prints the equilibrium rate and appends it to a list.",
+        "type": "summary"
+    },
+    "170": {
+        "file_id": 27,
+        "content": "import pandas as pd\nimport numpy as np\nimport copy\nimport math\ndef merge(ttuple):\n    temp_tuple=copy.deepcopy(ttuple)\n    temp_tuple.sort(key=lambda interval: interval[0])\n    merged = [temp_tuple[0]]\n    for current in temp_tuple:\n        previous = merged[-1]\n        if current[0] <= previous[1]:\n            previous[1] = max(previous[1], current[1])\n        else:\n            merged.append(current)\n    return merged\ndef sum_range(r):\n    return sum([x[1]-x[0] for x in r])\ndef skip_range(r,s):\n    x1,y1=s\n    assert x1<y1\n    r0=[]\n    for x in r:\n        x0,y0=x\n        assert x0<y0\n        if max(x0,x1)<min(y0,y1):\n            pass\n        else:\n            r0.append(x)\n    return r0\ndef skip_ranges(r,s):\n    r0=copy.deepcopy(r)\n    for s0 in s:\n        r0=skip_range(r0,s0)\n    return r0\ndef skip_sspan(r,s,inv=False):\n    r0=[]\n    for x in r:\n        if (x[1]-x[0])<s:\n            pass\n        else:\n            # only greater or equal to.\n            r0.append(x)\n    if inv:\n        return [x for x in r if x not in r0]\n    return r0",
+        "type": "code",
+        "location": "/generator/danmaku_filter/extract_danmaku.py:1-50"
+    },
+    "171": {
+        "file_id": 27,
+        "content": "The code defines several functions: \"merge\" merges overlapping time intervals, \"sum_range\" calculates the total length of a range of time intervals, \"skip_range\" skips intervals that overlap with specified start and end times, \"skip_ranges\" applies skipping to multiple ranges at once, and \"skip_sspan\" skips intervals smaller than a given size.",
+        "type": "comment"
+    },
+    "172": {
+        "file_id": 27,
+        "content": "#print(csv)\n#print(dir(csv))\ndef trial(csv,target,rate,span,skips,sspan,espan,step,rinv=False,inv=False,ahead=False):\n    assert target>0 and target<1\n    assert rate>0\n    assert span>0 and type(span) == int\n    assert sspan>0 and type(sspan) == int\n    assert espan>0 and type(espan) == int\n    assert step>0 and type(step) == int\n    assert type(skips) == list \n    for x0,x1 in skips:\n        assert x0<x1\n        assert type(x0) == type(x1)\n        assert type(x0) == int\n    p=csv[0]\n    final=p.sort_values().to_list()[-1:][0]\n    s=p.groupby(pd.cut(p,np.arange(0,math.floor(final),step))).count()\n#print(s)\n    s0=pd.DataFrame({\"density\":s,\"ema\":s.ewm(span=espan,adjust=False).mean()})\n#print(s0)\n    s1=s0.shape[0]\n    can=[]\n# still counting. factor things out.\n    for x in range(s1):\n        s2=s0.iloc[x]\n        den, ema=s2[\"density\"],s2[\"ema\"]\n        if den>ema*rate and not rinv:\n            print(den,ema,x)\n            xs0=x*step-span\n            xs1=x*step+span\n            can.append([max([xs0,0]),min([final,xs1])]) ",
+        "type": "code",
+        "location": "/generator/danmaku_filter/extract_danmaku.py:51-81"
+    },
+    "173": {
+        "file_id": 27,
+        "content": "This function defines a trial process that takes in csv data, target rate, spans, skips, etc. It performs data filtering and sorts the data into different categories based on specific conditions, such as density exceeding the rate or not. The extracted results are stored in a list of can lists containing start and end indices for each extracted data range.",
+        "type": "comment"
+    },
+    "174": {
+        "file_id": 27,
+        "content": "        elif den<=ema*rate and rinv:\n            print(den,ema,x)\n            xs0=x*step-span\n            xs1=x*step+span\n            can.append([max([xs0,0]),min([final,xs1])])\n    if ahead:\n        can = skip_ranges(can,skips)\n    merged=merge(can)\n    print(merged)\n    skipped=merged\n    if not ahead:\n        skipped=skip_ranges(merged,skips)\n    print(skipped)\n    skimmed=skip_sspan(skipped,sspan,inv=inv)\n    sr=sum_range(skimmed)\n    rws=sr/final\n    return rws, skimmed\n# get the percentage.\ntarget=0.2\nrate=1.2\nspan=2\nskips=[[0,5],[70,80]]\nsspan=5\nespan=4\nstep=3\nlr=0.1\nrates=[]\nrwss={}\nlastrate=None\ncsv = pd.read_csv(\"danmaku.csv\",header=None)\nwhile True:\n    rws, skipped=trial(csv,target,rate,span,skips,sspan,espan,step)\n    print(\"result\",rws,skipped,rate)\n    lastrate=rate\n    #lastrws=rws\n    rwss[rate]=rws\n    if rws>target:\n        rate+=lr\n    else:\n        rate-=lr\n    if rate<0 or rate>5:\n        print(\"not found.\",rate)\n        break\n    elif rate in rates:\n        rr,rlr=rwss[rate],rwss[lastrate]\n        #print(lastrate,rlr,rate,rr)",
+        "type": "code",
+        "location": "/generator/danmaku_filter/extract_danmaku.py:82-131"
+    },
+    "175": {
+        "file_id": 27,
+        "content": "This code filters danmaku data from a CSV file. It calculates the percentage of skipped ranges and applies skipping functions to merge, skip, and skim the ranges based on certain conditions. The code adjusts the rate, trying different rates until it finds one that meets the target percentage or exhausts all possible rates.",
+        "type": "comment"
+    },
+    "176": {
+        "file_id": 27,
+        "content": "        equ=(lastrate*rlr+rate*rr)/(rlr+rr)\n        print(\"found equllibrium.\",equ)\n        break\n    rates.append(rate)\n#change the shit accordingly?",
+        "type": "code",
+        "location": "/generator/danmaku_filter/extract_danmaku.py:132-136"
+    },
+    "177": {
+        "file_id": 27,
+        "content": "Computes an equilibrium rate based on the previous and current rates, prints it, and breaks the loop. Appends the new rate to the list 'rates'.",
+        "type": "comment"
+    },
+    "178": {
+        "file_id": 28,
+        "content": "/generator/danmaku_filter/extract_danmaku.sh",
+        "type": "filepath"
+    },
+    "179": {
+        "file_id": 28,
+        "content": "The code extracts specific data from the sample.xml file using grep commands. It filters lines containing \"p=[^,]+\" pattern and further narrows down by matching \"[0-9.]+\" pattern to retrieve numerical values.",
+        "type": "summary"
+    },
+    "180": {
+        "file_id": 28,
+        "content": "cat sample.xml | grep -Eo \"p=[^,]+\" | grep -Eo \"[0-9.]+\"",
+        "type": "code",
+        "location": "/generator/danmaku_filter/extract_danmaku.sh:1-1"
+    },
+    "181": {
+        "file_id": 28,
+        "content": "The code extracts specific data from the sample.xml file using grep commands. It filters lines containing \"p=[^,]+\" pattern and further narrows down by matching \"[0-9.]+\" pattern to retrieve numerical values.",
+        "type": "comment"
+    },
+    "182": {
+        "file_id": 29,
+        "content": "/generator/double-p/index.html",
+        "type": "filepath"
+    },
+    "183": {
+        "file_id": 29,
+        "content": "This code initializes a video recorder, sets window size, renders a rotating text animation with 360 frames, tracks the rotation angle, and handles video playback by displaying frames or ending video and closing the window.",
+        "type": "summary"
+    },
+    "184": {
+        "file_id": 29,
+        "content": "<html>\n  <body>\n    <h1>Test Movie</h1>\n    <script>\n      const electron = require('electron')\n      const createVideoRecorder = require('electron-recorder')\n      // First we grab a reference to the current window object\n      const win = electron.remote.getCurrentWindow()\n      // The size of the animation is the same as the size of the window\n      win.setSize(200, 200)\n      // Here we create recorder object\n      const video = createVideoRecorder(win, {\n        fps: 60,\n        output: 'test.mp4'\n      })\n      let frameCount = 360\n      function renderFrame () {\n        // Here is where we render the movie (we just make the text rotate)\n        Object.assign(document.querySelector('h1').style, {\n          'width': 100,\n          'margin-left': 50,\n          'margin-top': 50,\n          '-webkit-transform': 'rotate(' + frameCount + 'deg)'\n        })\n        // If we still have frames left, then take a snapshot and schedule\n        // another frame\n\t      console.log(frameCount);\n        if (--frameCount > 0) {",
+        "type": "code",
+        "location": "/generator/double-p/index.html:1-33"
+    },
+    "185": {
+        "file_id": 29,
+        "content": "This code initializes a video recorder using Electron and electron-recorder, sets the window size, and renders a rotating text animation for the movie with 360 frames. The frameCount variable keeps track of the current rotation angle, and console.log(frameCount) outputs the current angle in the console.",
+        "type": "comment"
+    },
+    "186": {
+        "file_id": 29,
+        "content": "          video.frame(renderFrame)\n        } else {\n          // Otherwise, movie is over and we save the snapshot to file\n          video.end()\n          win.close()\n        }\n      }\n      renderFrame()\n    </script>\n  </body>\n</html>",
+        "type": "code",
+        "location": "/generator/double-p/index.html:34-45"
+    },
+    "187": {
+        "file_id": 29,
+        "content": "Code snippet handles video playback. If the video is not yet over, it calls `renderFrame` to display frames. If movie ends, `video.end()` and `win.close()` are called to end video and close window. Finally, `renderFrame()` is invoked.",
+        "type": "comment"
+    },
+    "188": {
+        "file_id": 30,
+        "content": "/generator/double-p/init.sh",
+        "type": "filepath"
+    },
+    "189": {
+        "file_id": 30,
+        "content": "This code is initializing a script by setting the scripting language to Bash and installing the 'electron-recorder' package using npm.",
+        "type": "summary"
+    },
+    "190": {
+        "file_id": 30,
+        "content": "#!/bin/bash\nnpm i electron-recorder",
+        "type": "code",
+        "location": "/generator/double-p/init.sh:1-2"
+    },
+    "191": {
+        "file_id": 30,
+        "content": "This code is initializing a script by setting the scripting language to Bash and installing the 'electron-recorder' package using npm.",
+        "type": "comment"
+    },
+    "192": {
+        "file_id": 31,
+        "content": "/generator/double-p/launch.js",
+        "type": "filepath"
+    },
+    "193": {
+        "file_id": 31,
+        "content": "The code requires 'electron', 'electron-recorder', and 'fs' modules, creates a \"outputs\" directory, initializes an Electron app with a BrowserWindow, loads an HTML file, sets up a video recorder, renders frames at a specified rate, saves a snapshot after playback, captures page images during playback.",
+        "type": "summary"
+    },
+    "194": {
+        "file_id": 31,
+        "content": "const electron = require('electron')\nconst createVideoRecorder = require('electron-recorder')\nconst fs = require(\"fs\");\ntry{\nfs.mkdir(\"outputs\",(_)=>{})\n}catch(e){}\nvar pargs = process.argv;\npargs.shift();\npargs.shift();\nconst app = electron.app // electron module\nconst BrowserWindow = electron.BrowserWindow //enables UI\nconst fileurl = \"file:///root/AGI/AutoUP/generator/double-p/double-pendulum/index.html\"\n//const fileurl = \"https://www.baidu.com\"\napp.on(\"ready\", _ => {\n\t// what's wrong with the fucking fan?\nconst width = 1500;\nconst height = 1500;\n\t// not divisible by 2?\n\t// use xvfb.\n\tconst fps=60;\n    win = new BrowserWindow({\n        width: width,\n        height: height,\n        show: true,\n\t    frame: false\n    })\n      win.setSize(width,height)\nwin.loadURL(fileurl);\n      // Here we create recorder object\n      const video = createVideoRecorder(win, {\n        fps: fps,\n        output: \"outputs/\"+Date.now()+'_pendulum.mp4'\n      })\n      let frameCount = fps*60*10;\n      async function renderFrame () {\n\t      console.log(frameCount);",
+        "type": "code",
+        "location": "/generator/double-p/launch.js:1-39"
+    },
+    "195": {
+        "file_id": 31,
+        "content": "This code requires the 'electron', 'electron-recorder', and 'fs' modules. It creates a directory called \"outputs\" and initializes an Electron app with a BrowserWindow of size 1500x1500. The window loads a specific HTML file at the specified URL, while also creating a video recorder object with the given settings. A function 'renderFrame' is defined to continuously render frames for a specified duration.",
+        "type": "comment"
+    },
+    "196": {
+        "file_id": 31,
+        "content": "\t      frameCount -=1;\n        if (frameCount > 0) {\n\tsetTimeout(()=>{renderFrame();},Math.floor(1000/fps));\n          video.frame()\n\t\t// what the fuck?\n        } else {\n          // Otherwise, movie is over and we save the snapshot to file\nawait video.end()\n\t\tconsole.log(\"=================video end.===================\")\n//\t\tconsole.log(\"vlog:\",video.log);\n//\t\tthen(()=>{\n          win.close()\n\t\tapp.quit()\n\t//})\n        }\n      }\n\tvar contents = win.webContents;\nwin.webContents.on('did-stop-loading', () => {\n\tcontents.insertCSS('html,body{ overflow: hidden !important; }');\n//\twin.blur()\n\tconsole.log(\"did-stop-loading\");\n//\tconsole.dir(contents);\n//\tconsole.dir(win);\n/*\tsetInterval(()=>{\ncontents.capturePage().then((image)=>{console.log(image);})\n\t},500);*/\n      renderFrame()\n})\n})",
+        "type": "code",
+        "location": "/generator/double-p/launch.js:40-69"
+    },
+    "197": {
+        "file_id": 31,
+        "content": "The code is setting up a video player and rendering frames at a specified frame rate. When the video finishes, it saves a snapshot to a file, closes the window, and quits the application. It also modifies the CSS of the web contents to prevent overflow and captures page images periodically during playback.",
+        "type": "comment"
+    },
+    "198": {
+        "file_id": 32,
+        "content": "/generator/double-p/launch.sh",
+        "type": "filepath"
+    },
+    "199": {
+        "file_id": 32,
+        "content": "This script continuously runs a server using xvfb-run to launch the 'electron' application with the 'launch.js' file, creating a virtual framebuffer environment for graphics rendering in an endless loop.",
+        "type": "summary"
+    }
+}

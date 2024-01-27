@@ -1,0 +1,10 @@
+{
+    "summary": "The code imports the PyTTSx3 library, initializes an engine object for text-to-speech functionality, retrieves available voices, and defines a function tts() to convert input text into an audio file using specified rate, volume, and voice. The file is saved with a given prefix in .mp3 format, and the speech is executed using engine.runAndWait().",
+    "details": [
+        {
+            "comment": "The code imports the PyTTSx3 library, initializes an engine object for text-to-speech functionality, retrieves available voices, and defines a function tts() to convert input text into an audio file using specified rate, volume, and voice. The file is saved with a given prefix in .mp3 format, and the speech is executed using engine.runAndWait().",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/generator/singing/tts.py\":0-9",
+            "content": "import pyttsx3\nengine = pyttsx3.init() # object creation\nvoices = engine.getProperty('voices')       #getting details of current voice\n# print(\"total voices:\",voices)\ndef tts(text,output_prefix,rate=125,volume=1.0,voice=0):\n    engine.setProperty('rate', rate)     # setting up new voice rate\n    engine.setProperty('volume',volume)    # setting up volume level  between 0 and 18\n    engine.setProperty('voice', voices[voice].id)   \n    engine.save_to_file(text, '{}.mp3'.format(output_prefix))\n    engine.runAndWait()"
+        }
+    ]
+}

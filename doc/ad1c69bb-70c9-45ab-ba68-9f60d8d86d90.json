@@ -1,0 +1,10 @@
+{
+    "summary": "Copies bilibili_cookies_full.json from the confidential directory to bilibili_persistent.json in the same directory, preserving the file contents for future use.",
+    "details": [
+        {
+            "comment": "Copies bilibili_cookies_full.json from the confidential directory to bilibili_persistent.json in the same directory, preserving the file contents for future use.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/bilibiliupload_failsafe.sh\":0-2",
+            "content": "#!/bin/bash\npre=.confidential\ncp $pre/bilibili_cookies_full.json $pre/bilibili_persistent.json"
+        }
+    ]
+}

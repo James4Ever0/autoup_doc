@@ -1,0 +1,10 @@
+{
+    "summary": "This code is a batch file that runs on Windows and executes a Git pull command, pulling the latest changes from the \"origin\" remote repository to the local \"master\" branch. It uses the @echo off command to suppress the display of commands being executed in the command prompt.",
+    "details": [
+        {
+            "comment": "This code is a batch file that runs on Windows and executes a Git pull command, pulling the latest changes from the \"origin\" remote repository to the local \"master\" branch. It uses the @echo off command to suppress the display of commands being executed in the command prompt.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/pull.cmd\":0-1",
+            "content": "@echo off\ngit pull origin master"
+        }
+    ]
+}

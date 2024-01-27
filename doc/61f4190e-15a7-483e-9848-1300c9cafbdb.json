@@ -1,0 +1,10 @@
+{
+    "summary": "This code outlines the main directions and functions of a project, which involves analyzing various aspects of videos, images, audio, comments, and more on a platform. It includes features like trend prediction, video cut detection, text recognition, categorization, statistics, and resource timeline syncing for metadata analysis.",
+    "details": [
+        {
+            "comment": "This code outlines the main directions and functions of a project, which involves analyzing various aspects of videos, images, audio, comments, and more on a platform. It includes features like trend prediction, video cut detection, text recognition, categorization, statistics, and resource timeline syncing for metadata analysis.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/collector/bili_info_collect/README.md\":0-37",
+            "content": "# project brief\n## main direction:\n- per video spect\n- per essay spect\n- per uploader/viewer spect\n- comments\n- home suggestions\n- search suggestions\n- what's next list\n- monitor change\n- categories in main page\n- subpages\n- search\n- ads\n- dynamic\n## main functions:\n- value assignment/prediction\n- trend prediction\n- video cut detection\n- video/image mask/reigion tracing/scooping\n- video/image text recognization\n- video/image categorization\n- video/image statistics\n- audio cut\n- audio tune detect\n- audio tempo detect\n- audio categorizaion\n- audio statistics\n- danmaku/comments/dynamic analyzation\n- resource timeline sync\n- metadata analysis\n- video/image/audio/font source tracking\n- template extraction\n- fidelity"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "summary": "Code seems to import or require two modules, \"ws\" and \"collections\". The \"ws\" module is likely used for WebSocket communication, while the \"collections\" module provides useful classes for dealing with collections of objects.",
+    "details": [
+        {
+            "comment": "Code seems to import or require two modules, \"ws\" and \"collections\". The \"ws\" module is likely used for WebSocket communication, while the \"collections\" module provides useful classes for dealing with collections of objects.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/nodejs_require\":0-1",
+            "content": "ws\ncollections"
+        }
+    ]
+}

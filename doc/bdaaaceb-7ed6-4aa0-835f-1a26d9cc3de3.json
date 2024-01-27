@@ -1,0 +1,10 @@
+{
+    "summary": "This code retrieves all image links with the \"imglink\" class, stores their src and alt attributes in a Map, removes \"<strong>\" tags from alt text, and logs the resulting Map as JSON.",
+    "details": [
+        {
+            "comment": "This code retrieves all image links with the \"imglink\" class, stores their src and alt attributes in a Map, removes \"<strong>\" tags from alt text, and logs the resulting Map as JSON.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/collector/celeb_picture_collect/queries.js\":0-4",
+            "content": "var getlink = document.getElementsByClassName(\"imglink\"); \nvar dataOutput = {};\nfor (let links of getlink){for (let link of links.childNodes){try{if (link.tagName.toLowerCase() == \"img\") {dataOutput[link.getAttribute(\"src\")]=link.getAttribute(\"alt\").replace(\"<strong>\",\"\").replace(\"</strong>\",\"\")}}catch(e){}}}\n// then we will get the Map.\nconsole.log(JSON.stringify(dataOutput))"
+        }
+    ]
+}

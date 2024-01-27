@@ -1,0 +1,10 @@
+{
+    "summary": "This script downloads a video using the Bilibili_video_download tool, saves it to the collector/video_download folder, and sets the quality level to 80. The metadata is planned to be collected later.",
+    "details": [
+        {
+            "comment": "This script downloads a video using the Bilibili_video_download tool, saves it to the collector/video_download folder, and sets the quality level to 80. The metadata is planned to be collected later.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/demo_collect.sh\":0-7",
+            "content": "#!/bin/bash\n#seedme=$(cat .seed)\n#hackme=$(node tools/bv2av.js -bv2av $seedme)\n#echo about to download $hackme\nmkdir -p collector/video_download\n# what about the metadata?\n# collect later.\ncat .seed | xargs -iwhatever python3 collector/Bilibili_video_download/bilibili_video_download_v1.py -p whatever -o $PWD/collector/video_download -q 80 "
+        }
+    ]
+}

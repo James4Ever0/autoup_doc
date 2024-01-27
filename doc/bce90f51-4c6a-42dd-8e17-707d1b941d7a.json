@@ -1,0 +1,10 @@
+{
+    "summary": "This code is a requirements.txt file specifying the necessary libraries and packages for the project, including selenium, psutil, youtube_dl, Pillow, aiohttp[speedups], Requests, PyYAML, streamlink, a git repository (zhangn1985/ykdl), and rsa.",
+    "details": [
+        {
+            "comment": "This code is a requirements.txt file specifying the necessary libraries and packages for the project, including selenium, psutil, youtube_dl, Pillow, aiohttp[speedups], Requests, PyYAML, streamlink, a git repository (zhangn1985/ykdl), and rsa.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bilibiliupload/requirements.txt\":0-9",
+            "content": "selenium>=3.8.1\npsutil>=5.4.6\nyoutube_dl>=2018.11.18\nPillow>=5.2.0\naiohttp[speedups]\nRequests>=2.20.0\nPyYAML>=4.2b1\nstreamlink>=0.14.2\ngit+https://github.com/zhangn1985/ykdl.git\nrsa>=4.6"
+        }
+    ]
+}

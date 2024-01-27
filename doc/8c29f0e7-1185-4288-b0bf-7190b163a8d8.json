@@ -1,0 +1,10 @@
+{
+    "summary": "This code collects celebrity pictures and information from a list, ensuring the pictures are at least 1000x in size. It uses Unix-to-DOS file conversion for compatibility and Python script to process the list. The collected faces can then be used with another program, likely \"faceswap.py\".",
+    "details": [
+        {
+            "comment": "This code collects celebrity pictures and information from a list, ensuring the pictures are at least 1000x in size. It uses Unix-to-DOS file conversion for compatibility and Python script to process the list. The collected faces can then be used with another program, likely \"faceswap.py\".",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/collector/celeb_picture_collect/pic_collect.cmd\":0-9",
+            "content": "@echo off\nmkdir celeb_pictures\nREM flrst let's collect info of celebrities.\nREM and we've got pictures.\nREM make sure pictures are 1000x and more. <- this one is not ramdisked.\nREM make ramdisk if you wish? but it might not be good at all.\nREM generate information then.\nunix2dos celeb_list.txt\npython36 collect_pics.py celeb_list.txt\nREM detect the face then. just put all pics to faceswap.py."
+        }
+    ]
+}

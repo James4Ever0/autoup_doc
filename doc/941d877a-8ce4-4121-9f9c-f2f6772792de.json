@@ -1,0 +1,10 @@
+{
+    "summary": "This script continuously runs a server using xvfb-run to launch the 'electron' application with the 'launch.js' file, creating a virtual framebuffer environment for graphics rendering in an endless loop.",
+    "details": [
+        {
+            "comment": "This script continuously runs a server using xvfb-run to launch the 'electron' application with the 'launch.js' file, creating a virtual framebuffer environment for graphics rendering in an endless loop.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/generator/double-p/launch.sh\":0-4",
+            "content": "#!/bin/bash\nwhile true;\ndo\n\txvfb-run electron launch.js\ndone"
+        }
+    ]
+}

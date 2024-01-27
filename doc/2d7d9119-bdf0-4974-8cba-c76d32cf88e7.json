@@ -1,0 +1,10 @@
+{
+    "summary": "This code sets up a directory for dependencies, navigates to the MiraiGo folder, and configures the GOPATH and GOPROXY environment variables. It then uses \"go build\" to compile the Go program.",
+    "details": [
+        {
+            "comment": "This code sets up a directory for dependencies, navigates to the MiraiGo folder, and configures the GOPATH and GOPROXY environment variables. It then uses \"go build\" to compile the Go program.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/collector/qq_mirai_bot/build.sh\":0-3",
+            "content": "#!/bin/bash\nmkdir deps\ncd MiraiGo\nGOPATH=$PWD/../deps GOPROXY=https://goproxy.cn,direct go build "
+        }
+    ]
+}

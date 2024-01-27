@@ -1,0 +1,20 @@
+{
+    "summary": "The Dockerfile installs development tools, sets up symbolic links for pip3 and python3, configures environment variables, and creates a Bilibili uploader image with an entry point script that listens on port 9515/tcp.",
+    "details": [
+        {
+            "comment": "The Dockerfile installs various development tools, Python 3.7.3, Git, Zip, Node.js and downloads Google Chrome stable deb package. It also sets up symbolic links for pip3 and python3 executables.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bilibiliupload/Dockerfile\":0-26",
+            "content": "FROM jrottenberg/ffmpeg\n#VOLUME /opt/data\nRUN export DEBIAN_FRONTEND=noninteractive \\\n  && apt-get update \\\n  && apt install build-essential -y \\\n  && apt install libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev -y \\\n  && apt install wget -y \\\n  && apt install openssl -y \\\n  && apt install curl -y \\\n  && apt install libsqlite3-dev -y \\\n  && wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz \\\n  && tar -xvf Python-3.7.3.tgz \\\n  && cd Python-3.7.3 \\\n  && ./configure --enable-loadable-sqlite-extensions \\\n  && make \\\n  && make install \\\n  && ln -s /usr/local/bin/pip3 /usr/bin/pip3 \\\n  && ln -s /usr/local/bin/python3 /usr/bin/python3 \\\n#  && apt-get install -y python3-pip \\\n  && apt-get install -y git \\\n  && apt-get install -y zip \\\n  && apt-get install -y nodejs \\\n#  && apt-get install -y unzip \\\n  && \\\n  DL=https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \\\n  && curl -sL \"$DL\" > /tmp/chrome.deb \\\n  && apt install --no-install-recommends --no-install-suggests -y \\"
+        },
+        {
+            "comment": "This Dockerfile installs Chromium, sets environment variables, downloads the latest ChromeDriver, configures localization settings, removes unnecessary files, and installs required packages and dependencies. It then copies local files for project execution.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bilibiliupload/Dockerfile\":27-58",
+            "content": "    /tmp/chrome.deb \\\n  && CHROMIUM_FLAGS='--no-sandbox --disable-dev-shm-usage' \\\n  # Patch Chrome launch script and append CHROMIUM_FLAGS to the last line:\n  && sed -i '${s/$/'\" $CHROMIUM_FLAGS\"'/}' /opt/google/chrome/google-chrome \\\n  && BASE_URL=https://chromedriver.storage.googleapis.com \\\n  && VERSION=$(curl -sL \"$BASE_URL/LATEST_RELEASE\") \\\n  && curl -sL \"$BASE_URL/$VERSION/chromedriver_linux64.zip\" -o /tmp/driver.zip \\\n  && unzip /tmp/driver.zip \\\n  && chmod 755 chromedriver \\\n  && mv chromedriver /usr/local/bin/ \\\n  && apt-get install -y locales \\\n  && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \\\n  # Remove obsolete files:\n  && apt-get autoremove --purge -y \\\n    unzip \\\n  && apt-get clean \\\n  && rm -rf \\\n    /tmp/* \\\n    /usr/share/doc/* \\\n    /var/cache/* \\\n    /var/lib/apt/lists/* \\\n    /var/tmp/*\nENV LANG en_US.utf8\nCOPY requirements.txt /opt/\nRUN cd /opt \\\n    && pip3 install -r requirements.txt\n#USER webdriver\nCOPY common /opt/common\nCOPY engine /opt/engine\nCOPY Bilibili.py /opt/"
+        },
+        {
+            "comment": "This code configures a Docker image for a Bilibili uploader. It sets executable permissions on the script, copies demo configuration file, sets working directory, and specifies entry point as the Bilibili.py script. The exposed port is 9515/tcp.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bilibiliupload/Dockerfile\":59-65",
+            "content": "RUN chmod 755 /opt/Bilibili.py\nCOPY [\"config(demo).yaml\", \"/opt/config.yaml\"]\nWORKDIR /opt\nENTRYPOINT [\"./Bilibili.py\"]\n#EXPOSE 9515/tcp"
+        }
+    ]
+}

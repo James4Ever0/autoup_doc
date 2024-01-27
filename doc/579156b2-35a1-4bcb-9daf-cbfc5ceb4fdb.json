@@ -1,0 +1,10 @@
+{
+    "summary": "This code is initializing a script by setting the scripting language to Bash and installing the 'electron-recorder' package using npm.",
+    "details": [
+        {
+            "comment": "This code is initializing a script by setting the scripting language to Bash and installing the 'electron-recorder' package using npm.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/generator/double-p/init.sh\":0-1",
+            "content": "#!/bin/bash\nnpm i electron-recorder"
+        }
+    ]
+}

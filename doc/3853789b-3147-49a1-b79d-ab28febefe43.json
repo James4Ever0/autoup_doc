@@ -1,0 +1,10 @@
+{
+    "summary": "This code imports necessary libraries, loads audio file, performs Constant-Q Transform (CQT), displays a mel-frequency spectrogram of the audio using matplotlib, and then shows the resulting plot.",
+    "details": [
+        {
+            "comment": "This code imports necessary libraries, loads audio file, performs Constant-Q Transform (CQT), displays a mel-frequency spectrogram of the audio using matplotlib, and then shows the resulting plot.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/generator/singing/stft.py\":0-24",
+            "content": "import librosa\ntarget = \"sample.wav\"\ny, sr = librosa.load(target)\n#sft = librosa.stft(y)\npitch = librosa.cqt(y=y,sr=sr,hop_length=1024,n_bins = 84)\n#print(pitch)\nimport librosa.display\nimport matplotlib.pyplot as plt\nimport numpy as np\nfig, ax = plt.subplots()\nimg = librosa.display.specshow(librosa.amplitude_to_db(pitch,ref=np.max), x_axis=\"time\", y_axis=\"cqt_note\", sr=sr, fmax=8000,ax=ax)\nfig.colorbar(img, ax=ax, format='%+2.0f dB')\nax.set(title='Mel-frequency spectrogram')\nplt.show()"
+        }
+    ]
+}

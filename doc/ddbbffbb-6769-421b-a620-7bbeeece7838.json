@@ -1,0 +1,10 @@
+{
+    "summary": "The code kills processes, starts a Python server, waits for a second, and then runs justUpload.py script.",
+    "details": [
+        {
+            "comment": "The code kills processes, starts a Python server, waits for a second, and then runs justUpload.py script.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bilibiliupload/justUpload.sh\":0-11",
+            "content": "#!/bin/bash\n#quotes=$(ps aux | cat | grep python3 | grep trivial_server | awk '{print $2}' | wc | awk '{print $1}')\n#if [ $quotes -eq 0 ]; then\n#\tpython3 trivial_server.py &\n#\tsleep 1\n#fi\nps aux | cat | grep bash | grep main_entrance | awk '{print $2}' | xargs -iabc  kill -s SIGKILL abc &>/dev/null\nps aux | cat | grep python3 | grep Bilibili | awk '{print $2}' | xargs -iabc  kill -s SIGKILL abc &>/dev/null\nps aux | cat | grep python3 | grep trivial_server | awk '{print $2}' | xargs -iabc  kill -s SIGKILL abc &>/dev/null\npython3 trivial_server.py &\nsleep 1\npython3 justUpload.py"
+        }
+    ]
+}

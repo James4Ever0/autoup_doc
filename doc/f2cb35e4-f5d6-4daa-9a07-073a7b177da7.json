@@ -1,0 +1,10 @@
+{
+    "summary": "This code is a batch file for Windows, launched by double-clicking. It executes the \"electron.exe\" program, passing any command line arguments (%*) it receives. The REM comment likely refers to a Baidu image search URL, which might be related to the program's functionality but could also be a placeholder or documentation reference. The \"@echo off\" command ensures that no variable assignments are output during script execution, while the \"\\node_global\\node_modules\\electron\\dist\\\" part seems to indicate the location of the electron executable on the local system.",
+    "details": [
+        {
+            "comment": "This code is a batch file for Windows, launched by double-clicking. It executes the \"electron.exe\" program, passing any command line arguments (%*) it receives. The REM comment likely refers to a Baidu image search URL, which might be related to the program's functionality but could also be a placeholder or documentation reference. The \"@echo off\" command ensures that no variable assignments are output during script execution, while the \"\\node_global\\node_modules\\electron\\dist\\\" part seems to indicate the location of the electron executable on the local system.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/collector/celeb_picture_collect/electron.cmd\":0-2",
+            "content": "@echo off\nREM https://image.baidu.com/search/flip?tn=baiduimage&ie=utf-8&word=def&pn=0&gsm=50&ct=&ic=0&lm=-1&width=0&height=0\n\"E:\\nodejs\\node_global\\node_modules\\electron\\dist\\electron.exe\" %*"
+        }
+    ]
+}

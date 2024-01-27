@@ -1,0 +1,10 @@
+{
+    "summary": "This script checks if the background processes are running, and if not, it kills them (node chrome_receive.js and node chrome_console.js) before restarting them in collector directory.",
+    "details": [
+        {
+            "comment": "This script checks if the background processes are running, and if not, it kills them (node chrome_receive.js and node chrome_console.js) before restarting them in collector directory.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/debug_init.sh\":0-7",
+            "content": "#!/bin/bash\n# the shit must be running on the background.\n# how to prove?\nps aux | cat | grep node | grep chrome_receive | awk '{print $2}' | xargs -iabc  kill -s SIGKILL abc &>/dev/null\nps aux | cat | grep node | grep chrome_console | awk '{print $2}' | xargs -iabc kill -s SIGKILL abc &>/dev/null\ncd collector && node chrome_receive.js &\ncd collector && node chrome_console.js\ncd ../"
+        }
+    ]
+}

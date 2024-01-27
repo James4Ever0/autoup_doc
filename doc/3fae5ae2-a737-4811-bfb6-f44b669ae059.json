@@ -1,0 +1,10 @@
+{
+    "summary": "This code outlines the steps for uploading a video to Bilibili using a script. It involves uploading the video file, splitting it into chunks and uploading each chunk separately before marking them as complete. Additionally, it requires uploading a cover image and finalizing the post.",
+    "details": [
+        {
+            "comment": "This code outlines the steps for uploading a video to Bilibili using a script. It involves uploading the video file, splitting it into chunks and uploading each chunk separately before marking them as complete. Additionally, it requires uploading a cover image and finalizing the post.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/uploader/README.md\":0-10",
+            "content": "# uploader\nB\u7ad9(bilibili)\u811a\u672c\u6295\u7a3f\u5b9e\u73b0\u6b65\u9aa4\uff1a\n1. \u4e0a\u4f20\u89c6\u9891\u6587\u4ef6\n    - \u83b7\u53d6\u4e0a\u4f20url\n    - \u6587\u4ef6\u5206\u5757\u4e0a\u4f20\n    - \u6807\u8bb0\u4e0a\u4f20\u5b8c\u6210\n2. \u6295\u7a3f\n    - \u4e0a\u4f20\u5c01\u9762\u56fe\u7247\n    - \u5b8c\u6210\u6295\u7a3f"
+        }
+    ]
+}

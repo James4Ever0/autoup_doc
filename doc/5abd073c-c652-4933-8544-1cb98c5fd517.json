@@ -1,0 +1,10 @@
+{
+    "summary": "Quoting and unquoting plus-encoded \"pappps\u8d5b\u535a\u670b\u514b\" then making a GET request to localhost:9999/rename with the quoted name as parameter, printing the response.",
+    "details": [
+        {
+            "comment": "Quoting and unquoting plus-encoded \"pappps\u8d5b\u535a\u670b\u514b\" then making a GET request to localhost:9999/rename with the quoted name as parameter, printing the response.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bilibiliupload/demo_rename.py\":0-6",
+            "content": "import requests\nimport urllib\ntarget = urllib.parse.quote_plus(\"pappps\u8d5b\u535a\u670b\u514b\")\nurllib.parse.unquote_plus(target)\nr = requests.get(\"http://localhost:9999/rename?name=\"+target)\nprint(r.text)"
+        }
+    ]
+}

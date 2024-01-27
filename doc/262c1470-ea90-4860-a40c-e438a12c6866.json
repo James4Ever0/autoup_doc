@@ -1,0 +1,10 @@
+{
+    "summary": "Code imports necessary libraries, loads audio file \"sample.wav\", creates an array for convolution, convolves the audio signal with the array, prints the shapes of the results, finds the absolute values of the audio signal, determines the indices of local maxima in the signal, and potentially plots these signals.",
+    "details": [
+        {
+            "comment": "Code imports necessary libraries, loads audio file \"sample.wav\", creates an array for convolution, convolves the audio signal with the array, prints the shapes of the results, finds the absolute values of the audio signal, determines the indices of local maxima in the signal, and potentially plots these signals.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/generator/singing/np_ema.py\":0-22",
+            "content": "import numpy as np\nimport librosa\ndef plot(sound):\n    plt.plot(sound)\n    plt.show()\nimport matplotlib.pyplot as plt\n# here's the problem. it has the time converted.\ntarget = \"sample.wav\"\nsound = librosa.load(target)\nar0 = np.array([1 for _ in range(10000)])\nar1 = np.convolve(sound[0],ar0,\"valid\")\nprint(ar1.shape,sound[0].shape)\n# nearly the same.\n#plot(ar1)\nabs0 = np.absolute(sound[0])\nfrom scipy.signal import argrelextrema\nmax_ind = argrelextrema(abs0,np.greater)\nprint(max_ind)\n# do this several times?\n#plot(abs0)"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "summary": "The code is importing the networkx library and creating a directed graph using NetworkX's DiGraph. It adds two nodes with their respective attributes, \"sample video\" and \"another video\". The comment suggests adding edges between nodes but does not specify how to do it.",
+    "details": [
+        {
+            "comment": "The code is importing the networkx library and creating a directed graph using NetworkX's DiGraph. It adds two nodes with their respective attributes, \"sample video\" and \"another video\". The comment suggests adding edges between nodes but does not specify how to do it.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bili_interactive_upload/directed_graph.py\":0-7",
+            "content": "import networkx as nx\ng = nx.DiGraph()\ng.add_node({\"name\":\"sample video\",\"isRoot\":True,index=1,cid = 20021})\ng.add_node({\"name\":\"another video\",\"isRoot\":True,index=2,cid = 20022})\n# how to do this?\n# for x in g.nodes\n# g.add_edge((x,y))"
+        }
+    ]
+}

@@ -1,0 +1,405 @@
+{
+    "url": {
+        "full": "https://gitee.com/x00e0d991e368/auto-up",
+        "partial": "/x00e0d991e368/auto-up"
+    },
+    "file_mapping": {
+        "0": {
+            "filepath": "/README.md",
+            "entry_id": 0,
+            "language_id": "plain-text"
+        },
+        "1": {
+            "filepath": "/bilibiliupload_failsafe.sh",
+            "entry_id": 10,
+            "language_id": "shell"
+        },
+        "2": {
+            "filepath": "/collector/bili_info_collect/README.md",
+            "entry_id": 14,
+            "language_id": "markdown"
+        },
+        "3": {
+            "filepath": "/collector/celeb_picture_collect/baidu_spider.js",
+            "entry_id": 18,
+            "language_id": "javascript"
+        },
+        "4": {
+            "filepath": "/collector/celeb_picture_collect/collect_pics.py",
+            "entry_id": 50,
+            "language_id": "python"
+        },
+        "5": {
+            "filepath": "/collector/celeb_picture_collect/download_pics.py",
+            "entry_id": 56,
+            "language_id": "python"
+        },
+        "6": {
+            "filepath": "/collector/celeb_picture_collect/download_server.py",
+            "entry_id": 60,
+            "language_id": "python"
+        },
+        "7": {
+            "filepath": "/collector/celeb_picture_collect/elec_arg.js",
+            "entry_id": 64,
+            "language_id": "javascript"
+        },
+        "8": {
+            "filepath": "/collector/celeb_picture_collect/electron.cmd",
+            "entry_id": 68,
+            "language_id": "text"
+        },
+        "9": {
+            "filepath": "/collector/celeb_picture_collect/pic_collect.cmd",
+            "entry_id": 72,
+            "language_id": "text"
+        },
+        "10": {
+            "filepath": "/collector/celeb_picture_collect/queries.js",
+            "entry_id": 76,
+            "language_id": "javascript"
+        },
+        "11": {
+            "filepath": "/collector/chrome_console.js",
+            "entry_id": 80,
+            "language_id": "javascript"
+        },
+        "12": {
+            "filepath": "/collector/chrome_receive.js",
+            "entry_id": 88,
+            "language_id": "javascript"
+        },
+        "13": {
+            "filepath": "/collector/qq_mirai_bot/README",
+            "entry_id": 96,
+            "language_id": "plain-text"
+        },
+        "14": {
+            "filepath": "/collector/qq_mirai_bot/build.sh",
+            "entry_id": 100,
+            "language_id": "shell"
+        },
+        "15": {
+            "filepath": "/collector/qq_mirai_bot/build_main.sh",
+            "entry_id": 104,
+            "language_id": "shell"
+        },
+        "16": {
+            "filepath": "/collector/qq_mirai_bot/build_template.sh",
+            "entry_id": 108,
+            "language_id": "shell"
+        },
+        "17": {
+            "filepath": "/cookie_dumper.py",
+            "entry_id": 112,
+            "language_id": "python"
+        },
+        "18": {
+            "filepath": "/cookie_dumper.sh",
+            "entry_id": 122,
+            "language_id": "shell"
+        },
+        "19": {
+            "filepath": "/cookie_dumper_deprecated.py",
+            "entry_id": 126,
+            "language_id": "python"
+        },
+        "20": {
+            "filepath": "/cookie_getter.py",
+            "entry_id": 136,
+            "language_id": "python"
+        },
+        "21": {
+            "filepath": "/cookie_getter.sh",
+            "entry_id": 144,
+            "language_id": "shell"
+        },
+        "22": {
+            "filepath": "/debug_init.sh",
+            "entry_id": 148,
+            "language_id": "shell"
+        },
+        "23": {
+            "filepath": "/demo_collect.sh",
+            "entry_id": 152,
+            "language_id": "shell"
+        },
+        "24": {
+            "filepath": "/demo_post.sh",
+            "entry_id": 156,
+            "language_id": "shell"
+        },
+        "25": {
+            "filepath": "/gencommit.sh",
+            "entry_id": 160,
+            "language_id": "shell"
+        },
+        "26": {
+            "filepath": "/generator/README.md",
+            "entry_id": 164,
+            "language_id": "plain-text"
+        },
+        "27": {
+            "filepath": "/generator/danmaku_filter/extract_danmaku.py",
+            "entry_id": 168,
+            "language_id": "python"
+        },
+        "28": {
+            "filepath": "/generator/danmaku_filter/extract_danmaku.sh",
+            "entry_id": 178,
+            "language_id": "shell"
+        },
+        "29": {
+            "filepath": "/generator/double-p/index.html",
+            "entry_id": 182,
+            "language_id": "html"
+        },
+        "30": {
+            "filepath": "/generator/double-p/init.sh",
+            "entry_id": 188,
+            "language_id": "shell"
+        },
+        "31": {
+            "filepath": "/generator/double-p/launch.js",
+            "entry_id": 192,
+            "language_id": "javascript"
+        },
+        "32": {
+            "filepath": "/generator/double-p/launch.sh",
+            "entry_id": 198,
+            "language_id": "shell"
+        },
+        "33": {
+            "filepath": "/generator/faceswap/README.md",
+            "entry_id": 202,
+            "language_id": "markdown"
+        },
+        "34": {
+            "filepath": "/generator/singing/demo_song.py",
+            "entry_id": 230,
+            "language_id": "python"
+        },
+        "35": {
+            "filepath": "/generator/singing/mel_spec.py",
+            "entry_id": 234,
+            "language_id": "python"
+        },
+        "36": {
+            "filepath": "/generator/singing/np_conv.py",
+            "entry_id": 238,
+            "language_id": "python"
+        },
+        "37": {
+            "filepath": "/generator/singing/np_ema.py",
+            "entry_id": 244,
+            "language_id": "python"
+        },
+        "38": {
+            "filepath": "/generator/singing/nuts.py",
+            "entry_id": 248,
+            "language_id": "python"
+        },
+        "39": {
+            "filepath": "/generator/singing/piped_test.py",
+            "entry_id": 252,
+            "language_id": "python"
+        },
+        "40": {
+            "filepath": "/generator/singing/rmse.py",
+            "entry_id": 258,
+            "language_id": "python"
+        },
+        "41": {
+            "filepath": "/generator/singing/sample.sh",
+            "entry_id": 262,
+            "language_id": "shell"
+        },
+        "42": {
+            "filepath": "/generator/singing/stft.py",
+            "entry_id": 266,
+            "language_id": "python"
+        },
+        "43": {
+            "filepath": "/generator/singing/tts.py",
+            "entry_id": 270,
+            "language_id": "python"
+        },
+        "44": {
+            "filepath": "/init.sh",
+            "entry_id": 274,
+            "language_id": "shell"
+        },
+        "45": {
+            "filepath": "/nodejs_require",
+            "entry_id": 278,
+            "language_id": "text"
+        },
+        "46": {
+            "filepath": "/poster/README.md",
+            "entry_id": 282,
+            "language_id": "markdown"
+        },
+        "47": {
+            "filepath": "/poster/bili_interactive_upload/BRIEF",
+            "entry_id": 286,
+            "language_id": "text"
+        },
+        "48": {
+            "filepath": "/poster/bili_interactive_upload/README",
+            "entry_id": 290,
+            "language_id": "plain-text"
+        },
+        "49": {
+            "filepath": "/poster/bili_interactive_upload/TYPES",
+            "entry_id": 296,
+            "language_id": "text"
+        },
+        "50": {
+            "filepath": "/poster/bili_interactive_upload/bilibili.py",
+            "entry_id": 300,
+            "language_id": "python"
+        },
+        "51": {
+            "filepath": "/poster/bili_interactive_upload/directed_graph.py",
+            "entry_id": 322,
+            "language_id": "python"
+        },
+        "52": {
+            "filepath": "/poster/bili_interactive_upload/storyline.py",
+            "entry_id": 326,
+            "language_id": "python"
+        },
+        "53": {
+            "filepath": "/poster/bilibiliupload/Bilibili.py",
+            "entry_id": 346,
+            "language_id": "python"
+        },
+        "54": {
+            "filepath": "/poster/bilibiliupload/Dockerfile",
+            "entry_id": 350,
+            "language_id": "dockerfile"
+        },
+        "55": {
+            "filepath": "/poster/bilibiliupload/README.md",
+            "entry_id": 358,
+            "language_id": "plain-text"
+        },
+        "56": {
+            "filepath": "/poster/bilibiliupload/apply_patch.sh",
+            "entry_id": 366,
+            "language_id": "shell"
+        },
+        "57": {
+            "filepath": "/poster/bilibiliupload/clean_cache.sh",
+            "entry_id": 370,
+            "language_id": "shell"
+        },
+        "58": {
+            "filepath": "/poster/bilibiliupload/config_demo.yaml",
+            "entry_id": 374,
+            "language_id": "yaml"
+        },
+        "59": {
+            "filepath": "/poster/bilibiliupload/demo_rename.py",
+            "entry_id": 380,
+            "language_id": "python"
+        },
+        "60": {
+            "filepath": "/poster/bilibiliupload/justUpload.py",
+            "entry_id": 384,
+            "language_id": "python"
+        },
+        "61": {
+            "filepath": "/poster/bilibiliupload/justUpload.sh",
+            "entry_id": 388,
+            "language_id": "shell"
+        },
+        "62": {
+            "filepath": "/poster/bilibiliupload/mText.py",
+            "entry_id": 392,
+            "language_id": "python"
+        },
+        "63": {
+            "filepath": "/poster/bilibiliupload/main_entrance.sh",
+            "entry_id": 404,
+            "language_id": "shell"
+        },
+        "64": {
+            "filepath": "/poster/bilibiliupload/requirements.txt",
+            "entry_id": 408,
+            "language_id": "plain-text"
+        },
+        "65": {
+            "filepath": "/poster/bilibiliupload/title_tweaker.py",
+            "entry_id": 412,
+            "language_id": "python"
+        },
+        "66": {
+            "filepath": "/poster/bilibiliupload/trivial_server.py",
+            "entry_id": 418,
+            "language_id": "python"
+        },
+        "67": {
+            "filepath": "/poster/uploader/README.md",
+            "entry_id": 424,
+            "language_id": "markdown"
+        },
+        "68": {
+            "filepath": "/poster/uploader/bilibili.py",
+            "entry_id": 428,
+            "language_id": "python"
+        },
+        "69": {
+            "filepath": "/poster/uploader/extract_channels.py",
+            "entry_id": 450,
+            "language_id": "python"
+        },
+        "70": {
+            "filepath": "/pull.cmd",
+            "entry_id": 456,
+            "language_id": "text"
+        },
+        "71": {
+            "filepath": "/pull.sh",
+            "entry_id": 460,
+            "language_id": "shell"
+        },
+        "72": {
+            "filepath": "/requirements.txt",
+            "entry_id": 464,
+            "language_id": "plain-text"
+        },
+        "73": {
+            "filepath": "/tools/bv2av.js",
+            "entry_id": 468,
+            "language_id": "javascript"
+        },
+        "74": {
+            "filepath": "/tools/debug-flv",
+            "entry_id": 474,
+            "language_id": "text"
+        },
+        "75": {
+            "filepath": "/tools/index-flv",
+            "entry_id": 478,
+            "language_id": "text"
+        },
+        "76": {
+            "filepath": "/tools/stub.js",
+            "entry_id": 482,
+            "language_id": "javascript"
+        },
+        "77": {
+            "filepath": "/tools/test_debug.sh",
+            "entry_id": 486,
+            "language_id": "shell"
+        },
+        "78": {
+            "filepath": "/tools/testv2_debug.sh",
+            "entry_id": 490,
+            "language_id": "shell"
+        }
+    },
+    "project_name": "auto-up",
+    "split_count": 5
+}

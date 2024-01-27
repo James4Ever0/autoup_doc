@@ -1,0 +1,10 @@
+{
+    "summary": "The script installs necessary dependencies for the application, including FFmpeg, Espeak, Python decorator, and various libraries. It also creates a symbolic link to FFmpeg, installs required packages using pip3, and mentions potential future enhancements with advanced audio generation tools like sclang or deeplearning.",
+    "details": [
+        {
+            "comment": "The script installs necessary dependencies for the application, including FFmpeg, Espeak, Python decorator, and various libraries. It also creates a symbolic link to FFmpeg, installs required packages using pip3, and mentions potential future enhancements with advanced audio generation tools like sclang or deeplearning.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/init.sh\":0-13",
+            "content": "#!/bin/bash\napt install ffmpeg espeak\nsudo apt install --reinstall python*-decorator\nalocation=$(which ffmpeg)\nmkdir -p ~/.imageio/ffmpeg\nln -s $alocation ~/.imageio/ffmpeg/ffmpeg.linux64\npip3 install -r requirements.txt\npip3 install -r poster/bilibiliupload/requirements.txt\ncat nodejs_require | xargs -iabc npm i -g abc\npip3 install -r collector/Bilibili_video_download/requirements.txt\npip3 install webrtcvad==2.0.10 wave pydub simpleaudio numpy matplotlib\n# use virtualenv? what do you think?\n# also some basic audio library? such as TTS.\n# when advanced, use sclang, scide, scsynth to generate music, or deeplearning."
+        }
+    ]
+}

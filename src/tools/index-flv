@@ -1,0 +1,5 @@
+#!/usr/bin/python3
+
+from flvlib3.scripts import index_flv
+index_flv.main()
+

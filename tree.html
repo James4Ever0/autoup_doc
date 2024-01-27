@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="github-markdown.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <title>Project structure of: /x00e0d991e368/auto-up</title>
+    <style>
+        .directory:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        :target {
+            background-color: yellow !important;
+        }
+
+        .folded::before {
+            content: '\25B6';
+            margin-right: 8px;
+            /* Add space between marker and text */
+        }
+
+        .expanded::before {
+            content: '\25BC';
+            margin-right: 8px;
+            /* Add space between marker and text */
+        }
+    </style>
+    <script>
+        function toggleVisibility(element) {
+            let mclass = element.getAttribute("class");
+            if (mclass == "expanded") {
+                element.setAttribute('class', 'folded');
+            } else {
+                element.setAttribute('class', 'expanded');
+            }
+            const siblings = element.parentNode.children;
+            for (const sibling of siblings) {
+                if (sibling !== element) {
+                    sibling.style.display = (sibling.style.display === 'none') ? 'block' : 'none';
+                }
+            }
+        }
+    </script>
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+
+            .partial-repository-url {
+                display: none;
+            }
+        }
+
+        ul {
+            list-style: none;
+        }
+        #feeling-lucky:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <article class="markdown-body">
+        <h2>Project structure<span hierarchy="0" class="partial-repository-url"> of: /x00e0d991e368/auto-up</span><div style="float: right;"><a title="Document index" style="margin:3.5px;" href="index.html"><i class="bi bi-search"></i></a><a title="Feeling lucky" style="margin:3.5px;" id="feeling-lucky" href="#"><i class="bi bi-dice-3"></i></a><a title="Expand tree" style="margin:3.5px;" href="tree.html?full=true" id="expand-tree"><i class="bi bi-caret-down-square"></i></a></div></h2>
+<ul>
+<li><span hierarchy="0" class="expanded" onclick="toggleVisibility(this)" ><strong class="directory" id="/"><code>auto-up</code></strong> <em>Multimedia tools, Python libraries for Bilibili.com</em></span><ul>
+<li><a class="file_link" href="index.html?q=/bilibiliupload_failsafe.sh" id="/bilibiliupload_failsafe.sh"><code>bilibiliupload&UnderBar;failsafe&period;sh</code></a> <em>Copies bilibili cookies to persistent.json.</em></li>
+<li><span hierarchy="1" class="expanded" onclick="toggleVisibility(this)" ><strong class="directory" id="/collector/"><code>collector</code></strong> <em>WebSocket, storage, logging, media collector</em></span><ul>
+<li><span hierarchy="2" class="expanded" onclick="toggleVisibility(this)" ><strong class="directory" id="/collector/bili_info_collect/"><code>bili&UnderBar;info&UnderBar;collect</code></strong></span><ul>
+<li><a class="file_link" href="index.html?q=/collector/bili_info_collect/README.md" id="/collector/bili_info_collect/README.md"><code>README&period;md</code></a> <em>Analyze video, image, audio data on platform for trend prediction and categorization</em></li>
+</ul>
+</li>
+<li><span hierarchy="2" class="expanded" onclick="toggleVisibility(this)" ><strong class="directory" id="/collector/celeb_picture_collect/"><code>celeb&UnderBar;picture&UnderBar;collect</code></strong> <em>Celeb picture collection and query tool for faceswap.</em></span><ul>
+<li><a class="file_link" href="index.html?q=/collector/celeb_picture_collect/baidu_spider.js" id="/collector/celeb_picture_collect/baidu_spider.js"><code>baidu&UnderBar;spider&period;js</code></a> <em>Crawler-scraper, downloads images with progress tracking.</em></li>
+<li><a class="file_link" href="index.html?q=/collector/celeb_picture_collect/collect_pics.py" id="/collector/celeb_picture_collect/collect_pics.py"><code>collect&UnderBar;pics&period;py</code></a> <em>Randomly selects, processes, and counts celebrity pictures.</em></li>
+<li><a class="file_link" href="index.html?q=/collector/celeb_picture_collect/download_pics.py" id="/collector/celeb_picture_collect/download_pics.py"><code>download&UnderBar;pics&period;py</code></a> <em>Download and decode celebrity pictures from a URL.</em></li>
+<li><a class="file_link" href="index.html?q=/collector/celeb_picture_collect/download_server.py" id="/collector/celeb_picture_collect/download_server.py"><code>download&UnderBar;server&period;py</code></a> <em>Asynchronous file download server.</em></li>
+<li><a class="file_link" href="index.html?q=/collector/celeb_picture_collect/elec_arg.js" id="/collector/celeb_picture_collect/elec_arg.js"><code>elec&UnderBar;arg&period;js</code></a> <em>Electron app processes command-line arguments.</em></li>
+<li><a class="file_link" href="index.html?q=/collector/celeb_picture_collect/electron.cmd" id="/collector/celeb_picture_collect/electron.cmd"><code>electron&period;cmd</code></a> <em>Runs Electron with command line args in Windows.</em></li>
+<li><a class="file_link" href="index.html?q=/collector/celeb_picture_collect/pic_collect.cmd" id="/collector/celeb_picture_collect/pic_collect.cmd"><code>pic&UnderBar;collect&period;cmd</code></a> <em>Celeb picture collector for faceswap.</em></li>
+<li><a class="file_link" href="index.html?q=/collector/celeb_picture_collect/queries.js" id="/collector/celeb_picture_collect/queries.js"><code>queries&period;js</code></a> <em>Retrieves image links, stores in Map, removes "<strong>", logs as JSON.</em></li>
+</ul>
+</li>
+<li><a class="file_link" href="index.html?q=/collector/chrome_console.js" id="/collector/chrome_console.js"><code>chrome&UnderBar;console&period;js</code></a> <em>WebSocket HTTP server with player management and logging</em></li>
+<li><a class="file_link" href="index.html?q=/collector/chrome_receive.js" id="/collector/chrome_receive.js"><code>chrome&UnderBar;receive&period;js</code></a> <em>Server, GET/POST, data storage, timestamps, recursive directories.</em></li>
+<li><span hierarchy="2" class="expanded" onclick="toggleVisibility(this)" ><strong class="directory" id="/collector/qq_mirai_bot/"><code>qq&UnderBar;mirai&UnderBar;bot</code></strong> <em>MiraiGo-Template build scripts, dynamic scraping features missing.</em></span><ul>
+<li><a class="file_link" href="index.html?q=/collector/qq_mirai_bot/build.sh" id="/collector/qq_mirai_bot/build.sh"><code>build&period;sh</code></a> <em>Compiles MiraiGo program with GOPATH and GOPROXY.</em></li>
+<li><a class="file_link" href="index.html?q=/collector/qq_mirai_bot/build_main.sh" id="/collector/qq_mirai_bot/build_main.sh"><code>build&UnderBar;main&period;sh</code></a> <em>Builds go-cqhttp on GOPATH.</em></li>
+<li><a class="file_link" href="index.html?q=/collector/qq_mirai_bot/build_template.sh" id="/collector/qq_mirai_bot/build_template.sh"><code>build&UnderBar;template&period;sh</code></a> <em>Builds MiraiGo-Template with go.</em></li>
+<li><a class="file_link" href="index.html?q=/collector/qq_mirai_bot/README" id="/collector/qq_mirai_bot/README"><code>README</code></a> <em>Missing dynamic scraping for features.</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="file_link" href="index.html?q=/cookie_dumper.py" id="/cookie_dumper.py"><code>cookie&UnderBar;dumper&period;py</code></a> <em>Bilibili cookie dumper with chatroom control in Python.</em></li>
+<li><a class="file_link" href="index.html?q=/cookie_dumper.sh" id="/cookie_dumper.sh"><code>cookie&UnderBar;dumper&period;sh</code></a> <em>Automated script updates "config_demo.yaml" with "bilibili_cookies".</em></li>
+<li><a class="file_link" href="index.html?q=/cookie_dumper_deprecated.py" id="/cookie_dumper_deprecated.py"><code>cookie&UnderBar;dumper&UnderBar;deprecated&period;py</code></a> <em>Cookie capturing class with deprecated exit function.</em></li>
+<li><a class="file_link" href="index.html?q=/cookie_getter.py" id="/cookie_getter.py"><code>cookie&UnderBar;getter&period;py</code></a> <em>Bilibili account cookie extractor with process control.</em></li>
+<li><a class="file_link" href="index.html?q=/cookie_getter.sh" id="/cookie_getter.sh"><code>cookie&UnderBar;getter&period;sh</code></a> <em>Replaces demo values in config file with actual cookies.</em></li>
+<li><a class="file_link" href="index.html?q=/debug_init.sh" id="/debug_init.sh"><code>debug&UnderBar;init&period;sh</code></a> <em>Restarts stalled processes in collector directory.</em></li>
+<li><a class="file_link" href="index.html?q=/demo_collect.sh" id="/demo_collect.sh"><code>demo&UnderBar;collect&period;sh</code></a> <em>Bilibili video downloader, 80 quality, collector.</em></li>
+<li><a class="file_link" href="index.html?q=/demo_post.sh" id="/demo_post.sh"><code>demo&UnderBar;post&period;sh</code></a> <em>Bash script uploads video to Bilibili.</em></li>
+<li><a class="file_link" href="index.html?q=/gencommit.sh" id="/gencommit.sh"><code>gencommit&period;sh</code></a> <em>Retrieves system name and timestamp for logging.</em></li>
+<li><span hierarchy="1" class="expanded" onclick="toggleVisibility(this)" ><strong class="directory" id="/generator/"><code>generator</code></strong> <em>Artificial intelligence audio generation tool</em></span><ul>
+<li><span hierarchy="2" class="expanded" onclick="toggleVisibility(this)" ><strong class="directory" id="/generator/danmaku_filter/"><code>danmaku&UnderBar;filter</code></strong> <em>Extracts and adjusts danmaku rates for equilibrium.</em></span><ul>
+<li><a class="file_link" href="index.html?q=/generator/danmaku_filter/extract_danmaku.py" id="/generator/danmaku_filter/extract_danmaku.py"><code>extract&UnderBar;danmaku&period;py</code></a> <em>Adjusts CSV danmaku rates for equilibrium.</em></li>
+<li><a class="file_link" href="index.html?q=/generator/danmaku_filter/extract_danmaku.sh" id="/generator/danmaku_filter/extract_danmaku.sh"><code>extract&UnderBar;danmaku&period;sh</code></a> <em>Extracts specific data from sample.xml using grep commands.</em></li>
+</ul>
+</li>
+<li><span hierarchy="2" class="expanded" onclick="toggleVisibility(this)" ><strong class="directory" id="/generator/double-p/"><code>double-p</code></strong> <em>Video recorder app with rotating text animations and server functionality.</em></span><ul>
+<li><a class="file_link" href="index.html?q=/generator/double-p/index.html" id="/generator/double-p/index.html"><code>index&period;html</code></a> <em>Video recorder, rotating text animation with 360 frames, and playback.</em></li>
+<li><a class="file_link" href="index.html?q=/generator/double-p/init.sh" id="/generator/double-p/init.sh"><code>init&period;sh</code></a> <em>Init script, Bash, electron-recorder package installation.</em></li>
+<li><a class="file_link" href="index.html?q=/generator/double-p/launch.js" id="/generator/double-p/launch.js"><code>launch&period;js</code></a> <em>Video recorder Electron app, captures frames and images.</em></li>
+<li><a class="file_link" href="index.html?q=/generator/double-p/launch.sh" id="/generator/double-p/launch.sh"><code>launch&period;sh</code></a> <em>Endless loop: continuous server running with virtual framebuffer</em></li>
+</ul>
+</li>
+<li><span hierarchy="2" class="expanded" onclick="toggleVisibility(this)" ><strong class="directory" id="/generator/faceswap/"><code>faceswap</code></strong></span><ul>
+<li><a class="file_link" href="index.html?q=/generator/faceswap/README.md" id="/generator/faceswap/README.md"><code>README&period;md</code></a> <em>Open-source faceswap tool with deep learning and payment options</em></li>
+</ul>
+</li>
+<li><a class="file_link" href="index.html?q=/generator/README.md" id="/generator/README.md"><code>README&period;md</code></a> <em>Text generation process using ML and NLP.</em></li>
+<li><span hierarchy="2" class="expanded" onclick="toggleVisibility(this)" ><strong class="directory" id="/generator/singing/"><code>singing</code></strong> <em>Spectrogram-based singing audio generator.</em></span><ul>
+<li><a class="file_link" href="index.html?q=/generator/singing/demo_song.py" id="/generator/singing/demo_song.py"><code>demo&UnderBar;song&period;py</code></a> <em>Pitch-shifted singing demo in Python</em></li>
+<li><a class="file_link" href="index.html?q=/generator/singing/mel_spec.py" id="/generator/singing/mel_spec.py"><code>mel&UnderBar;spec&period;py</code></a> <em>Computes and displays mel-spectrogram audio visualization.</em></li>
+<li><a class="file_link" href="index.html?q=/generator/singing/np_conv.py" id="/generator/singing/np_conv.py"><code>np&UnderBar;conv&period;py</code></a> <em>Convolve audio samples, find peaks, align and extract.</em></li>
+<li><a class="file_link" href="index.html?q=/generator/singing/np_ema.py" id="/generator/singing/np_ema.py"><code>np&UnderBar;ema&period;py</code></a> <em>Convolves, prints shapes, finds local maxima.</em></li>
+<li><a class="file_link" href="index.html?q=/generator/singing/nuts.py" id="/generator/singing/nuts.py"><code>nuts&period;py</code></a> <em>Extracts harmonics and percussives from The Nutcracker.</em></li>
+<li><a class="file_link" href="index.html?q=/generator/singing/piped_test.py" id="/generator/singing/piped_test.py"><code>piped&UnderBar;test&period;py</code></a> <em>Tests Audacity pipe functionality in OS-specific setup.</em></li>
+<li><a class="file_link" href="index.html?q=/generator/singing/rmse.py" id="/generator/singing/rmse.py"><code>rmse&period;py</code></a> <em>Calculates RMS value of audio signal, plots it.</em></li>
+<li><a class="file_link" href="index.html?q=/generator/singing/sample.sh" id="/generator/singing/sample.sh"><code>sample&period;sh</code></a> <em>Generate speech audio using espeak, save as 'sample.wav'.</em></li>
+<li><a class="file_link" href="index.html?q=/generator/singing/stft.py" id="/generator/singing/stft.py"><code>stft&period;py</code></a> <em>Analyzes audio, creates mel-frequency spectrogram with CQT.</em></li>
+<li><a class="file_link" href="index.html?q=/generator/singing/tts.py" id="/generator/singing/tts.py"><code>tts&period;py</code></a> <em>Text-to-speech audio file generator.</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="file_link" href="index.html?q=/init.sh" id="/init.sh"><code>init&period;sh</code></a> <em>Install dependencies and potential future audio enhancements.</em></li>
+<li><a class="file_link" href="index.html?q=/nodejs_require" id="/nodejs_require"><code>nodejs&UnderBar;require</code></a> <em>Imports "ws" and "collections" modules.</em></li>
+<li><span hierarchy="1" class="expanded" onclick="toggleVisibility(this)" ><strong class="directory" id="/poster/"><code>poster</code></strong> <em>Manage and create attractive posters.</em></span><ul>
+<li><span hierarchy="2" class="expanded" onclick="toggleVisibility(this)" ><strong class="directory" id="/poster/bili_interactive_upload/"><code>bili&UnderBar;interactive&UnderBar;upload</code></strong> <em>Interactive Bili upload with branching stories</em></span><ul>
+<li><a class="file_link" href="index.html?q=/poster/bili_interactive_upload/bilibili.py" id="/poster/bili_interactive_upload/bilibili.py"><code>bilibili&period;py</code></a> <em>Bilibili video uploader with session support and multi-P uploads.</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bili_interactive_upload/BRIEF" id="/poster/bili_interactive_upload/BRIEF"><code>BRIEF</code></a> <em>Switch Linux file manager, consider mc or ranger.</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bili_interactive_upload/directed_graph.py" id="/poster/bili_interactive_upload/directed_graph.py"><code>directed&UnderBar;graph&period;py</code></a> <em>Create directed graph with nodes, add edges.</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bili_interactive_upload/README" id="/poster/bili_interactive_upload/README"><code>README</code></a> <em>Bilibili video upload automation tool</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bili_interactive_upload/storyline.py" id="/poster/bili_interactive_upload/storyline.py"><code>storyline&period;py</code></a> <em>Branching story class with variable values and user-driven actions</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bili_interactive_upload/TYPES" id="/poster/bili_interactive_upload/TYPES"><code>TYPES</code></a> <em>Types, Constants &amp; Options: Bili Interactive Upload</em></li>
+</ul>
+</li>
+<li><span hierarchy="2" class="expanded" onclick="toggleVisibility(this)" ><strong class="directory" id="/poster/bilibiliupload/"><code>bilibiliupload</code></strong> <em>Automate Bilibili uploads and management.</em></span><ul>
+<li><a class="file_link" href="index.html?q=/poster/bilibiliupload/apply_patch.sh" id="/poster/bilibiliupload/apply_patch.sh"><code>apply&UnderBar;patch&period;sh</code></a> <em>Renames, backs up, replaces files</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bilibiliupload/Bilibili.py" id="/poster/bilibiliupload/Bilibili.py"><code>Bilibili&period;py</code></a> <em>Bilibili daemon: async uploader, stoppable.</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bilibiliupload/clean_cache.sh" id="/poster/bilibiliupload/clean_cache.sh"><code>clean&UnderBar;cache&period;sh</code></a> <em>Delete "<strong>pycache</strong>" directories recursively.</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bilibiliupload/config_demo.yaml" id="/poster/bilibiliupload/config_demo.yaml"><code>config&UnderBar;demo&period;yaml</code></a> <em>Configure Bilibili uploads with parallel support and stream list.</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bilibiliupload/demo_rename.py" id="/poster/bilibiliupload/demo_rename.py"><code>demo&UnderBar;rename&period;py</code></a> <em>Quote-unquote, make GET request for renaming.</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bilibiliupload/Dockerfile" id="/poster/bilibiliupload/Dockerfile"><code>Dockerfile</code></a> <em>Bilibili uploader Docker setup</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bilibiliupload/justUpload.py" id="/poster/bilibiliupload/justUpload.py"><code>justUpload&period;py</code></a> <em>Automate Bilibili video upload using configurations.</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bilibiliupload/justUpload.sh" id="/poster/bilibiliupload/justUpload.sh"><code>justUpload&period;sh</code></a> <em>Kills, starts server, waits, runs justUpload.py</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bilibiliupload/main_entrance.sh" id="/poster/bilibiliupload/main_entrance.sh"><code>main&UnderBar;entrance&period;sh</code></a> <em>Kills python, starts server, runs Bilibili.py</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bilibiliupload/mText.py" id="/poster/bilibiliupload/mText.py"><code>mText&period;py</code></a> <em>Markov model initializer for text generation</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bilibiliupload/README.md" id="/poster/bilibiliupload/README.md"><code>README&period;md</code></a> <em>Bilibili uploader/downloader, multi-platform, event-driven</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bilibiliupload/requirements.txt" id="/poster/bilibiliupload/requirements.txt"><code>requirements&period;txt</code></a> <em>Bilibili upload requirements: selenium, youtube_dl, packages.</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bilibiliupload/title_tweaker.py" id="/poster/bilibiliupload/title_tweaker.py"><code>title&UnderBar;tweaker&period;py</code></a> <em>Text manipulation and censoring functions with Markov chain generation.</em></li>
+<li><a class="file_link" href="index.html?q=/poster/bilibiliupload/trivial_server.py" id="/poster/bilibiliupload/trivial_server.py"><code>trivial&UnderBar;server&period;py</code></a> <em>Python Tornado app: file renaming with JSON serving and UUIDs.</em></li>
+</ul>
+</li>
+<li><a class="file_link" href="index.html?q=/poster/README.md" id="/poster/README.md"><code>README&period;md</code></a> <em>Intro to project, interactive video posting unavailable.</em></li>
+<li><span hierarchy="2" class="expanded" onclick="toggleVisibility(this)" ><strong class="directory" id="/poster/uploader/"><code>uploader</code></strong> <em>Bilibili poster uploader</em></span><ul>
+<li><a class="file_link" href="index.html?q=/poster/uploader/bilibili.py" id="/poster/uploader/bilibili.py"><code>bilibili&period;py</code></a> <em>Bilibil Uploader Python Script</em></li>
+<li><a class="file_link" href="index.html?q=/poster/uploader/extract_channels.py" id="/poster/uploader/extract_channels.py"><code>extract&UnderBar;channels&period;py</code></a> <em>Extraction and validation functions for data structures.</em></li>
+<li><a class="file_link" href="index.html?q=/poster/uploader/README.md" id="/poster/uploader/README.md"><code>README&period;md</code></a> <em>Bilibli video upload script guide</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="file_link" href="index.html?q=/pull.cmd" id="/pull.cmd"><code>pull&period;cmd</code></a> <em>Runs Git pull cmd on Windows, updates local master branch.</em></li>
+<li><a class="file_link" href="index.html?q=/pull.sh" id="/pull.sh"><code>pull&period;sh</code></a> <em>Executes Git pull command for remote repository merging.</em></li>
+<li><a class="file_link" href="index.html?q=/README.md" id="/README.md"><code>README&period;md</code></a> <em>Video segmentation, pose detection, audio analysis app for bilibili.com</em></li>
+<li><a class="file_link" href="index.html?q=/requirements.txt" id="/requirements.txt"><code>requirements&period;txt</code></a> <em>Essential Python library dependencies.</em></li>
+<li><span hierarchy="1" class="expanded" onclick="toggleVisibility(this)" ><strong class="directory" id="/tools/"><code>tools</code></strong> <em>Media conversion and debugging utilities</em></span><ul>
+<li><a class="file_link" href="index.html?q=/tools/bv2av.js" id="/tools/bv2av.js"><code>bv2av&period;js</code></a> <em>BV/AV ID converter and URL replacement tool</em></li>
+<li><a class="file_link" href="index.html?q=/tools/debug-flv" id="/tools/debug-flv"><code>debug-flv</code></a> <em>Debug FLV file handling tool</em></li>
+<li><a class="file_link" href="index.html?q=/tools/index-flv" id="/tools/index-flv"><code>index-flv</code></a> <em>Index FLV files with flvlib3 module</em></li>
+<li><a class="file_link" href="index.html?q=/tools/stub.js" id="/tools/stub.js"><code>stub&period;js</code></a> <em>Stub tool for BV-AV conversion.</em></li>
+<li><a class="file_link" href="index.html?q=/tools/test_debug.sh" id="/tools/test_debug.sh"><code>test&UnderBar;debug&period;sh</code></a> <em>Debug-FLV tool on HOP.flv with -i and -u options</em></li>
+<li><a class="file_link" href="index.html?q=/tools/testv2_debug.sh" id="/tools/testv2_debug.sh"><code>testv2&UnderBar;debug&period;sh</code></a> <em>Test bilibili video with debug-flv tool.</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+    </article>
+    <script type="text/javascript">
+        function getQueryParams() {
+            var search = window.location.search.substring(1); // Remove leading '?'
+            var queryParams = {};
+            search.split('&').forEach(function (pair) {
+                var parts = pair.split('=');
+                var key = decodeURIComponent(parts[0]);
+                var value = decodeURIComponent(parts[1]);
+                queryParams[key] = value;
+            });
+            return queryParams;
+        }
+
+        const queryParams = getQueryParams(window.location.search);
+        const show_full = queryParams.full == "true";
+        //const is_random = queryParams.random == 'true';
+        function feelingLucky() {
+            var elements = document.getElementsByClassName("file_link");
+            var randomIndex = Math.floor(Math.random() * elements.length);
+            window.location = elements[randomIndex].href;
+        }
+        //if (is_random) {feelingLucky();}
+        document.getElementById("feeling-lucky").onclick = feelingLucky;
+        if (!show_full) {
+            const spans = document.querySelectorAll('span');
+            for (let span of spans) {
+                if (span.getAttribute("hierarchy") == '0') { continue }
+                toggleVisibility(span);
+            }
+        } else {
+            const expand_elem = document.getElementById('expand-tree');
+            expand_elem.setAttribute("href", "tree.html");
+            expand_elem.setAttribute("title", "Undo expand");
+            expand_elem.innerHTML = '<i class="bi bi-caret-up-square"></i>'
+        }
+
+    </script>
+</body>
+
+</html>

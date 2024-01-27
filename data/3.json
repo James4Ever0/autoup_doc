@@ -1,0 +1,539 @@
+{
+    "300": {
+        "file_id": 50,
+        "content": "/poster/bili_interactive_upload/bilibili.py",
+        "type": "filepath"
+    },
+    "301": {
+        "file_id": 50,
+        "content": "The Uploader class handles Bilibili video uploads by splitting files, utilizing sessions and supporting multi-P uploads. The code validates input parameters, assembles strings for dynamic content, reads JSON file, checks cookies, and initializes Uploader instance to upload specified file with given parameters.",
+        "type": "summary"
+    },
+    "302": {
+        "file_id": 50,
+        "content": "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\nimport os\nimport re\nimport sys\nimport math\nimport time\nimport json\nimport base64\nimport requests\nimport argparse\nfrom requests.adapters import HTTPAdapter\n# planning using two jsons. one for credential, one for video details.\n# you can generate the cover anyway?\n# upload flv/mp4\nclass Uploader(object):\n    def __init__(self,cookie_string):\n        # TODO: 增加登录接口使用账号密码登陆\n        #  get all related shits?\n        cookie = cookie_string\n        self.MAX_RETRYS = 5\n        self.profile = 'ugcupos/yb'\n        self.cdn = 'ws'\n        self.csrf = re.search('bili_jct=(.*?);', cookie + ';').group(1)\n        self.mid = re.search('DedeUserID=(.*?);', cookie + ';').group(1)\n        self.session = requests.session()\n        self.session.mount('https://', HTTPAdapter(max_retries=self.MAX_RETRYS))\n        self.session.headers['cookie'] = cookie\n        self.session.headers['Accept'] = 'application/json, text/javascript, */*; q=0.01'\n        self.session.headers['User-Agent'] = 'Mozil",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/bilibili.py:1-34"
+    },
+    "303": {
+        "file_id": 50,
+        "content": "This code defines a class called Uploader for uploading videos to Bilibili. It initializes the object with a cookie string, sets maximum retries, profile, and CDN. The session uses HTTP adapter for handling retries, sets headers for cookie, accept, and user-agent.",
+        "type": "comment"
+    },
+    "304": {
+        "file_id": 50,
+        "content": "la/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'\n        self.session.headers['Referer'] = 'https://space.bilibili.com/{mid}/#!/'.format(mid=self.mid)\n    def _upload(self, filepath):\n        \"\"\"执行上传文件操作\"\"\"\n        if not os.path.isfile(filepath):\n            print('FILE NOT EXISTS:', filepath, file=sys.stderr)\n            return\n        filename = os.path.basename(filepath)\n        filesize = os.path.getsize(filepath)\n        # 1.获取本次上传所需信息\n        preupload_url = 'https://member.bilibili.com/preupload'\n        params = {\n            'os': 'upos',\n            'r': 'upos',\n            'ssl': '0',\n            'name': filename,\n            'size': filesize,\n            'upcdn': self.cdn,\n            'profile': self.profile,\n        }\n        response = self.session.get(preupload_url, params=params)\n        upload_info = response.json()\n        # 本次上传bilibili端文件名\n        upload_info['bili_filename'] = upload_info['upos_uri'].split('/')[-1].split('.')[0]\n        # 本次上传url",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/bilibili.py:34-63"
+    },
+    "305": {
+        "file_id": 50,
+        "content": "This code is used to upload a file to Bilibili using the bilibili.py module. It first checks if the file exists, then retrieves the necessary information for the upload process by making a GET request to the preupload URL with the required parameters. The response contains the upload info which includes the Bilibili filename and the upload URL.",
+        "type": "comment"
+    },
+    "306": {
+        "file_id": 50,
+        "content": "        endpoint = 'http:%s/' % upload_info['endpoint']\n        upload_url = re.sub(r'^upos://', endpoint, upload_info['upos_uri'])\n        print('UPLOAD URL:', upload_url, file=sys.stderr)\n        # 本次上传session\n        upload_session = requests.session()\n        upload_session.mount('http://', HTTPAdapter(max_retries=self.MAX_RETRYS))\n        upload_session.headers['X-Upos-Auth'] = upload_info['auth']\n        # 2.获取本次上传的upload_id\n        response = upload_session.post(upload_url + '?uploads&output=json')\n        upload_info['upload_id'] = response.json()['upload_id']\n        print('UPLOAD INFO:', upload_info, file=sys.stderr)\n        # 3.分块上传文件\n        CHUNK_SIZE = 4 * 1024 * 1024\n        total_chunks = math.ceil(filesize * 1.0 / CHUNK_SIZE)\n        offset = 0\n        chunk = 0\n        parts_info = {'parts': []}\n        fp = open(filepath, 'rb')\n        while True:\n            blob = fp.read(CHUNK_SIZE)\n            if not blob:\n                break\n            params = {\n                'partNumber': chunk + 1,",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/bilibili.py:64-90"
+    },
+    "307": {
+        "file_id": 50,
+        "content": "Code block 3: Upload file in chunks\n- Creates a session for this upload\n- Gets the upload ID by posting to upload URL\n- Splits the file into chunks of 4MB, uploads each chunk separately",
+        "type": "comment"
+    },
+    "308": {
+        "file_id": 50,
+        "content": "                'uploadId': upload_info['upload_id'],\n                'chunk': chunk,\n                'chunks': total_chunks,\n                'size': len(blob),\n                'start': offset,\n                'end': offset + len(blob),\n                'total': filesize,\n            }\n            response = upload_session.put(upload_url, params=params, data=blob)\n            print('Uploading...',math.floor(chunk / total_chunks  * 100), '%  UPLOAD CHUNK', chunk, ':', response.text, file=sys.stderr)\n            parts_info['parts'].append({\n                'partNumber': chunk + 1,\n                'eTag': 'etag'\n            })\n            chunk += 1\n            offset += len(blob)\n        # 4.标记本次上传完成\n        params = {\n            'output': 'json',\n            'name': filename,\n            'profile': self.profile,\n            'uploadId': upload_info['upload_id'],\n            'biz_id': upload_info['biz_id']\n        }\n        response = upload_session.post(upload_url, params=params, data=parts_info)\n        print('UPLOAD RESULT:', response.text, file=sys.stderr)",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/bilibili.py:91-118"
+    },
+    "309": {
+        "file_id": 50,
+        "content": "Uploading video chunks to Bilibili server: The code uploads video chunks as separate requests and keeps track of each part's number and eTag. After all chunks are uploaded, it sends a final request to complete the upload process.",
+        "type": "comment"
+    },
+    "310": {
+        "file_id": 50,
+        "content": "        return upload_info\n    def _cover_up(self, image_path):\n        \"\"\"上传图片并获取图片链接\"\"\"\n        if not os.path.isfile(image_path):\n            return ''\n        fp = open(image_path, 'rb')\n        encode_data = base64.b64encode(fp.read())\n        url='https://member.bilibili.com/x/vu/web/cover/up'\n        data={\n            'cover': b'data:image/jpeg;base64,' + encode_data,\n            'csrf': self.csrf,\n        }\n        response = self.session.post(url, data=data)\n        return response.json()['data']['url']\n    def upload(self, filepath, title, tid, tag='', desc='', source='', cover_path='', dynamic='', no_reprint=1):\n        \"\"\"视频投稿\n        Args:\n            filepath   : 视频文件路径\n            title      : 投稿标题\n            tid        : 投稿频道id,详见https://member.bilibili.com/x/web/archive/pre\n            tag        : 视频标签，多标签使用','号分隔\n            desc       : 视频描述信息\n            source     : 转载视频出处url\n            cover_path : 封面图片路径\n            dynamic    : 分享动态, 比如：\"#周五##放假# 劳资明天不上班\"\n            no_reprint : 1表示不允许转载,0表示允许",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/bilibili.py:120-147"
+    },
+    "311": {
+        "file_id": 50,
+        "content": "The code defines a class with methods to upload videos and covers to Bilibili, handle CSRF tokens, and post data. The `upload` method takes filepath, title, channel ID, tags, description, source URL, cover path, dynamic text, and reprint preferences for posting a video on Bilibili. The `_cover_up` method uploads an image and returns the link to it.",
+        "type": "comment"
+    },
+    "312": {
+        "file_id": 50,
+        "content": "        \"\"\"\n        # TODO:\n        # 1.增加多P上传\n        # 2.对已投稿视频进行删改, 包括删除投稿，修改信息，加P删P等\n        # 上传文件, 获取上传信息\n        upload_info = self._upload(filepath)\n        if not upload_info:\n            return\n        # 获取图片链接\n        # cover is empty! wtf?\n        # do you need to check the api? not yet. i assure you will not do this.\n        cover_url = self._cover_up(cover_path) if cover_path else ''\n        # 版权判断, 转载无版权\n        copyright = 2 if source else 1\n        # tag设置\n        if isinstance(tag, list):\n            tag = ','.join(tag)\n        # 设置视频基本信息\n        # what is that desc_format_id?\n        params = {\n            'copyright' : copyright,\n            'source'    : source,\n            'title'     : title,\n            'tid'       : tid,\n            'tag'       : tag,\n            'no_reprint': no_reprint,\n            'desc'      : desc,\n            'desc_format_id': 0,\n            'dynamic': dynamic,\n            'cover'     : cover_url,\n            'videos'    : [{\n                'filename': upload_info['bili_filename'],",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/bilibili.py:148-180"
+    },
+    "313": {
+        "file_id": 50,
+        "content": "This code is for uploading a video to Bilibili and handling various aspects of the process, including multi-P (partner) uploads, updating existing videos, uploading files, retrieving upload information, determining copyright status, setting tags, and configuring video details. The function takes filepath as input and returns an upload info object if successful.",
+        "type": "comment"
+    },
+    "314": {
+        "file_id": 50,
+        "content": "                'title'   : title,\n                'desc'    : '',\n            }]\n        }\n        if source:\n            del params['no_reprint']\n        # short for video-upload.\n        url = 'https://member.bilibili.com/x/vu/web/add?csrf=' + self.csrf\n        response = self.session.post(url, json=params)\n        print('SET VIDEO INFO:', response.text, file=sys.stderr)\n        return response.json()\ndef checkFile(cf):\n    assert cf.startswith(\"/\")\n    assert os.path.exists(cf)\n    assert os.path.isfile(cf)\nif __name__ == '__main__':\n    parser = argparse.ArgumentParser(description='上传bilibili视频')\n    parser.add_argument('-k','--json', help=\"full cookie dump json absolute path\", required=True)\n    parser.add_argument('-f', '--file', help='video file absolute path', required=True)\n#    parser.add_argument('-t', '--title', help='标题', required=True)\n#    parser.add_argument('-c', '--channel', type=int, help='频道id, 详见https://member.bilibili.com/x/web/archive/pre', required=True)\n#    parser.add_argument('-T', '--tag', nargs='*', help='标签')",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/bilibili.py:181-204"
+    },
+    "315": {
+        "file_id": 50,
+        "content": "The code is a Python script for uploading Bilibili videos. It requires a JSON file containing user cookies and a video file path as inputs. The function \"checkFile\" validates the provided file path, ensuring it exists, is accessible, and is of type file. The script then parses command line arguments using argparse. It does not include title, channel, or tag as explicit arguments but could potentially be added in the future. The script posts video information to a Bilibili API endpoint for uploading videos.",
+        "type": "comment"
+    },
+    "316": {
+        "file_id": 50,
+        "content": "    parser.add_argument(\"-m\",\"--metadata\", help=\"json metadata of post information absolute path\", required = True)\n    parser.add_argument('-c', '--cover', help=\"cover picture absolute path\")\n    args = parser.parse_args()\n    checkFile(args.file)\n    checkFile(args.json)\n    musthave = [\"title\",\"tid\"]\n    checkFile(args.metadata)\n    parsed =None\n    with open(args.metadata,\"r\") as fi:\n        parsed = json.loads(fi.read())\n    if parsed == None:\n        print(\"metadata error\")\n    assert type(parsed) == dict\n    key_parsed = list(parsed.keys())\n    for x in musthave:\n        assert x in key_parsed\n    assert type(parsed[\"title\"]) == str\n    assert type(parsed[\"tid\"]) == int\n    title = parsed[\"title\"]\n    assert len(title)>0\n    tid = parsed[\"tid\"]\n    tag=''\n    desc=''\n    source=''\n    cover_path=''\n    dynamic=''\n    no_reprint=1\n    if \"tag\" in key_parsed:\n        assert type(parsed[\"tag\"]) == list\n        for x in parsed[\"tag\"]:\n            assert type(x) == str\n            assert len(x)>0\n            assert \",\" not in x",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/bilibili.py:205-237"
+    },
+    "317": {
+        "file_id": 50,
+        "content": "This code is parsing command line arguments and validating a JSON metadata file. It checks if the necessary keys are present, verifies their types, and performs basic assertions on their content. The title, tid, tag, description, source, cover path, dynamic, and no_reprint variables are being initialized for further usage in the code.",
+        "type": "comment"
+    },
+    "318": {
+        "file_id": 50,
+        "content": "        tag = \",\".join(parsed[\"tag\"])\n    if \"desc\" in key_parsed:\n        assert type(parsed[\"desc\"]) == str\n        assert len(parsed[\"desc\"])>0\n        desc = parsed[\"desc\"]\n    if \"source\" in key_parsed:\n        assert type(parsed[\"source\"]) == str\n        source = parsed[\"source\"]\n    if \"cover_path\" in key_parsed:\n        assert type(parsed[\"source_path\"]) == str\n        checkFile(parsed[\"source_path\"])\n    if \"dynamic\" in key_parsed:\n        assert type(parsed[\"dynamic\"]) == dict\n        ddyn = parsed[\"dynamic\"]\n        ddyn_keys = list(ddyn.keys())\n        assert len(ddyn_keys) == 2\n        assert \"tags\" in ddyn_keys\n        assert \"content\" in ddyn_keys\n        dtags = ddyn[\"tags\"]\n        dcont = ddyn[\"content\"]\n        assert type(dtags) == list\n        assert type(dcont) == str\n        assert len(dcont)>0\n        assert \"#\" not in dcont\n        for x in dtags:\n            assert type(x) == str\n            assert \"#\" not in x\n            dynamic+=\"#\"+x+\"#\"\n        dynamic+=\" \"+dcont\n    if \"no_reprint\" in key_parsed:",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/bilibili.py:238-267"
+    },
+    "319": {
+        "file_id": 50,
+        "content": "This code is validating the input parameters for a Bilibili interactive upload, ensuring that they are in the correct format. It checks if certain keys like \"tag\", \"desc\", \"source\", \"cover_path\", and \"dynamic\" are present in the input dictionary. If these keys exist, it further validates their types (e.g., string) and formats (e.g., length, no presence of unwanted characters). It also assembles strings for possible dynamic content in the upload.",
+        "type": "comment"
+    },
+    "320": {
+        "file_id": 50,
+        "content": "        nop = parsed[\"no_reprint\"]\n        assert type(nop) == int\n        assert nop in [0,1]\n        no_reprint = nop\n    cookie_string = \"\"\n    cookies = None\n    with open(args.json,\"r\") as f:\n        cookies = json.loads(f.read())\n    assert type(cookies) == dict\n    mustcook = [\"DedeUserID\", \"bili_jct\"]\n    for x in mustcook:\n        assert x in cookies.keys()\n    ckeys = mustcook+[x for x in cookies.keys() if x not in mustcook]\n#    assert \"bili_jct\" in cookies.keys()\n    for x in ckeys:\n        cookie_string+=x+\"=\"+cookies[x]+\"; \"\n    cookie_string = cookie_string[:-2]\n    uper = Uploader(cookie_string)\n    uper.upload(args.file, title,tid, tag=tag, desc=desc, source=source, cover_path=cover_path, dynamic=dynamic, no_reprint=no_reprint)",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/bilibili.py:268-286"
+    },
+    "321": {
+        "file_id": 50,
+        "content": "Code reads JSON file, checks for required cookies and creates a cookie string. It then initializes an instance of Uploader class with the cookie string and uploads the specified file with given parameters like title, tag etc.",
+        "type": "comment"
+    },
+    "322": {
+        "file_id": 51,
+        "content": "/poster/bili_interactive_upload/directed_graph.py",
+        "type": "filepath"
+    },
+    "323": {
+        "file_id": 51,
+        "content": "The code is importing the networkx library and creating a directed graph using NetworkX's DiGraph. It adds two nodes with their respective attributes, \"sample video\" and \"another video\". The comment suggests adding edges between nodes but does not specify how to do it.",
+        "type": "summary"
+    },
+    "324": {
+        "file_id": 51,
+        "content": "import networkx as nx\ng = nx.DiGraph()\ng.add_node({\"name\":\"sample video\",\"isRoot\":True,index=1,cid = 20021})\ng.add_node({\"name\":\"another video\",\"isRoot\":True,index=2,cid = 20022})\n# how to do this?\n# for x in g.nodes\n# g.add_edge((x,y))",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/directed_graph.py:1-8"
+    },
+    "325": {
+        "file_id": 51,
+        "content": "The code is importing the networkx library and creating a directed graph using NetworkX's DiGraph. It adds two nodes with their respective attributes, \"sample video\" and \"another video\". The comment suggests adding edges between nodes but does not specify how to do it.",
+        "type": "comment"
+    },
+    "326": {
+        "file_id": 52,
+        "content": "/poster/bili_interactive_upload/storyline.py",
+        "type": "filepath"
+    },
+    "327": {
+        "file_id": 52,
+        "content": "Code creates a story class for branching stories with variable values, initializes names and functions, defines links, and sets conditions based on video IDs in a program that allows user actions to manipulate \"数值3\" and define node and GUI variables. Conversion process is unclear and there's debate over using a unified framework.",
+        "type": "summary"
+    },
+    "328": {
+        "file_id": 52,
+        "content": "import json\nimport exrrx\nimport time\nimport networkx\nimport random\nsysrand=random.SystemRandom()\n# can you just parse and replace?\ndef mima_int(_mi,_ma):\n    assert type(_mi)==int\n    assert type(_ma)==int\n    assert _mi<_ma\n    return sysrand.choice(list(range(_mi,_ma+1)))\ndef now():\n    return round(time.time()*1000)\ndef gen_link():\n    return exrex.getone(\"l-[0-9a-zA-Z#@]{10}\")\ndef gen_var():\n    return exrex.getone(\"v-[0-9a-zA-Z#@]{10}\")\ndef gen_node():\n    return exrex.getone(\"n-[0-9a-zA-Z#@]{9}\")\ndef rtheme():\n    return mima_int(1,11) \nclass story:\n    def __init__(self,graph):\n        self.graph=graph\n        self.vlist=\n        self.nlist=\n        self.llist=\n    def init_names(self):\n# the hash is generated from [vl]-[0-9a-zA-Z#@]{10}, n-[0-9a-zA-Z#@]{9}.\n# variable value ranging from 0 to 100.\n# if we want to be some copycat then it is just fine.\n# branching node -> flowLink -> virtual node -> refLink -> jump target\n# the cropping method shall be applied on the cover image.\n# ratio is 960:600.\n# it should be conversion instead of something else.",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/storyline.py:1-37"
+    },
+    "329": {
+        "file_id": 52,
+        "content": "The code defines a class called \"story\" for generating and managing a story. It uses various functions such as mima_int, now, gen_link, gen_var, and gen_node. The story object has an associated graph and lists for nodes, variables, and links. It initializes names and can be used to generate a story with branching paths and variable values ranging from 0 to 100.",
+        "type": "comment"
+    },
+    "330": {
+        "file_id": 52,
+        "content": "\"\"\"\ngraph(dict) -> script (escaped \\\" JSON string) -> hasGoto true\n                                               -> editorVersion \"1.4.6\"\n                                               -> createdTime 1607968436531 (using Date.now())\n                                               -> currentThemeId 11 (button theme)\n                                               -> enableVariables true\n                                               -> nodes (dict) -> n-U9IKgqOwz -> id \"n-U9IKgqOwz\"\n                                                                              -> type \"videoNode/gotoNode\" (gotoNode has empty data dict)\n                                                                              -> data (dict) -> type 0/1/2 (0-NODE_TYPE_PLAY, 1-NODE_TYPE_SELECT 2-NODE_TYPE_POINT)\n                                                                                             -> aid \"\"\n                                                                                             -> cid <video_cid>\n        ",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/storyline.py:38-49"
+    },
+    "331": {
+        "file_id": 52,
+        "content": "The code creates a storyline script with a gotoNode, setting properties such as editorVersion, createdTime, currentThemeId, enableVariables, and nodes. The nodes include a videoNode/gotoNode type with an empty data dict, specifying the node type (0-NODE_TYPE_PLAY, 1-NODE_TYPE_SELECT, 2-NODE_TYPE_POINT), aid as empty, cid as <video_cid>.",
+        "type": "comment"
+    },
+    "332": {
+        "file_id": 52,
+        "content": "                                                                                     -> name \"nodename\"\n                                                                                             -> duration <duration in miliseconds>\n                                                                                             -> index 1 (the P_ number)\n                                                                                             -> showTime 0/5 (how many seconds shall options appear, 0 for infinite)\n                                                                                             -> innerOptions [] (not to fuck with it)\n                                                                                             -> dimension (dict) -> width <video_width>\n                                                                                                                 -> height <video_height> (seems to follow 1920*1080, especially 1080)\n                                                                              -> isRoot true",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/storyline.py:49-56"
+    },
+    "333": {
+        "file_id": 52,
+        "content": "This code represents a storyline object, containing attributes such as name, duration in milliseconds, index, show time, inner options, and dimensions. The width and height follow a specific resolution (likely 1920*1080). The isRoot attribute indicates that this storyline is the main one.",
+        "type": "comment"
+    },
+    "334": {
+        "file_id": 52,
+        "content": "                                                                              -> input [] (from flowLink)\n                                                                              -> output [\"l-9wPBhA3DYG\",\"l-Ku7rG1F5Uy\",\"l-@rsVvtjRtA\"] (gotoNode can only have one, videoNode 4)\n                                                                              -> refInput [] (from reflink)\n                                                                              -> refOutput [] (only for gotoNode)\n                                               -> links (dict) -> l-9wPBhA3DYG (dict) -> id \"l-9wPBhA3DYG\"\n                                                                                      -> type \"flowLink/reflink\" (reflink can jump around except for the \"from\" node or the virtual node, and have empty data dict)\n                                                                                      -> data (dict) -> id \"l-9wPBhA3DYG\"\n                                                                                                     -> text \"a jumplink\"",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/storyline.py:57-64"
+    },
+    "335": {
+        "file_id": 52,
+        "content": "This code appears to be creating a flowLink and a reflink for a storyline. The flowLink connects the input list to an output list containing three elements, while the reflink only has data for the gotoNode. The links dictionary stores the \"l-9wPBhA3DYG\" key with details about its type (flowLink/reflink) and text (\"a jumplink\").",
+        "type": "comment"
+    },
+    "336": {
+        "file_id": 52,
+        "content": "                                                                                                     -> default true\n                                                                                                     -> point (dict) -> x 0 (range (0,1), leave 0 for assignments later) \n                                                                                                                     -> y 0\n                                                                                                                     -> align 2 (what is this align?)\n                                                                                                     -> conditions (controlling to appear this one or not) [{\"vid\":\"v-6ztcnfk9bz\",\"type\":\"ge/gt/le/lt/eq\",\"value\":0,\"value2\":100,\"enabled\":false}, (value2 must be greater than value)\n                                                                                                                    {\"vid\":\"v-3pihLg1zJY\",\"type\":\"range\",\"value\":1,\"value2\":100,\"enabled\":false}] (only useful when type is \"range\")",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/storyline.py:65-70"
+    },
+    "337": {
+        "file_id": 52,
+        "content": "This code sets default values for a point, with x and y coordinates set to 0, align value set to 2 (possibly related to alignment), and conditions for when this point should appear based on video IDs and their respective types. The conditions include checks for greater than or equal/less than or equal values.",
+        "type": "comment"
+    },
+    "338": {
+        "file_id": 52,
+        "content": "                                                                                                     -> actions (after selection) [{\"vid\":\"v-mJe1rMDpb\",\"type\":\"add/sub/assign\",\"value\":0,\"enabled\":true}]\n                                                                                      -> from: \"n-U9IKgqOwz\"\n                                                                                      -> to: \"n-aO0f9zG6l\"\n                                               -> variables [] -> (dict) -> v-@5Cni3WYlG\n                                                                         -> type 1/2 (1 for variable, 2 for random)\n                                                                         -> name \"数值3\" \n                                                                         -> initValue 5\n                                                                         -> initValue2 0 (for random variable,if so must be greater than initValue)\n                                                                         -> displayable false (to hide it or not)",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/storyline.py:71-79"
+    },
+    "339": {
+        "file_id": 52,
+        "content": "The code represents a user action to add, subtract or assign a value (0) to a variable named \"数值3\" with an initial value of 5. The variable is set to be hidden, and the code will execute this operation after the selection is made.",
+        "type": "comment"
+    },
+    "340": {
+        "file_id": 52,
+        "content": "            -> aid <av_id>\n            -> skin_id <skin_id>\n            -> nodes [] -> (dict) -> id \"<node_id>\" (only for videoNode)\n                                  -> cid <cid>\n                                  -> name <node_name>\n                                  -> is_start 1/0 (i for initial node, 0 for childrens)\n                                  -> show_time -1 (-1 for infinite, anything other than that means the option duration)\n                                  -> otype 1/2 (1 for auto align options, 2 for pinpoint options) \n                                  -> edges [] -> (dict) -> id \"<edge_id>\" (flowLink)\n                                                        -> title \"edge title\"\n                                                        -> to_node_id \"<dest_node_id>\" (must be videoNode)\n                                                        -> is_default 0/1 (1 for default)\n                                                        -> condition [] -> (dict) -> var_id \"v-3pihLg1zJY\" (this can be used multiple times for same var to produce \"reign\" effect)",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/storyline.py:80-92"
+    },
+    "341": {
+        "file_id": 52,
+        "content": "This code defines a node object within the context of a storyline. It includes attributes like aid, av_id, skin_id, id (only for videoNode), cid, name, is_start, show_time, otype, and edges. The edges attribute contains information about the edge title, destination node ID, default status, and condition if applicable.",
+        "type": "comment"
+    },
+    "342": {
+        "file_id": 52,
+        "content": "                                                                                  -> condition \"le/lt/ge/gt/eq\"\n                                                                                  -> value 0\n                                                        -> attribute [] -> (dict) -> var_id \"<var_id>\" (cannot be random variable)\n                                                                                  -> action \"add/sub/assign\"\n                                                                                  -> value 0\n                                                        -> text_align (top:1 right:2 bottom:3 left:4) (for otype:2)\n                                                        -> pos_x <abs_pos_x> (for otype:2)\n                                                        -> pos_y <abs_pos_y> (for otype:2)\n            -> regional_vars [] -> (dict) -> name: \"<number_name>\"\n                                          -> init_min initValue\n                                          -> init_max initValue2",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/storyline.py:93-103"
+    },
+    "343": {
+        "file_id": 52,
+        "content": "This code appears to be setting up variables for a graphical user interface (GUI) element, possibly in Python. It specifies the attribute and position of the GUI element with various options such as alignment, absolute positions, regional variables, and initialization values. The condition and action are also specified, likely related to updating or modifying the GUI element based on certain conditions. The code may be part of a larger program that utilizes these GUI elements for user interaction or data visualization.",
+        "type": "comment"
+    },
+    "344": {
+        "file_id": 52,
+        "content": "                                          -> type 1/2 (1 for variable, 2 for random)\n                                          -> id \"<variable_id>\"\n                                          -> is_show 0/1 (0 for not show, 1 for show)\n\"\"\"\n# just WTF?\n# main issues: convert what to what?\n# better use a unified framework or not.",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/storyline.py:104-110"
+    },
+    "345": {
+        "file_id": 52,
+        "content": "This code snippet seems to be converting a variable or random value into an unspecified format. The main issue is the lack of clarity in the conversion process and if it's better to use a unified framework or not.",
+        "type": "comment"
+    },
+    "346": {
+        "file_id": 53,
+        "content": "/poster/bilibiliupload/Bilibili.py",
+        "type": "filepath"
+    },
+    "347": {
+        "file_id": 53,
+        "content": "Starts a daemon process that can be stopped, restarted, or the uploader only can be run. Uses asyncio for asynchronous execution.",
+        "type": "summary"
+    },
+    "348": {
+        "file_id": 53,
+        "content": "#!/usr/bin/python3\n# coding:utf8\nimport asyncio\nimport sys\nimport common\nfrom engine import main\nfrom common.Daemon import Daemon\nif __name__ == '__main__':\n    sys.excepthook = common.new_hook\n    daemon = Daemon('watch_process.pid')\n    if len(sys.argv) == 2:\n        if 'start' == sys.argv[1]:\n            daemon.start()\n        elif 'stop' == sys.argv[1]:\n            daemon.stop()\n        elif 'restart' == sys.argv[1]:\n            daemon.restart()\n        else:\n            print('unknown command')\n            sys.exit(2)\n        sys.exit(0)\n    elif len(sys.argv) == 1:\n        # how do you run the uploader only, or to disable it?\n        asyncio.run(main())\n    else:\n        print('usage: %s start|stop|restart' % sys.argv[0])\n        sys.exit(2)",
+        "type": "code",
+        "location": "/poster/bilibiliupload/Bilibili.py:1-30"
+    },
+    "349": {
+        "file_id": 53,
+        "content": "Starts a daemon process that can be stopped, restarted, or the uploader only can be run. Uses asyncio for asynchronous execution.",
+        "type": "comment"
+    },
+    "350": {
+        "file_id": 54,
+        "content": "/poster/bilibiliupload/Dockerfile",
+        "type": "filepath"
+    },
+    "351": {
+        "file_id": 54,
+        "content": "The Dockerfile installs development tools, sets up symbolic links for pip3 and python3, configures environment variables, and creates a Bilibili uploader image with an entry point script that listens on port 9515/tcp.",
+        "type": "summary"
+    },
+    "352": {
+        "file_id": 54,
+        "content": "FROM jrottenberg/ffmpeg\n#VOLUME /opt/data\nRUN export DEBIAN_FRONTEND=noninteractive \\\n  && apt-get update \\\n  && apt install build-essential -y \\\n  && apt install libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev -y \\\n  && apt install wget -y \\\n  && apt install openssl -y \\\n  && apt install curl -y \\\n  && apt install libsqlite3-dev -y \\\n  && wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz \\\n  && tar -xvf Python-3.7.3.tgz \\\n  && cd Python-3.7.3 \\\n  && ./configure --enable-loadable-sqlite-extensions \\\n  && make \\\n  && make install \\\n  && ln -s /usr/local/bin/pip3 /usr/bin/pip3 \\\n  && ln -s /usr/local/bin/python3 /usr/bin/python3 \\\n#  && apt-get install -y python3-pip \\\n  && apt-get install -y git \\\n  && apt-get install -y zip \\\n  && apt-get install -y nodejs \\\n#  && apt-get install -y unzip \\\n  && \\\n  DL=https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \\\n  && curl -sL \"$DL\" > /tmp/chrome.deb \\\n  && apt install --no-install-recommends --no-install-suggests -y \\",
+        "type": "code",
+        "location": "/poster/bilibiliupload/Dockerfile:1-27"
+    },
+    "353": {
+        "file_id": 54,
+        "content": "The Dockerfile installs various development tools, Python 3.7.3, Git, Zip, Node.js and downloads Google Chrome stable deb package. It also sets up symbolic links for pip3 and python3 executables.",
+        "type": "comment"
+    },
+    "354": {
+        "file_id": 54,
+        "content": "    /tmp/chrome.deb \\\n  && CHROMIUM_FLAGS='--no-sandbox --disable-dev-shm-usage' \\\n  # Patch Chrome launch script and append CHROMIUM_FLAGS to the last line:\n  && sed -i '${s/$/'\" $CHROMIUM_FLAGS\"'/}' /opt/google/chrome/google-chrome \\\n  && BASE_URL=https://chromedriver.storage.googleapis.com \\\n  && VERSION=$(curl -sL \"$BASE_URL/LATEST_RELEASE\") \\\n  && curl -sL \"$BASE_URL/$VERSION/chromedriver_linux64.zip\" -o /tmp/driver.zip \\\n  && unzip /tmp/driver.zip \\\n  && chmod 755 chromedriver \\\n  && mv chromedriver /usr/local/bin/ \\\n  && apt-get install -y locales \\\n  && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \\\n  # Remove obsolete files:\n  && apt-get autoremove --purge -y \\\n    unzip \\\n  && apt-get clean \\\n  && rm -rf \\\n    /tmp/* \\\n    /usr/share/doc/* \\\n    /var/cache/* \\\n    /var/lib/apt/lists/* \\\n    /var/tmp/*\nENV LANG en_US.utf8\nCOPY requirements.txt /opt/\nRUN cd /opt \\\n    && pip3 install -r requirements.txt\n#USER webdriver\nCOPY common /opt/common\nCOPY engine /opt/engine\nCOPY Bilibili.py /opt/",
+        "type": "code",
+        "location": "/poster/bilibiliupload/Dockerfile:28-59"
+    },
+    "355": {
+        "file_id": 54,
+        "content": "This Dockerfile installs Chromium, sets environment variables, downloads the latest ChromeDriver, configures localization settings, removes unnecessary files, and installs required packages and dependencies. It then copies local files for project execution.",
+        "type": "comment"
+    },
+    "356": {
+        "file_id": 54,
+        "content": "RUN chmod 755 /opt/Bilibili.py\nCOPY [\"config(demo).yaml\", \"/opt/config.yaml\"]\nWORKDIR /opt\nENTRYPOINT [\"./Bilibili.py\"]\n#EXPOSE 9515/tcp",
+        "type": "code",
+        "location": "/poster/bilibiliupload/Dockerfile:60-66"
+    },
+    "357": {
+        "file_id": 54,
+        "content": "This code configures a Docker image for a Bilibili uploader. It sets executable permissions on the script, copies demo configuration file, sets working directory, and specifies entry point as the Bilibili.py script. The exposed port is 9515/tcp.",
+        "type": "comment"
+    },
+    "358": {
+        "file_id": 55,
+        "content": "/poster/bilibiliupload/README.md",
+        "type": "filepath"
+    },
+    "359": {
+        "file_id": 55,
+        "content": "This cross-platform downloader/uploader supports Baidu, Qiniu, and Bilbili. Event-driven with multiple logins, error recovery, and concurrency control. It automatically records live streams for Bilibili and has API/Selenium upload methods. Configuration is in config.yaml.",
+        "type": "summary"
+    },
+    "360": {
+        "file_id": 55,
+        "content": "# bilibiliupload\n![](https://img.shields.io/badge/python-v3.7%2B-blue)\n支持自动录制各大直播平台，上传直播录像到bilibili。  \n* 自动选择上传线路，保证国内外vps上传质量\n* 可分别控制下载与上传并发量\n* 支持通过API上传与selenium操作浏览器上传两种方式\n相关设置在config.yaml文件中，如直播间地址，b站账号密码\n## 使用准备\n修改文件名**config(demo).yaml** → **config.yaml**\\\n下载 __FFmpeg__\\\n依赖安装`pip3 install -r requirements.txt`\n## Linux系统下使用方法：\n>\n>     启动： ./Bilibili.py start\n>\n>     退出： ./Bilibili.py stop\n>\n>     重启： ./Bilibili.py restart\n>\n> `ps -A | grep .py` 查看进程是否启动成功\n## docker使用 🔨 \n```bash\ncd bilibiliupload\nsudo docker build . -t sc2\nsudo docker run -d sc2\n```\n## 进入容器 📦\n```bash\nsudo docker ps (找到你的imageId)\nsudo docker exec -it imageId /bin/bash     \n```\n## Windows系统下使用方法：\n~~图形界面版在release中下载AutoTool.msi进行安装~~\n>     命令行版\n>        启动：    python Bilibili.py\n> QQ群：837362626\n## 使用建议\n关于B站为什么不能多p上传\\\n目前bilibili网页端是根据用户权重来限制分p数量的，权重不够的用户自动切换到客户端的提交接口。\n>用户等级大于3，且粉丝数>100，web端投稿不限制分p数量\n国内vps网络费用较高，建议使用国外vps，根据机器的硬盘等资源设置合理并发量。\nb站上传目前有两种模式，分别为bup和bupfetch模式。\n>* bup：国内常用模式，视频直接上传到b站投稿系统。\n>* bupfetch：目前见于国外网络环境，视频首先上传至第三方文件系统，上传结束后通知bilibili投稿系统，再由b站投稿系统从第三方系统拉取视频，以保证某些地区用户的上传体验。",
+        "type": "code",
+        "location": "/poster/bilibiliupload/README.md:1-51"
+    },
+    "361": {
+        "file_id": 55,
+        "content": "This code is for a Python script that supports automatic recording and uploading of live streams to Bilibili. It has options for selecting the upload channel, controlling download and upload concurrency, and supporting API and Selenium-based upload methods. Configuration settings are in the config.yaml file, such as live room address and Bilibili account password. It provides instructions for Linux and Windows systems and Docker usage.",
+        "type": "comment"
+    },
+    "362": {
+        "file_id": 55,
+        "content": "bup模式支持的上传方式为upos，其线路有：\n* ws（网宿）\n* qn（七牛）\n* bda2（百度）\nbupfetch模式支持的上传方式及线路有：\n1. kodo（七牛）\n2. gcs（谷歌）\n3. bos（百度）\n国内基本选择upos模式的bda2线路。国外多为upos模式的ws和qn线路，也有bupfetch模式的kodo、gcs线路。bilibili采用客户端和服务器端线路探测相结合的方式，服务器会返回可选线路，客户端上传前会先发包测试选择一条延迟最低的线路，保证各个地区的上传质量。\n***\nLinux下以daemon进程启动，程序执行过程可查看日志文件。\n登录有两种方案：\n* 操作浏览器模拟登录\n* 通过b站的OAuth2接口\n>对于滑动验证码可进行二值化、灰度处理找缺口计算移动像素，系统会上传分析你的拖动行为，模拟人操作轨迹，提供加速度、抖动等，如直接拖动到目标位置不能通过验证，提示：“拼图被怪物吃了”。滑动验证码系统会学习，需不断更新轨迹策略保证通过验证的成功率。\n>OAuth2接口要提供key，需逆向分析各端\n线程池限制并发数，减少磁盘占满的可能性。检测下载情况卡死或者下载超时，重试三次保证可用性。代码更新后将在空闲时自动重启。\n下载整合了ykdl、youtube-dl、streamlink，不支持或者支持的不够好的网站可自行拓展。\n下载和上传模块插件化，如果有上传或下载目前不支持平台的需求便于拓展。\n下载基类在`engine/plugins/base_adapter.py`中，拓展其他网站，需要继承下载模块的基类，加装饰器`@Plugin.download`。\n拓展上传平台，继承`engine/plugins/upload/__init__.py`文件中上传基类，加装饰器`@Plugin.upload`。\n实现了一套基于装饰器的事件驱动框架。增加其他功能监听对应事件即可，比如下载后转码：\n```python\n# e.p.给函数注册事件\n# 如果操作耗时请指定block=True, 否则会卡住事件循环\n@event_manager.register(\"download_finish\", block=True)\ndef transcoding(data):\n    pass\n```\n## Credits\n* Thanks `ykdl, youtube-dl, streamlink` provides downloader.",
+        "type": "code",
+        "location": "/poster/bilibiliupload/README.md:53-97"
+    },
+    "363": {
+        "file_id": 55,
+        "content": "Code is for a cross-platform downloader and uploader that supports various platforms like Baidu, Qiniu, and Bilbili. It uses event-driven framework, has multiple login options (browser simulation or OAuth2), and can detect and recover from download errors.",
+        "type": "comment"
+    },
+    "364": {
+        "file_id": 55,
+        "content": "类似项目`ZhangMingZhao1/StreamerHelper`",
+        "type": "code",
+        "location": "/poster/bilibiliupload/README.md:99-99"
+    },
+    "365": {
+        "file_id": 55,
+        "content": "This code is referring to a similar project named `ZhangMingZhao1/StreamerHelper`. The project is likely related to assisting streamers or handling tasks related to live streaming.",
+        "type": "comment"
+    },
+    "366": {
+        "file_id": 56,
+        "content": "/poster/bilibiliupload/apply_patch.sh",
+        "type": "filepath"
+    },
+    "367": {
+        "file_id": 56,
+        "content": "This script is copying and renaming files, replacing original with source. It backs up the original file by appending \".bak\" to its name before overwriting it with the source file.",
+        "type": "summary"
+    },
+    "368": {
+        "file_id": 56,
+        "content": "#!/bin/bash\norig=\"usr/lib/python3.8/http/cookiejar.py\"\nsrc=\"cookiejar.py\"\ncp $orig $orig.bak\ncp $src $orig",
+        "type": "code",
+        "location": "/poster/bilibiliupload/apply_patch.sh:1-5"
+    },
+    "369": {
+        "file_id": 56,
+        "content": "This script is copying and renaming files, replacing original with source. It backs up the original file by appending \".bak\" to its name before overwriting it with the source file.",
+        "type": "comment"
+    },
+    "370": {
+        "file_id": 57,
+        "content": "/poster/bilibiliupload/clean_cache.sh",
+        "type": "filepath"
+    },
+    "371": {
+        "file_id": 57,
+        "content": "This script finds all directories containing the \"__pycache__\" suffix within the current directory and its subdirectories, then deletes them recursively using xargs and the \"rm -rf\" command.",
+        "type": "summary"
+    },
+    "372": {
+        "file_id": 57,
+        "content": "#!/bin/bash\nfind | grep __pycache__ | xargs rm -rf",
+        "type": "code",
+        "location": "/poster/bilibiliupload/clean_cache.sh:1-2"
+    },
+    "373": {
+        "file_id": 57,
+        "content": "This script finds all directories containing the \"__pycache__\" suffix within the current directory and its subdirectories, then deletes them recursively using xargs and the \"rm -rf\" command.",
+        "type": "comment"
+    },
+    "374": {
+        "file_id": 58,
+        "content": "/poster/bilibiliupload/config_demo.yaml",
+        "type": "filepath"
+    },
+    "375": {
+        "file_id": 58,
+        "content": "The YAML file configures Bilibili video uploads using cookies and credentials, supports parallel uploads with size limits, and multiple streams. The code provides a list of Twitch streamer URLs for StarCraft II tournament races' first-person perspective streams.",
+        "type": "summary"
+    },
+    "376": {
+        "file_id": 58,
+        "content": "user: # 在填了cookies的情况下优先使用cookies上传，如需使用用户名密码上传请注释掉cookies\n    cookies:\n        SESSDATA: your SESSDATA\n        bili_jct: your bili_jct\n        DedeUserID: your DedeUserID\n    account:\n        username: your usrname\n        password: your password\n# 默认通过网页接口上传,可选通过操作chrome上传,此时需要填写chromedriver路径\n#chromedriver_path: /usr/local/bin/chromedriver\n# b站上传线路选择，默认为自动模式，目前可手动切换为bda2, kodo, ws, qn。\nlines: AUTO\n# 单文件并发上传数，未达到带宽上限时增大此值可提高上传速度\nthreads: 3\n# 录像单文件大小限制，单位Byte，超过此大小分段下载\nfile_size: 2621440000\nstreamers:\n    星际2INnoVation吕布卫星人族天梯第一视角:\n        url:\n            - https://www.twitch.tv/innovation_s2\n            - https://www.panda.tv/1160340\n        tid: 171\n        cover_path: /cover/up.jpg\n        tags:\n          - 星际争霸2\n          - 电子竞技\n    星际2soO输本虫族天梯第一视角:\n        url:\n            - https://www.twitch.tv/sc2soo\n            - https://www.panda.tv/1150595\n    星际2sOs狗哥神族天梯第一视角:\n        url:\n            - https://www.panda.tv/1160930\n            - https://www.twitch.tv/jinairsos1\n    星际2Stats拔本神族天梯第一视角:\n        url:\n            - https://www.twitch.tv/kimdaeyeob3",
+        "type": "code",
+        "location": "/poster/bilibiliupload/config_demo.yaml:1-39"
+    },
+    "377": {
+        "file_id": 58,
+        "content": "This YAML file configures Bilibili video upload settings using cookies, user account credentials, Chrome driver path (optional), and streaming service details. It allows for parallel uploads with file size limits and supports multiple streams.",
+        "type": "comment"
+    },
+    "378": {
+        "file_id": 58,
+        "content": "    星际2Dark暗本虫族天梯第一视角:\n        url:\n            - https://www.twitch.tv/qkrfuddn0\n    星际2Scarlett噶姐虫族天梯第一视角:\n        url:\n            - https://www.twitch.tv/scarlettm\n    星际2GuMiho砸本人族天梯第一视角:\n        url:\n            - https://www.twitch.tv/gumiho\n    星际2Maru人族天梯第一视角:\n        url:\n            - https://www.twitch.tv/maru072\n    星际2TY全教主全太阳人族天梯第一视角:\n        url:\n            - https://www.twitch.tv/sc2tyty\n    星际2ByuN武圣人族天梯第一视角:\n        url:\n            - https://www.twitch.tv/byunprime\n    星际2小herO神族天梯第一视角:\n        url:\n            - https://www.twitch.tv/dmadkr0818\n    星际2Zest神族天梯第一视角:\n        url:\n            - https://www.twitch.tv/sc2_zest\n    星际2PartinG跳跳胖丁神族天梯第一视角:\n        url:\n            - https://www.twitch.tv/partingthebigboy\n    星际2Rogue脑虫虫族天梯第一视角:\n        url:\n            - https://www.twitch.tv/roguejinair\n    星际2Classic经典神皇神族第一视角:\n        url:\n            - https://www.twitch.tv/kimclassic",
+        "type": "code",
+        "location": "/poster/bilibiliupload/config_demo.yaml:40-72"
+    },
+    "379": {
+        "file_id": 58,
+        "content": "This code provides a list of Twitch streamer URLs for various StarCraft II players participating in different races' tournament first-person perspective streams.",
+        "type": "comment"
+    },
+    "380": {
+        "file_id": 59,
+        "content": "/poster/bilibiliupload/demo_rename.py",
+        "type": "filepath"
+    },
+    "381": {
+        "file_id": 59,
+        "content": "Quoting and unquoting plus-encoded \"pappps赛博朋克\" then making a GET request to localhost:9999/rename with the quoted name as parameter, printing the response.",
+        "type": "summary"
+    },
+    "382": {
+        "file_id": 59,
+        "content": "import requests\nimport urllib\ntarget = urllib.parse.quote_plus(\"pappps赛博朋克\")\nurllib.parse.unquote_plus(target)\nr = requests.get(\"http://localhost:9999/rename?name=\"+target)\nprint(r.text)",
+        "type": "code",
+        "location": "/poster/bilibiliupload/demo_rename.py:1-7"
+    },
+    "383": {
+        "file_id": 59,
+        "content": "Quoting and unquoting plus-encoded \"pappps赛博朋克\" then making a GET request to localhost:9999/rename with the quoted name as parameter, printing the response.",
+        "type": "comment"
+    },
+    "384": {
+        "file_id": 60,
+        "content": "/poster/bilibiliupload/justUpload.py",
+        "type": "filepath"
+    },
+    "385": {
+        "file_id": 60,
+        "content": "This Python script imports necessary modules and classes to start a BiliWeb object, which is responsible for uploading video content to the Bilibili platform. It retrieves configuration data such as streamer names and URLs, and then starts the BiliWeb instance. The purpose of this code is to automate the upload process on the Bilibili platform using given configurations.",
+        "type": "summary"
+    },
+    "386": {
+        "file_id": 60,
+        "content": "#!/usr/bin/python3\n# coding:utf8\nimport asyncio\nimport sys\nimport common\nimport engine\nfrom engine import main\nfrom engine.plugins.upload import bili_web\nfrom common.Daemon import Daemon\n#asyncio.run(main())\ndate = common.time_now()\nurl = \"https://live.bilibili.com/734\"\nname = engine.config[\"streamers\"]\nname = list(name.keys())[0]\n#name = \"赛博朋克2077\"\ndata = {\"url\":url,\"date\":date,\"format_title\":str(date)+name}\nbweb = bili_web.BiliWeb(name,data,engine.config[\"user\"])\n# what is the filelist?\nbweb.start()",
+        "type": "code",
+        "location": "/poster/bilibiliupload/justUpload.py:1-19"
+    },
+    "387": {
+        "file_id": 60,
+        "content": "This Python script imports necessary modules and classes to start a BiliWeb object, which is responsible for uploading video content to the Bilibili platform. It retrieves configuration data such as streamer names and URLs, and then starts the BiliWeb instance. The purpose of this code is to automate the upload process on the Bilibili platform using given configurations.",
+        "type": "comment"
+    },
+    "388": {
+        "file_id": 61,
+        "content": "/poster/bilibiliupload/justUpload.sh",
+        "type": "filepath"
+    },
+    "389": {
+        "file_id": 61,
+        "content": "The code kills processes, starts a Python server, waits for a second, and then runs justUpload.py script.",
+        "type": "summary"
+    },
+    "390": {
+        "file_id": 61,
+        "content": "#!/bin/bash\n#quotes=$(ps aux | cat | grep python3 | grep trivial_server | awk '{print $2}' | wc | awk '{print $1}')\n#if [ $quotes -eq 0 ]; then\n#\tpython3 trivial_server.py &\n#\tsleep 1\n#fi\nps aux | cat | grep bash | grep main_entrance | awk '{print $2}' | xargs -iabc  kill -s SIGKILL abc &>/dev/null\nps aux | cat | grep python3 | grep Bilibili | awk '{print $2}' | xargs -iabc  kill -s SIGKILL abc &>/dev/null\nps aux | cat | grep python3 | grep trivial_server | awk '{print $2}' | xargs -iabc  kill -s SIGKILL abc &>/dev/null\npython3 trivial_server.py &\nsleep 1\npython3 justUpload.py",
+        "type": "code",
+        "location": "/poster/bilibiliupload/justUpload.sh:1-12"
+    },
+    "391": {
+        "file_id": 61,
+        "content": "The code kills processes, starts a Python server, waits for a second, and then runs justUpload.py script.",
+        "type": "comment"
+    },
+    "392": {
+        "file_id": 62,
+        "content": "/poster/bilibiliupload/mText.py",
+        "type": "filepath"
+    },
+    "393": {
+        "file_id": 62,
+        "content": "This code initializes a Markov model, sets n-word considerations, and populates the word dictionary for generating next word probabilities. It generates sentences using the Markov chain model based on previous words and creates specified number of sentences using create_sentences function.",
+        "type": "summary"
+    },
+    "394": {
+        "file_id": 62,
+        "content": "from __future__ import division\nfrom collections import defaultdict\nimport string\nimport re\nimport numpy as np\nclass CountProbPair:\n    def __init__(self):\n        self.count = 0\n        self.prob = 0.0\nclass Markov:\n    def __init__(self, n=2):\n        #self.word_dict = defaultdict(lambda: defaultdict((int, float)))\n        self.word_dict = defaultdict(lambda: defaultdict(CountProbPair))\n        self.word_dict[('',)][''].prob = 0.0\n        self.word_dict[('',)][''].count = 0\n        self.n = n\n    def add_raw(self, sentences):\n        \"\"\" Generate word n-tuple and next word probability dict \"\"\"\n        n = self.n\n        assert type(sentences) == list\n#        sentences = re.split(r'(?<!\\w\\.\\w.)(?<![A-Z][a-z]\\.)(?<=\\.|\\?|!)\\s', text)\n        # '' is a special symbol for the start of a sentence like pymarkovchain uses\n        for sentence in sentences:\n            assert type(sentence) == list\n            words = sentence  # split each sentence into its constituent words\n            if len(words) == 0:\n                continue",
+        "type": "code",
+        "location": "/poster/bilibiliupload/mText.py:1-31"
+    },
+    "395": {
+        "file_id": 62,
+        "content": "The code imports necessary libraries and defines classes for a Markov model. It initializes the word dictionary with default values, sets the number of words to consider (n), and provides an add_raw method to generate word n-tuples and next word probability dictionary from input sentences.",
+        "type": "comment"
+    },
+    "396": {
+        "file_id": 62,
+        "content": "            # first word follows a sentence end\n            self.word_dict[(\"\",)][words[0]].count += 1\n            for j in range(1, n+1):\n                for i in range(len(words) - 1):\n                    if i + j >= len(words):\n                        continue\n                    word = tuple(words[i:i + j])\n                    self.word_dict[word][words[i + j]].count += 1\n                # last word precedes a sentence end\n                self.word_dict[tuple(words[len(words) - j:len(words)])][\"\"].count += 1\n        # We've now got the db filled with parametrized word counts\n        # We still need to normalize this to represent probabilities\n        for word in self.word_dict:\n            wordsum = 0\n            for nextword in self.word_dict[word]:\n                wordsum += self.word_dict[word][nextword].count\n            if wordsum != 0:\n                for nextword in self.word_dict[word]:\n                    self.word_dict[word][nextword].prob = self.word_dict[word][nextword].count / wordsum\n    def add_to_dict(self, text):",
+        "type": "code",
+        "location": "/poster/bilibiliupload/mText.py:33-55"
+    },
+    "397": {
+        "file_id": 62,
+        "content": "This code populates a word dictionary by counting occurrences of words and their combinations in the given text. It then normalizes the counts to represent probabilities for each word following another word or an empty string.",
+        "type": "comment"
+    },
+    "398": {
+        "file_id": 62,
+        "content": "        \"\"\" Generate word n-tuple and next word probability dict \"\"\"\n        n = self.n\n        sentences = re.split(r'(?<!\\w\\.\\w.)(?<![A-Z][a-z]\\.)(?<=\\.|\\?|!)\\s', text)\n        # '' is a special symbol for the start of a sentence like pymarkovchain uses\n        for sentence in sentences:\n            sentence = sentence.replace('\"','') # remove quotes\n            words = sentence.strip().split()  # split each sentence into its constituent words\n            if len(words) == 0:\n                continue\n            # first word follows a sentence end\n            self.word_dict[(\"\",)][words[0]].count += 1\n            for j in range(1, n+1):\n                for i in range(len(words) - 1):\n                    if i + j >= len(words):\n                        continue\n                    word = tuple(words[i:i + j])\n                    self.word_dict[word][words[i + j]].count += 1\n                # last word precedes a sentence end\n                self.word_dict[tuple(words[len(words) - j:len(words)])][\"\"].count += 1",
+        "type": "code",
+        "location": "/poster/bilibiliupload/mText.py:56-78"
+    },
+    "399": {
+        "file_id": 62,
+        "content": "This function generates word n-tuples and next word probability dictionary. It iterates through sentences, removing quotes and splitting them into words. For each sentence segment, it updates the count for the words based on their positions in the sentence. The special symbol \"''\" is used to denote start of a sentence, similar to how pymarkovchain uses it.",
+        "type": "comment"
+    }
+}

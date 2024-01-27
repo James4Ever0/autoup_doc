@@ -1,0 +1,10 @@
+{
+    "summary": "Running debug-flv tool for HOP.flv file with options -i and -u.",
+    "details": [
+        {
+            "comment": "Running debug-flv tool for HOP.flv file with options -i and -u.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/tools/test_debug.sh\":0-1",
+            "content": "#!/bin/bash\n./debug-flv -i -u /root/AGI/AutoUP/collector/video_download/bilibili_video/HOP.flv"
+        }
+    ]
+}

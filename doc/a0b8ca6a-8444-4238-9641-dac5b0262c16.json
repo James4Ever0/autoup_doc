@@ -1,0 +1,10 @@
+{
+    "summary": "This Python script imports necessary modules and classes to start a BiliWeb object, which is responsible for uploading video content to the Bilibili platform. It retrieves configuration data such as streamer names and URLs, and then starts the BiliWeb instance. The purpose of this code is to automate the upload process on the Bilibili platform using given configurations.",
+    "details": [
+        {
+            "comment": "This Python script imports necessary modules and classes to start a BiliWeb object, which is responsible for uploading video content to the Bilibili platform. It retrieves configuration data such as streamer names and URLs, and then starts the BiliWeb instance. The purpose of this code is to automate the upload process on the Bilibili platform using given configurations.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bilibiliupload/justUpload.py\":0-18",
+            "content": "#!/usr/bin/python3\n# coding:utf8\nimport asyncio\nimport sys\nimport common\nimport engine\nfrom engine import main\nfrom engine.plugins.upload import bili_web\nfrom common.Daemon import Daemon\n#asyncio.run(main())\ndate = common.time_now()\nurl = \"https://live.bilibili.com/734\"\nname = engine.config[\"streamers\"]\nname = list(name.keys())[0]\n#name = \"\u8d5b\u535a\u670b\u514b2077\"\ndata = {\"url\":url,\"date\":date,\"format_title\":str(date)+name}\nbweb = bili_web.BiliWeb(name,data,engine.config[\"user\"])\n# what is the filelist?\nbweb.start()"
+        }
+    ]
+}

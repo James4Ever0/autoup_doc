@@ -1,0 +1,15 @@
+{
+    "summary": "This code initializes a video recorder, sets window size, renders a rotating text animation with 360 frames, tracks the rotation angle, and handles video playback by displaying frames or ending video and closing the window.",
+    "details": [
+        {
+            "comment": "This code initializes a video recorder using Electron and electron-recorder, sets the window size, and renders a rotating text animation for the movie with 360 frames. The frameCount variable keeps track of the current rotation angle, and console.log(frameCount) outputs the current angle in the console.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/generator/double-p/index.html\":0-32",
+            "content": "<html>\n  <body>\n    <h1>Test Movie</h1>\n    <script>\n      const electron = require('electron')\n      const createVideoRecorder = require('electron-recorder')\n      // First we grab a reference to the current window object\n      const win = electron.remote.getCurrentWindow()\n      // The size of the animation is the same as the size of the window\n      win.setSize(200, 200)\n      // Here we create recorder object\n      const video = createVideoRecorder(win, {\n        fps: 60,\n        output: 'test.mp4'\n      })\n      let frameCount = 360\n      function renderFrame () {\n        // Here is where we render the movie (we just make the text rotate)\n        Object.assign(document.querySelector('h1').style, {\n          'width': 100,\n          'margin-left': 50,\n          'margin-top': 50,\n          '-webkit-transform': 'rotate(' + frameCount + 'deg)'\n        })\n        // If we still have frames left, then take a snapshot and schedule\n        // another frame\n\t      console.log(frameCount);\n        if (--frameCount > 0) {"
+        },
+        {
+            "comment": "Code snippet handles video playback. If the video is not yet over, it calls `renderFrame` to display frames. If movie ends, `video.end()` and `win.close()` are called to end video and close window. Finally, `renderFrame()` is invoked.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/generator/double-p/index.html\":33-44",
+            "content": "          video.frame(renderFrame)\n        } else {\n          // Otherwise, movie is over and we save the snapshot to file\n          video.end()\n          win.close()\n        }\n      }\n      renderFrame()\n    </script>\n  </body>\n</html>"
+        }
+    ]
+}

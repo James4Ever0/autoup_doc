@@ -1,0 +1,10 @@
+{
+    "summary": "This script creates a directory named \"deps\", navigates to the \"go-cqhttp\" folder, sets GOPATH and GOPROXY variables, then builds the code using go build.",
+    "details": [
+        {
+            "comment": "This script creates a directory named \"deps\", navigates to the \"go-cqhttp\" folder, sets GOPATH and GOPROXY variables, then builds the code using go build.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/collector/qq_mirai_bot/build_main.sh\":0-3",
+            "content": "#!/bin/bash\nmkdir deps\ncd go-cqhttp\nGOPATH=$PWD/../deps GOPROXY=https://goproxy.cn,direct go build "
+        }
+    ]
+}

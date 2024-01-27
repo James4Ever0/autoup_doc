@@ -1,0 +1,10 @@
+{
+    "summary": "This code requires the electron module and removes two extra arguments from the process.argv array before logging the updated array. It is likely used for processing command line arguments in an Electron app.",
+    "details": [
+        {
+            "comment": "This code requires the electron module and removes two extra arguments from the process.argv array before logging the updated array. It is likely used for processing command line arguments in an Electron app.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/collector/celeb_picture_collect/elec_arg.js\":0-7",
+            "content": "const {electron} = require ('electron')\n// const args = electron.process.argv\n// including 2 extras.\n// console.log(process.argv)\nvar pargs = process.argv;\npargs.shift();\npargs.shift();\nconsole.log(pargs);"
+        }
+    ]
+}

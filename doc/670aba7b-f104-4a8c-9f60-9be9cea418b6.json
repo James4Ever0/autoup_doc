@@ -1,0 +1,10 @@
+{
+    "summary": "This code provides a brief overview of the text generation process, mentioning the use of Markov chains, NLTK, machine translation, GPT2, BERT, and deep learning.",
+    "details": [
+        {
+            "comment": "This code provides a brief overview of the text generation process, mentioning the use of Markov chains, NLTK, machine translation, GPT2, BERT, and deep learning.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/generator/README.md\":0-6",
+            "content": "# brief\n## text generation\n- markov chain/nltk\n- machine translation\n- gpt2/bert/deeplearning"
+        }
+    ]
+}

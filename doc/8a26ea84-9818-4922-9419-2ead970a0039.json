@@ -1,0 +1,10 @@
+{
+    "summary": "The code imports necessary libraries, defines a function for current timestamp, checks command-line arguments and file existence, decodes a prefix with base64, quotes the keyword for URL encoding, and comments about using electron instead and not caring about duplication.",
+    "details": [
+        {
+            "comment": "The code imports necessary libraries, defines a function for current timestamp, checks command-line arguments and file existence, decodes a prefix with base64, quotes the keyword for URL encoding, and comments about using electron instead and not caring about duplication.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/collector/celeb_picture_collect/download_pics.py\":0-23",
+            "content": "import sys\nimport base64\nimport os\nimport time\nimport urllib.parse\ndef now():\n    return round(time.time()*1000)\nag = sys.argv[1:]\nassert len(ag) == 2\nassert os.path.exists(ag[0])\nfpath=ag[0]\ndef decode(string):\n    return base64.b64decode(string).decode()\nfprefix = ag[1]\nadds = 0 \nkeyword = decode(fprefix)\nkeyword_enc=urllib.parse.quote(keyword,\"utf-8\")\n# use electron instead.\n# do not care about duplication. it might always be true.\n# just make sure the subject is not the same when rendering."
+        }
+    ]
+}

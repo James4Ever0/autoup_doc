@@ -1,0 +1,10 @@
+{
+    "summary": "This script imports the index_flv module from flvlib3 and executes its main function. It is likely used for indexing FLV (Flash Video) files.",
+    "details": [
+        {
+            "comment": "This script imports the index_flv module from flvlib3 and executes its main function. It is likely used for indexing FLV (Flash Video) files.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/tools/index-flv\":0-3",
+            "content": "#!/usr/bin/python3\nfrom flvlib3.scripts import index_flv\nindex_flv.main()"
+        }
+    ]
+}

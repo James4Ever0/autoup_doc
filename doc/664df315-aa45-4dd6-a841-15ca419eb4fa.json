@@ -1,0 +1,10 @@
+{
+    "summary": "Code loads a audio file of \"The Nutcracker\" using librosa library, sets the hop length for analysis (23ms), separates harmonics and percussives into two waveforms, checks their shapes, and then saves them as separate audio files \"nuts_harm.wav\" and \"nuts_perc.wav\".",
+    "details": [
+        {
+            "comment": "Code loads a audio file of \"The Nutcracker\" using librosa library, sets the hop length for analysis (23ms), separates harmonics and percussives into two waveforms, checks their shapes, and then saves them as separate audio files \"nuts_harm.wav\" and \"nuts_perc.wav\".",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/generator/singing/nuts.py\":0-18",
+            "content": "import librosa\ny, sr = librosa.load(librosa.ex('nutcracker'))\n# Set the hop length; at 22050 Hz, 512 samples ~= 23ms\n#hop_length = 512\nchannels = len(y.shape)\n# Separate harmonics and percussives into two waveforms\ny_harmonic, y_percussive = librosa.effects.hpss(y)\n#print(y_harmonic.shape,y_percussive.shape)\n#check shape first.\nimport soundfile\nwith soundfile.SoundFile(\"nuts_harm.wav\",\"w\",sr,channels,\"PCM_24\") as f:\n    f.write(y_harmonic)\nwith soundfile.SoundFile(\"nuts_perc.wav\",\"w\",sr,channels,\"PCM_24\") as f:\n    f.write(y_percussive)"
+        }
+    ]
+}

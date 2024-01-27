@@ -1,0 +1,10 @@
+{
+    "summary": "This code imports the necessary libraries and starts a new thread for downloading, which will be useful for asynchronous file downloads.",
+    "details": [
+        {
+            "comment": "This code imports the necessary libraries and starts a new thread for downloading, which will be useful for asynchronous file downloads.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/collector/celeb_picture_collect/download_server.py\":0-2",
+            "content": "# will start another thread for downloading.\nimport threading\nimport requests"
+        }
+    ]
+}

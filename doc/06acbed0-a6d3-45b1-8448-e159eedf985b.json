@@ -1,0 +1,10 @@
+{
+    "summary": "The code extracts specific data from the sample.xml file using grep commands. It filters lines containing \"p=[^,]+\" pattern and further narrows down by matching \"[0-9.]+\" pattern to retrieve numerical values.",
+    "details": [
+        {
+            "comment": "The code extracts specific data from the sample.xml file using grep commands. It filters lines containing \"p=[^,]+\" pattern and further narrows down by matching \"[0-9.]+\" pattern to retrieve numerical values.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/generator/danmaku_filter/extract_danmaku.sh\":0-0",
+            "content": "cat sample.xml | grep -Eo \"p=[^,]+\" | grep -Eo \"[0-9.]+\""
+        }
+    ]
+}

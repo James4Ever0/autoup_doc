@@ -1,0 +1,10 @@
+{
+    "summary": "This script executes a Git pull command, fetching and merging changes from the 'origin' remote repository into the local 'master' branch.",
+    "details": [
+        {
+            "comment": "This script executes a Git pull command, fetching and merging changes from the 'origin' remote repository into the local 'master' branch.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/pull.sh\":0-1",
+            "content": "#!/bin/bash\ngit pull origin master"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "summary": "The script kills any existing python3 trivial_server processes, starts the trivial_server.py, waits for a second, and then runs Bilibili.py.",
+    "details": [
+        {
+            "comment": "The script kills any existing python3 trivial_server processes, starts the trivial_server.py, waits for a second, and then runs Bilibili.py.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bilibiliupload/main_entrance.sh\":0-4",
+            "content": "#!/bin/bash\nps aux | cat | grep python3 | grep trivial_server | awk '{print $2}' | xargs -iabc  kill -s SIGKILL abc &>/dev/null\npython3 trivial_server.py &\nsleep 1\npython3 Bilibili.py"
+        }
+    ]
+}

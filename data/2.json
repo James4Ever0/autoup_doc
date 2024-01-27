@@ -1,0 +1,535 @@
+{
+    "200": {
+        "file_id": 32,
+        "content": "#!/bin/bash\nwhile true;\ndo\n\txvfb-run electron launch.js\ndone",
+        "type": "code",
+        "location": "/generator/double-p/launch.sh:1-5"
+    },
+    "201": {
+        "file_id": 32,
+        "content": "This script continuously runs a server using xvfb-run to launch the 'electron' application with the 'launch.js' file, creating a virtual framebuffer environment for graphics rendering in an endless loop.",
+        "type": "comment"
+    },
+    "202": {
+        "file_id": 33,
+        "content": "/generator/faceswap/README.md",
+        "type": "filepath"
+    },
+    "203": {
+        "file_id": 33,
+        "content": "Deepfakes_faceswap is a deep learning tool for face recognition and swapping, while Andenixa's project offers payment options, improvements, and deep learning discussions. Both promote collaboration and use Python programming with YouTube video explanations of neural networks.",
+        "type": "summary"
+    },
+    "204": {
+        "file_id": 33,
+        "content": "# deepfakes_faceswap\n<p align=\"center\">\n  <a href=\"https://faceswap.dev\"><img src=\"https://i.imgur.com/zHvjHnb.png\"></img></a>\n<br />FaceSwap is a tool that utilizes deep learning to recognize and swap faces in pictures and videos.\n</p>\n<p align=\"center\">\n<img src = \"https://i.imgur.com/nWHFLDf.jpg\"></img>\n</p>\n<p align=\"center\">\n<a href=\"https://www.patreon.com/bePatron?u=23238350\"><img src=\"https://c5.patreon.com/external/logo/become_a_patron_button.png\"></img></a>\n&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"https://discord.gg/FC54sYg\"><img src=\"https://i.imgur.com/gIpztkv.png\"></img></a></p>\n<p align=\"center\">\n  <a href=\"https://www.youtube.com/watch?v=r1jng79a5xc\"><img src=\"https://img.youtube.com/vi/r1jng79a5xc/0.jpg\"></img></a>\n<br />Jennifer Lawrence/Steve Buscemi FaceSwap using the Villain model\n</p>\n[![Build Status](https://travis-ci.org/deepfakes/faceswap.svg?branch=master)](https://travis-ci.org/deepfakes/faceswap) [![Documentation Status](https://readthedocs.org/projects/faceswap/badge/?version=latest)](https://faceswap.readthedocs.io/en/latest/?badge=latest)",
+        "type": "code",
+        "location": "/generator/faceswap/README.md:1-18"
+    },
+    "205": {
+        "file_id": 33,
+        "content": "Code snippet describes a tool called \"deepfakes_faceswap\" which utilizes deep learning to recognize and swap faces in pictures and videos. It includes images, links to the website, Patreon, and YouTube video showcasing its functionality. Also mentions build status on Travis-CI and documentation status on ReadTheDocs.",
+        "type": "comment"
+    },
+    "206": {
+        "file_id": 33,
+        "content": "Make sure you check out [INSTALL.md](INSTALL.md) before getting started.\n- [deepfakes_faceswap](#deepfakesfaceswap)\n- [Manifesto](#manifesto)\n  - [FaceSwap has ethical uses.](#faceswap-has-ethical-uses)\n- [How To setup and run the project](#how-to-setup-and-run-the-project)\n- [Overview](#overview)\n  - [Extract](#extract)\n  - [Train](#train)\n  - [Convert](#convert)\n  - [GUI](#gui)\n- [General notes:](#general-notes)\n- [Help I need support!](#help-i-need-support)\n  - [Discord Server](#discord-server)\n  - [FaceSwap Forum](#faceswap-forum)\n- [Donate](#donate)\n  - [Patreon](#patreon)\n  - [One time Donations](#one-time-donations)\n    - [@torzdf](#torzdf)\n    - [@andenixa](#andenixa)\n    - [@kvrooman](#kvrooman)\n- [How to contribute](#how-to-contribute)\n  - [For people interested in the generative models](#for-people-interested-in-the-generative-models)\n  - [For devs](#for-devs)\n  - [For non-dev advanced users](#for-non-dev-advanced-users)\n  - [For end-users](#for-end-users)\n  - [For haters](#for-haters)\n- [About github.com/deepfakes](#about-githubcomdeepfakes)",
+        "type": "code",
+        "location": "/generator/faceswap/README.md:20-47"
+    },
+    "207": {
+        "file_id": 33,
+        "content": "This code appears to be a README for a project called \"deepfakes_faceswap\". It briefly outlines the structure of the project, providing information on how to setup and run it, as well as details about the various components (extract, train, convert, GUI), general notes, and ways to get support or donate. It also provides information on how to contribute to the project depending on your skills/interests and some information about the GitHub page for the broader deepfakes community.",
+        "type": "comment"
+    },
+    "208": {
+        "file_id": 33,
+        "content": "  - [What is this repo?](#what-is-this-repo)\n  - [Why this repo?](#why-this-repo)\n  - [Why is it named 'deepfakes' if it is not /u/deepfakes?](#why-is-it-named-deepfakes-if-it-is-not-udeepfakes)\n  - [What if /u/deepfakes feels bad about that?](#what-if-udeepfakes-feels-bad-about-that)\n- [About machine learning](#about-machine-learning)\n  - [How does a computer know how to recognize/shape faces? How does machine learning work? What is a neural network?](#how-does-a-computer-know-how-to-recognizeshape-faces-how-does-machine-learning-work-what-is-a-neural-network)\n# Manifesto\n## FaceSwap has ethical uses.\nWhen faceswapping was first developed and published, the technology was groundbreaking, it was a huge step in AI development. It was also completely ignored outside of academia because the code was confusing and fragmentary. It required a thorough understanding of complicated AI techniques and took a lot of effort to figure it out. Until one individual brought it together into a single, cohesive",
+        "type": "code",
+        "location": "/generator/faceswap/README.md:48-59"
+    },
+    "209": {
+        "file_id": 33,
+        "content": "This code describes the purpose of the 'deepfakes' repository, which contains information about machine learning and FaceSwap technology. It also addresses possible concerns and questions related to the naming and origin of the repository.",
+        "type": "comment"
+    },
+    "210": {
+        "file_id": 33,
+        "content": " collection. It ran, it worked, and as is so often the way with new technology emerging on the internet, it was immediately used to create inappropriate content. Despite the inappropriate uses the software was given originally, it was the first AI code that anyone could download, run and learn by experimentation without having a Ph.D. in math, computer theory, psychology, and more. Before \"deepfakes\" these techniques were like black magic, only practiced by those who could understand all of the inner workings as described in esoteric and endlessly complicated books and papers.\n\"Deepfakes\" changed all that and anyone could participate in AI development. To us, developers, the release of this code opened up a fantastic learning opportunity. It allowed us to build on ideas developed by others, collaborate with a variety of skilled coders, experiment with AI whilst learning new skills and ultimately contribute towards an emerging technology which will only see more mainstream use as it progresses.",
+        "type": "code",
+        "location": "/generator/faceswap/README.md:59-61"
+    },
+    "211": {
+        "file_id": 33,
+        "content": "This code discusses the emergence of \"deepfakes\" as a groundbreaking AI tool, making it accessible for anyone to download, run, and learn without specialized knowledge. It emphasizes how this opened opportunities for developers to collaborate, experiment, and contribute to the advancement of AI technology.",
+        "type": "comment"
+    },
+    "212": {
+        "file_id": 33,
+        "content": "Are there some out there doing horrible things with similar software? Yes. And because of this, the developers have been following strict ethical standards. Many of us don't even use it to create videos, we just tinker with the code to see what it does. Sadly, the media concentrates only on the unethical uses of this software. That is, unfortunately, the nature of how it was first exposed to the public, but it is not representative of why it was created, how we use it now, or what we see in its future. Like any technology, it can be used for good or it can be abused. It is our intention to develop FaceSwap in a way that its potential for abuse is minimized whilst maximizing its potential as a tool for learning, experimenting and, yes, for legitimate faceswapping.\nWe are not trying to denigrate celebrities or to demean anyone. We are programmers, we are engineers, we are Hollywood VFX artists, we are activists, we are hobbyists, we are human beings. To this end, we feel that it's time to",
+        "type": "code",
+        "location": "/generator/faceswap/README.md:63-65"
+    },
+    "213": {
+        "file_id": 33,
+        "content": "This code highlights the developers' commitment to upholding strict ethical standards while using FaceSwap software. They emphasize its potential for learning, experimentation, and legitimate faceswapping purposes rather than abusing it.",
+        "type": "comment"
+    },
+    "214": {
+        "file_id": 33,
+        "content": " come out with a standard statement of what this software is and isn't as far as us developers are concerned.\n- FaceSwap is not for creating inappropriate content.\n- FaceSwap is not for changing faces without consent or with the intent of hiding its use.\n- FaceSwap is not for any illicit, unethical, or questionable purposes.\n- FaceSwap exists to experiment and discover AI techniques, for social or political commentary, for movies, and for any number of ethical and reasonable uses.\nWe are very troubled by the fact that FaceSwap can be used for unethical and disreputable things. However, we support the development of tools and techniques that can be used ethically as well as provide education and experience in AI for anyone who wants to learn it hands-on. We will take a zero tolerance approach to anyone using this software for any unethical purposes and will actively discourage any such uses.\n# How To setup and run the project\nFaceSwap is a Python program that will run on multiple Operating Systems including Windows, Linux, and MacOS.",
+        "type": "code",
+        "location": "/generator/faceswap/README.md:65-75"
+    },
+    "215": {
+        "file_id": 33,
+        "content": "This code provides a clear statement of the software's purpose, limitations, and developers' stance on its usage. FaceSwap is not for creating inappropriate content or hiding its use, but rather for experimentation, social/political commentary, movies, and other ethical uses. Developers are against unethical uses and will actively discourage them. The code also explains how to set up and run the Python program on various operating systems.",
+        "type": "comment"
+    },
+    "216": {
+        "file_id": 33,
+        "content": "See [INSTALL.md](INSTALL.md) for full installation instructions. You will need a modern GPU with CUDA support for best performance. AMD GPUs are partially supported.\n# Overview\nThe project has multiple entry points. You will have to:\n - Gather photos and/or videos\n - **Extract** faces from your raw photos\n - **Train** a model on the faces extracted from the photos/videos\n - **Convert** your sources with the model\nCheck out [USAGE.md](USAGE.md) for more detailed instructions.\n## Extract\nFrom your setup folder, run `python faceswap.py extract`. This will take photos from `src` folder and extract faces into `extract` folder.\n## Train\nFrom your setup folder, run `python faceswap.py train`. This will take photos from two folders containing pictures of both faces and train a model that will be saved inside the `models` folder.\n## Convert\nFrom your setup folder, run `python faceswap.py convert`. This will take photos from `original` folder and apply new faces into `modified` folder.\n## GUI\nAlternatively, you can run the GUI by running `python faceswap.py gui`",
+        "type": "code",
+        "location": "/generator/faceswap/README.md:77-98"
+    },
+    "217": {
+        "file_id": 33,
+        "content": "The code provides installation instructions, system requirements, and multiple entry points for the project. It involves extracting faces from photos, training a model, converting sources with the model, and using a GUI option. Instructions are given for each step in the command line.",
+        "type": "comment"
+    },
+    "218": {
+        "file_id": 33,
+        "content": "# General notes:\n- All of the scripts mentioned have `-h`/`--help` options with arguments that they will accept. You're smart, you can figure out how this works, right?!\nNB: there is a conversion tool for video. This can be accessed by running `python tools.py effmpeg -h`. Alternatively, you can use [ffmpeg](https://www.ffmpeg.org) to convert video into photos, process images, and convert images back to the video.\n**Some tips:**\nReusing existing models will train much faster than starting from nothing.\nIf there is not enough training data, start with someone who looks similar, then switch the data.\n# Help I need support!\n## Discord Server\nYour best bet is to join the [FaceSwap Discord server](https://discord.gg/FC54sYg) where there are plenty of users willing to help. Please note that, like this repo, this is a SFW Server!\n## FaceSwap Forum\nAlternatively, you can post questions in the [FaceSwap Forum](https://faceswap.dev/forum). Please do not post general support questions in this repo as they are liable to be deleted without response.",
+        "type": "code",
+        "location": "/generator/faceswap/README.md:100-116"
+    },
+    "219": {
+        "file_id": 33,
+        "content": "General notes and tips provided for using scripts, conversion tools, and support options for FaceSwap.",
+        "type": "comment"
+    },
+    "220": {
+        "file_id": 33,
+        "content": "# Donate\nThe developers work tirelessly to improve and develop FaceSwap. Many hours have been put in to provide the software as it is today, but this is an extremely time-consuming process with no financial reward. If you enjoy using the software, please consider donating to the devs, so they can spend more time implementing improvements.\n## Patreon\nThe best way to support us is through our Patreon page:\n[![become-a-patron](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/bePatron?u=23238350)\n## One time Donations\nAlternatively you can give a one off donation to any of our Devs:\n### @torzdf\n There is very little FaceSwap code that hasn't been touched by torzdf. He is responsible for implementing the GUI, FAN aligner, MTCNN detector and porting the Villain, DFL-H128 and DFaker models to FaceSwap, as well as significantly improving many areas of the code.\n**Bitcoin:** 385a1r9tyZpt5LyZcNk1FALTxC8ZHta7yq\n**Ethereum:** 0x18CBbff5fA7C78de7B949A2b0160A0d1bd649f80",
+        "type": "code",
+        "location": "/generator/faceswap/README.md:118-133"
+    },
+    "221": {
+        "file_id": 33,
+        "content": "The code encourages users to support the FaceSwap developers financially through donations or patronage, highlighting the Patreon page and providing individual developers' bitcoin and ethereum wallets for direct contributions.",
+        "type": "comment"
+    },
+    "222": {
+        "file_id": 33,
+        "content": "**Paypal:** [![torzdf](https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JZ8PP3YE9J62L)\n### @andenixa\nCreator of the Unbalanced and OHR models, as well as expanding various capabilities within the training process. Andenixa is currently working on new models and will take requests for donations.\n**Paypal:** [![andenixa](https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NRVLQYGS6NWTU)\n### @kvrooman\nResponsible for consolidating the converters, adding a lot of code to fix model stability issues, and helping significantly towards making the training process more modular, kvrooman continues to be a very active contributor.\n**Ethereum:** 0x18CBbff5fA7C78de7B949A2b0160A0d1bd649f80\n# How to contribute\n## For people interested in the generative models\n - Go to the 'faceswap-model' to discuss/suggest/commit alternatives to the current algorithm.",
+        "type": "code",
+        "location": "/generator/faceswap/README.md:135-150"
+    },
+    "223": {
+        "file_id": 33,
+        "content": "This code snippet is a README file for a project related to generative models, particularly the Unbalanced and OHR models. It mentions that Andenixa is the creator of these models and provides a PayPal donation link. The code also acknowledges @kvrooman's contributions, including consolidating converters and improving model stability. Additionally, it mentions an Ethereum wallet address for another contributor. Lastly, it provides instructions on where to contribute and discuss improvements for the generative models.",
+        "type": "comment"
+    },
+    "224": {
+        "file_id": 33,
+        "content": "## For devs\n - Read this README entirely\n - Fork the repo\n - Play with it\n - Check issues with the 'dev' tag\n - For devs more interested in computer vision and openCV, look at issues with the 'opencv' tag. Also feel free to add your own alternatives/improvements\n## For non-dev advanced users\n - Read this README entirely\n - Clone the repo\n - Play with it\n - Check issues with the 'advuser' tag\n - Also go to the '[faceswap Forum](https://faceswap.dev/forum)' and help others.\n## For end-users\n - Get the code here and play with it if you can\n - You can also go to the [faceswap Forum](https://faceswap.dev/forum) and help or get help from others.\n - Be patient. This is a relatively new technology for developers as well. Much effort is already being put into making this program easy to use for the average user. It just takes time!\n - **Notice** Any issue related to running the code has to be opened in the [faceswap Forum](https://faceswap.dev/forum)!\n## For haters\nSorry, no time for that.\n# About github.com/deepfakes",
+        "type": "code",
+        "location": "/generator/faceswap/README.md:152-175"
+    },
+    "225": {
+        "file_id": 33,
+        "content": "For developers, provides instructions for reading the README, forking the repository, experimenting with it, and addressing issues tagged as 'dev' or 'opencv'. For non-developers who are advanced users, they can clone the repo, explore it, report issues tagged 'advuser', and participate in the faceswap Forum. End-users can try the code, seek help or contribute on the faceswap Forum, be patient with its development, and report code-related issues there. The text dismisses haters without further commentary.",
+        "type": "comment"
+    },
+    "226": {
+        "file_id": 33,
+        "content": "## What is this repo?\nIt is a community repository for active users.\n## Why this repo?\nThe joshua-wu repo seems not active. Simple bugs like missing _http://_ in front of urls have not been solved since days.\n## Why is it named 'deepfakes' if it is not /u/deepfakes?\n 1. Because a typosquat would have happened sooner or later as project grows\n 2. Because we wanted to recognize the original author\n 3. Because it will better federate contributors and users\n## What if /u/deepfakes feels bad about that?\nThis is a friendly typosquat, and it is fully dedicated to the project. If /u/deepfakes wants to take over this repo/user and drive the project, he is welcomed to do so (Raise an issue, and he will be contacted on Reddit). Please do not send /u/deepfakes messages for help with the code you find here.\n# About machine learning\n## How does a computer know how to recognize/shape faces? How does machine learning work? What is a neural network?\nIt's complicated. Here's a good video that makes the process understandable:",
+        "type": "code",
+        "location": "/generator/faceswap/README.md:177-194"
+    },
+    "227": {
+        "file_id": 33,
+        "content": "This code is for a README file in a community repository named 'deepfakes' which aims to be an active user-friendly alternative to the previously active joshua-wu repo. It explains why it's called 'deepfakes', how machine learning works, and encourages the original author of the project to take over if desired.",
+        "type": "comment"
+    },
+    "228": {
+        "file_id": 33,
+        "content": "[![How Machines Learn](https://img.youtube.com/vi/R9OHn5ZF4Uo/0.jpg)](https://www.youtube.com/watch?v=R9OHn5ZF4Uo)\nHere's a slightly more in depth video that tries to explain the basic functioning of a neural network:\n[![How Machines Learn](https://img.youtube.com/vi/aircAruvnKk/0.jpg)](https://www.youtube.com/watch?v=aircAruvnKk)\ntl;dr: training data + trial and error",
+        "type": "code",
+        "location": "/generator/faceswap/README.md:195-200"
+    },
+    "229": {
+        "file_id": 33,
+        "content": "This code snippet contains two YouTube video links with brief descriptions. The first link provides a more in-depth explanation of how neural networks function, and the second link is a shorter version of the same concept - both are aimed at explaining machine learning through trial and error using training data.",
+        "type": "comment"
+    },
+    "230": {
+        "file_id": 34,
+        "content": "/generator/singing/demo_song.py",
+        "type": "filepath"
+    },
+    "231": {
+        "file_id": 34,
+        "content": "Code imports required libraries, loads a sample audio file, prints the loaded waveform and its properties, estimates pitch tuning, applies pitch shift, saves shifted audio to a new file, and plots the original waveform.",
+        "type": "summary"
+    },
+    "232": {
+        "file_id": 34,
+        "content": "import librosa\ntarget = \"sample.wav\"\ntrumpet = librosa.ex('trumpet')\nprint(trumpet)\n# along with sample rate.\nsample = librosa.load(target)\nprint(sample)\narray, sample_rate = sample\nprint(type(array), type(sample_rate))\n# numpy array.\npitch_estimate = librosa.pitch.estimate_tuning(array,sr=sample_rate)\nprint(pitch_estimate)\nshifted = librosa.effects.pitch_shift(sample[0],sample[1],2)\nchannels = len(shifted.shape)\n# next is to crop the audio file?\nimport soundfile\nwith soundfile.SoundFile(\"shifted.wav\",\"w\",sample[1],channels,\"PCM_24\") as f:\n    f.write(shifted)\nimport matplotlib.pyplot as plt\nimport librosa.display\nplot = librosa.display.waveplot(sample[0], sample[1])\nplt.show()",
+        "type": "code",
+        "location": "/generator/singing/demo_song.py:1-34"
+    },
+    "233": {
+        "file_id": 34,
+        "content": "Code imports required libraries, loads a sample audio file, prints the loaded waveform and its properties, estimates pitch tuning, applies pitch shift, saves shifted audio to a new file, and plots the original waveform.",
+        "type": "comment"
+    },
+    "234": {
+        "file_id": 35,
+        "content": "/generator/singing/mel_spec.py",
+        "type": "filepath"
+    },
+    "235": {
+        "file_id": 35,
+        "content": "This code loads an audio file, computes the mel-frequency spectrogram, displays it as a visualization with decibel scale and color bar, and sets the title.",
+        "type": "summary"
+    },
+    "236": {
+        "file_id": 35,
+        "content": "import librosa\nimport librosa.display\ntarget = \"sample.wav\"\ny, sr = librosa.load(target)\nS = librosa.feature.melspectrogram(y=y, sr=sr)\nimport matplotlib.pyplot as plt\nimport numpy as np\nfig, ax = plt.subplots()\nS_dB = librosa.power_to_db(S, ref=np.max)\nimg = librosa.display.specshow(S_dB, x_axis='time',\n                         y_axis='mel', sr=sr,\n                         fmax=8000, ax=ax)\nfig.colorbar(img, ax=ax, format='%+2.0f dB')\nax.set(title='Mel-frequency spectrogram')\nplt.show()",
+        "type": "code",
+        "location": "/generator/singing/mel_spec.py:1-29"
+    },
+    "237": {
+        "file_id": 35,
+        "content": "This code loads an audio file, computes the mel-frequency spectrogram, displays it as a visualization with decibel scale and color bar, and sets the title.",
+        "type": "comment"
+    },
+    "238": {
+        "file_id": 36,
+        "content": "/generator/singing/np_conv.py",
+        "type": "filepath"
+    },
+    "239": {
+        "file_id": 36,
+        "content": "The code reads an audio file, extracts first channel samples, creates a window function, convolves it with samples, finds peaks in convolution, and plots the peaks. The absolute values of 'abs0' and 'ar1' are plotted and peaks can be aligned and extracted.",
+        "type": "summary"
+    },
+    "240": {
+        "file_id": 36,
+        "content": "import numpy as np\nimport librosa\ndef plot(sound):\n    plt.plot(sound)\n    plt.show()\nimport matplotlib.pyplot as plt\n# here's the problem. it has the time converted.\ndef findpeaks(ar1):\n    from scipy.signal import find_peaks\n    # distance is useful.\n    peaks, _ = find_peaks(ar1, height = 0, distance=150)\n    return peaks, ar1[peaks]\n#    plt.plot(ar1)\n#    plt.plot(peaks,ar1[peaks],\"x\")\n#    plt.show()\ntarget = \"sample.wav\"\nsound = librosa.load(target)\ntotal = 1000\ncenter = 0.2\nside = (1-center)/2\nside0,center0 = int(side*total),int(total*center)\nar0 = np.array([0 for _ in range(side0)]+[1 for _ in range(center0)]+[0 for _ in range(side0)])\nabs0 = np.absolute(sound[0])\nar1 = np.convolve(abs0,ar0,\"valid\")\nlocation, peaks = findpeaks(sound[0])\npeaks_diff = np.diff(peaks)\n#plot(peaks_diff)\n#plot(peaks)\nfrom scipy.signal import find_peaks\nnpeaks = -1*peaks\npks0, _ =  find_peaks(npeaks)\npks1 =  npeaks[pks0]\nplt.plot(npeaks)\nplt.plot(pks0,pks1,\"x\")\nplt.show()\n# i can invert it.\n# nearly the same.\n#plot(ar1)\n# do this several times?",
+        "type": "code",
+        "location": "/generator/singing/np_conv.py:1-45"
+    },
+    "241": {
+        "file_id": 36,
+        "content": "Code reads an audio file, extracts the first channel's samples, creates a rectangular window function, convolves it with the sample, finds peaks in the resulting convolution, and plots the peaks.",
+        "type": "comment"
+    },
+    "242": {
+        "file_id": 36,
+        "content": "#plot(abs0)\n#plot(ar1)\n# you can line up those peaks and do it again.\n# how to get peak values?",
+        "type": "code",
+        "location": "/generator/singing/np_conv.py:46-49"
+    },
+    "243": {
+        "file_id": 36,
+        "content": "This code snippet is plotting the absolute values of 'abs0' and 'ar1'. The peaks can be aligned and repeated to extract their values.",
+        "type": "comment"
+    },
+    "244": {
+        "file_id": 37,
+        "content": "/generator/singing/np_ema.py",
+        "type": "filepath"
+    },
+    "245": {
+        "file_id": 37,
+        "content": "Code imports necessary libraries, loads audio file \"sample.wav\", creates an array for convolution, convolves the audio signal with the array, prints the shapes of the results, finds the absolute values of the audio signal, determines the indices of local maxima in the signal, and potentially plots these signals.",
+        "type": "summary"
+    },
+    "246": {
+        "file_id": 37,
+        "content": "import numpy as np\nimport librosa\ndef plot(sound):\n    plt.plot(sound)\n    plt.show()\nimport matplotlib.pyplot as plt\n# here's the problem. it has the time converted.\ntarget = \"sample.wav\"\nsound = librosa.load(target)\nar0 = np.array([1 for _ in range(10000)])\nar1 = np.convolve(sound[0],ar0,\"valid\")\nprint(ar1.shape,sound[0].shape)\n# nearly the same.\n#plot(ar1)\nabs0 = np.absolute(sound[0])\nfrom scipy.signal import argrelextrema\nmax_ind = argrelextrema(abs0,np.greater)\nprint(max_ind)\n# do this several times?\n#plot(abs0)",
+        "type": "code",
+        "location": "/generator/singing/np_ema.py:1-23"
+    },
+    "247": {
+        "file_id": 37,
+        "content": "Code imports necessary libraries, loads audio file \"sample.wav\", creates an array for convolution, convolves the audio signal with the array, prints the shapes of the results, finds the absolute values of the audio signal, determines the indices of local maxima in the signal, and potentially plots these signals.",
+        "type": "comment"
+    },
+    "248": {
+        "file_id": 38,
+        "content": "/generator/singing/nuts.py",
+        "type": "filepath"
+    },
+    "249": {
+        "file_id": 38,
+        "content": "Code loads a audio file of \"The Nutcracker\" using librosa library, sets the hop length for analysis (23ms), separates harmonics and percussives into two waveforms, checks their shapes, and then saves them as separate audio files \"nuts_harm.wav\" and \"nuts_perc.wav\".",
+        "type": "summary"
+    },
+    "250": {
+        "file_id": 38,
+        "content": "import librosa\ny, sr = librosa.load(librosa.ex('nutcracker'))\n# Set the hop length; at 22050 Hz, 512 samples ~= 23ms\n#hop_length = 512\nchannels = len(y.shape)\n# Separate harmonics and percussives into two waveforms\ny_harmonic, y_percussive = librosa.effects.hpss(y)\n#print(y_harmonic.shape,y_percussive.shape)\n#check shape first.\nimport soundfile\nwith soundfile.SoundFile(\"nuts_harm.wav\",\"w\",sr,channels,\"PCM_24\") as f:\n    f.write(y_harmonic)\nwith soundfile.SoundFile(\"nuts_perc.wav\",\"w\",sr,channels,\"PCM_24\") as f:\n    f.write(y_percussive)",
+        "type": "code",
+        "location": "/generator/singing/nuts.py:1-19"
+    },
+    "251": {
+        "file_id": 38,
+        "content": "Code loads a audio file of \"The Nutcracker\" using librosa library, sets the hop length for analysis (23ms), separates harmonics and percussives into two waveforms, checks their shapes, and then saves them as separate audio files \"nuts_harm.wav\" and \"nuts_perc.wav\".",
+        "type": "comment"
+    },
+    "252": {
+        "file_id": 39,
+        "content": "/generator/singing/piped_test.py",
+        "type": "filepath"
+    },
+    "253": {
+        "file_id": 39,
+        "content": "The code tests Audacity pipe functionality, sets up pipe names based on OS, opens reading/writing pipes and includes a test with example commands.",
+        "type": "summary"
+    },
+    "254": {
+        "file_id": 39,
+        "content": "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\"\"\"Tests the audacity pipe.\nKeep pipe_test.py short!!\nYou can make more complicated longer tests to test other functionality\nor to generate screenshots etc in other scripts.\nMake sure Audacity is running first and that mod-script-pipe is enabled\nbefore running this script.\nRequires Python 2.7 or later. Python 3 is strongly recommended.\n\"\"\"\nimport os\nimport sys\nif sys.platform == 'win32':\n    print(\"pipe-test.py, running on windows\")\n    TONAME = '\\\\\\\\.\\\\pipe\\\\ToSrvPipe'\n    FROMNAME = '\\\\\\\\.\\\\pipe\\\\FromSrvPipe'\n    EOL = '\\r\\n\\0'\nelse:\n    print(\"pipe-test.py, running on linux or mac\")\n    TONAME = '/tmp/audacity_script_pipe.to.' + str(os.getuid())\n    FROMNAME = '/tmp/audacity_script_pipe.from.' + str(os.getuid())\n    EOL = '\\n'\nprint(\"Write to  \\\"\" + TONAME +\"\\\"\")\nif not os.path.exists(TONAME):\n    print(\" ..does not exist.  Ensure Audacity is running with mod-script-pipe.\")\n    sys.exit()\nprint(\"Read from \\\"\" + FROMNAME +\"\\\"\")\nif not os.path.exists(FROMNAME):\n    print(\" ..does not exist.  Ensure Audacity is running with mod-script-pipe.\")",
+        "type": "code",
+        "location": "/generator/singing/piped_test.py:1-35"
+    },
+    "255": {
+        "file_id": 39,
+        "content": "This code tests the Audacity pipe by checking if the 'To' and 'From' pipes exist, ensuring Audacity is running with mod-script-pipe enabled. It sets up the pipe names based on operating system (Windows or Linux/macOS), and checks if the pipes are accessible.",
+        "type": "comment"
+    },
+    "256": {
+        "file_id": 39,
+        "content": "    sys.exit()\nprint(\"-- Both pipes exist.  Good.\")\nTOFILE = open(TONAME, 'w')\nprint(\"-- File to write to has been opened\")\nFROMFILE = open(FROMNAME, 'rt')\nprint(\"-- File to read from has now been opened too\\r\\n\")\ndef send_command(command):\n    \"\"\"Send a single command.\"\"\"\n    print(\"Send: >>> \\n\"+command)\n    TOFILE.write(command + EOL)\n    TOFILE.flush()\ndef get_response():\n    \"\"\"Return the command response.\"\"\"\n    result = ''\n    line = ''\n    while True:\n        result += line\n        line = FROMFILE.readline()\n        if line == '\\n' and len(result) > 0:\n            break\n    return result\ndef do_command(command):\n    \"\"\"Send one command, and return the response.\"\"\"\n    send_command(command)\n    response = get_response()\n    print(\"Rcvd: <<< \\n\" + response)\n    return response\ndef quick_test():\n    \"\"\"Example list of commands.\"\"\"\n    do_command('Help: Command=Help')\n    do_command('Help: Command=\"GetInfo\"')\n    #do_command('SetPreference: Name=GUI/Theme Value=classic Reload=1')\nquick_test()",
+        "type": "code",
+        "location": "/generator/singing/piped_test.py:36-76"
+    },
+    "257": {
+        "file_id": 39,
+        "content": "The code opens two pipes, one for writing commands and the other for reading responses. It defines functions to send a single command and get the response, and includes a quick test with some example commands.",
+        "type": "comment"
+    },
+    "258": {
+        "file_id": 40,
+        "content": "/generator/singing/rmse.py",
+        "type": "filepath"
+    },
+    "259": {
+        "file_id": 40,
+        "content": "This code imports necessary libraries, loads a sound file, calculates the RMS (Root Mean Square) value of the audio signal, and then plots it using matplotlib.",
+        "type": "summary"
+    },
+    "260": {
+        "file_id": 40,
+        "content": "import librosa\nimport librosa.feature\ntarget = \"sample.wav\"\nld = librosa.load(target)\nsample = librosa.feature.rms(ld[0])\n#print(sample)\nimport matplotlib.pyplot as plt\nplt.plot(sample.T)\nplt.show()",
+        "type": "code",
+        "location": "/generator/singing/rmse.py:1-16"
+    },
+    "261": {
+        "file_id": 40,
+        "content": "This code imports necessary libraries, loads a sound file, calculates the RMS (Root Mean Square) value of the audio signal, and then plots it using matplotlib.",
+        "type": "comment"
+    },
+    "262": {
+        "file_id": 41,
+        "content": "/generator/singing/sample.sh",
+        "type": "filepath"
+    },
+    "263": {
+        "file_id": 41,
+        "content": "This code utilizes the espeak command-line tool to generate speech audio. The \"hello world\" text is spoken and saved as a .wav file named 'sample.wav'. This could be used for creating voice recordings or integrating text-to-speech functionality into applications.",
+        "type": "summary"
+    },
+    "264": {
+        "file_id": 41,
+        "content": "espeak \"hello world\" -w sample.wav",
+        "type": "code",
+        "location": "/generator/singing/sample.sh:1-1"
+    },
+    "265": {
+        "file_id": 41,
+        "content": "This code utilizes the espeak command-line tool to generate speech audio. The \"hello world\" text is spoken and saved as a .wav file named 'sample.wav'. This could be used for creating voice recordings or integrating text-to-speech functionality into applications.",
+        "type": "comment"
+    },
+    "266": {
+        "file_id": 42,
+        "content": "/generator/singing/stft.py",
+        "type": "filepath"
+    },
+    "267": {
+        "file_id": 42,
+        "content": "This code imports necessary libraries, loads audio file, performs Constant-Q Transform (CQT), displays a mel-frequency spectrogram of the audio using matplotlib, and then shows the resulting plot.",
+        "type": "summary"
+    },
+    "268": {
+        "file_id": 42,
+        "content": "import librosa\ntarget = \"sample.wav\"\ny, sr = librosa.load(target)\n#sft = librosa.stft(y)\npitch = librosa.cqt(y=y,sr=sr,hop_length=1024,n_bins = 84)\n#print(pitch)\nimport librosa.display\nimport matplotlib.pyplot as plt\nimport numpy as np\nfig, ax = plt.subplots()\nimg = librosa.display.specshow(librosa.amplitude_to_db(pitch,ref=np.max), x_axis=\"time\", y_axis=\"cqt_note\", sr=sr, fmax=8000,ax=ax)\nfig.colorbar(img, ax=ax, format='%+2.0f dB')\nax.set(title='Mel-frequency spectrogram')\nplt.show()",
+        "type": "code",
+        "location": "/generator/singing/stft.py:1-25"
+    },
+    "269": {
+        "file_id": 42,
+        "content": "This code imports necessary libraries, loads audio file, performs Constant-Q Transform (CQT), displays a mel-frequency spectrogram of the audio using matplotlib, and then shows the resulting plot.",
+        "type": "comment"
+    },
+    "270": {
+        "file_id": 43,
+        "content": "/generator/singing/tts.py",
+        "type": "filepath"
+    },
+    "271": {
+        "file_id": 43,
+        "content": "The code imports the PyTTSx3 library, initializes an engine object for text-to-speech functionality, retrieves available voices, and defines a function tts() to convert input text into an audio file using specified rate, volume, and voice. The file is saved with a given prefix in .mp3 format, and the speech is executed using engine.runAndWait().",
+        "type": "summary"
+    },
+    "272": {
+        "file_id": 43,
+        "content": "import pyttsx3\nengine = pyttsx3.init() # object creation\nvoices = engine.getProperty('voices')       #getting details of current voice\n# print(\"total voices:\",voices)\ndef tts(text,output_prefix,rate=125,volume=1.0,voice=0):\n    engine.setProperty('rate', rate)     # setting up new voice rate\n    engine.setProperty('volume',volume)    # setting up volume level  between 0 and 18\n    engine.setProperty('voice', voices[voice].id)   \n    engine.save_to_file(text, '{}.mp3'.format(output_prefix))\n    engine.runAndWait()",
+        "type": "code",
+        "location": "/generator/singing/tts.py:1-10"
+    },
+    "273": {
+        "file_id": 43,
+        "content": "The code imports the PyTTSx3 library, initializes an engine object for text-to-speech functionality, retrieves available voices, and defines a function tts() to convert input text into an audio file using specified rate, volume, and voice. The file is saved with a given prefix in .mp3 format, and the speech is executed using engine.runAndWait().",
+        "type": "comment"
+    },
+    "274": {
+        "file_id": 44,
+        "content": "/init.sh",
+        "type": "filepath"
+    },
+    "275": {
+        "file_id": 44,
+        "content": "The script installs necessary dependencies for the application, including FFmpeg, Espeak, Python decorator, and various libraries. It also creates a symbolic link to FFmpeg, installs required packages using pip3, and mentions potential future enhancements with advanced audio generation tools like sclang or deeplearning.",
+        "type": "summary"
+    },
+    "276": {
+        "file_id": 44,
+        "content": "#!/bin/bash\napt install ffmpeg espeak\nsudo apt install --reinstall python*-decorator\nalocation=$(which ffmpeg)\nmkdir -p ~/.imageio/ffmpeg\nln -s $alocation ~/.imageio/ffmpeg/ffmpeg.linux64\npip3 install -r requirements.txt\npip3 install -r poster/bilibiliupload/requirements.txt\ncat nodejs_require | xargs -iabc npm i -g abc\npip3 install -r collector/Bilibili_video_download/requirements.txt\npip3 install webrtcvad==2.0.10 wave pydub simpleaudio numpy matplotlib\n# use virtualenv? what do you think?\n# also some basic audio library? such as TTS.\n# when advanced, use sclang, scide, scsynth to generate music, or deeplearning.",
+        "type": "code",
+        "location": "/init.sh:1-14"
+    },
+    "277": {
+        "file_id": 44,
+        "content": "The script installs necessary dependencies for the application, including FFmpeg, Espeak, Python decorator, and various libraries. It also creates a symbolic link to FFmpeg, installs required packages using pip3, and mentions potential future enhancements with advanced audio generation tools like sclang or deeplearning.",
+        "type": "comment"
+    },
+    "278": {
+        "file_id": 45,
+        "content": "/nodejs_require",
+        "type": "filepath"
+    },
+    "279": {
+        "file_id": 45,
+        "content": "Code seems to import or require two modules, \"ws\" and \"collections\". The \"ws\" module is likely used for WebSocket communication, while the \"collections\" module provides useful classes for dealing with collections of objects.",
+        "type": "summary"
+    },
+    "280": {
+        "file_id": 45,
+        "content": "ws\ncollections",
+        "type": "code",
+        "location": "/nodejs_require:1-2"
+    },
+    "281": {
+        "file_id": 45,
+        "content": "Code seems to import or require two modules, \"ws\" and \"collections\". The \"ws\" module is likely used for WebSocket communication, while the \"collections\" module provides useful classes for dealing with collections of objects.",
+        "type": "comment"
+    },
+    "282": {
+        "file_id": 46,
+        "content": "/poster/README.md",
+        "type": "filepath"
+    },
+    "283": {
+        "file_id": 46,
+        "content": "This code provides a brief introduction to the project and outlines that the current interactive video posting method is not yet available.",
+        "type": "summary"
+    },
+    "284": {
+        "file_id": 46,
+        "content": "# brief\n## roadmap\ncurrently interactive video posting method is a myth.",
+        "type": "code",
+        "location": "/poster/README.md:1-5"
+    },
+    "285": {
+        "file_id": 46,
+        "content": "This code provides a brief introduction to the project and outlines that the current interactive video posting method is not yet available.",
+        "type": "comment"
+    },
+    "286": {
+        "file_id": 47,
+        "content": "/poster/bili_interactive_upload/BRIEF",
+        "type": "filepath"
+    },
+    "287": {
+        "file_id": 47,
+        "content": "This code suggests changing the default file manager in Linux and mentions mc (Midnight Commander) and ranger as alternatives. Multiupload is considered irrelevant to the platform, so it should be disregarded.",
+        "type": "summary"
+    },
+    "288": {
+        "file_id": 47,
+        "content": "to upload the thing, you need to change your default file manager, which is not very hard to do in linux.\n-> mc, ranger\nmultiupload is nonrelevent to the platform. cut the shit.",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/BRIEF:1-5"
+    },
+    "289": {
+        "file_id": 47,
+        "content": "This code suggests changing the default file manager in Linux and mentions mc (Midnight Commander) and ranger as alternatives. Multiupload is considered irrelevant to the platform, so it should be disregarded.",
+        "type": "comment"
+    },
+    "290": {
+        "file_id": 48,
+        "content": "/poster/bili_interactive_upload/README",
+        "type": "filepath"
+    },
+    "291": {
+        "file_id": 48,
+        "content": "This Bilibili video upload automation code handles video and skeleton file uploads with specific parameters, retrieves cids via GET requests, and edits final worldline for POST to a specific API endpoint.",
+        "type": "summary"
+    },
+    "292": {
+        "file_id": 48,
+        "content": "# General Interactive Video Upload Automation\n## Basic routine\n1. upload videos via https://member.bilibili.com/preupload, and along with the only cover.\n2. upload skeleton via https://member.bilibili.com/x/vu/web/add?csrf=, according to this format:\n```json\n{\"copyright\":1, // 1 for copyright, 2 for copyleft\n\"videos\":\n[{\"filename\":\"m201214(no file extension)\",\"title\":\"pic\",\"desc\":\"\",\"cid\":0},{\"filename\":\"mfilename\",\"title\": \"final\",\"desc\":\"\",\"cid\":0},{\"filename\": \"mxx\",\"title\":\"sxx\",\"desc\":\"\",\"cid\":0}] //the cid will be assigned later by bilibili.\n,\"no_reprint\":1,\n\"interactive\":1,\n\"tid\":171,\n\"cover\":\"//i0.xx.com/xx.jpg\",\n\"title\":\"interactive_video_final\",\n\"tag\":\"互动视频\",\n\"desc_format_id\":39, // not sure about this one. it says we can use chinese downtick to specify the game names prefixed by \"related games:\".\n\"desc\":\"\",\n\"dynamic\":\"#互动视频#\",\n\"open_elec\":1, //allow to get financial support.\n\"subtitle\":{\"open\":1,\"lan\":\"\"}, //language not specified.\n\"up_close_reply\":false,\n\"up_close_danmu\":false\n}\n```\n3. **GET** cids from https://member.bilibili.com/x/web/archive/view?bvid=<bv_id>",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/README:1-29"
+    },
+    "293": {
+        "file_id": 48,
+        "content": "This code outlines an interactive video upload automation process on Bilibili, involving steps to upload the video and skeleton with specific parameters. It starts by uploading videos and covers, then uploading a skeleton file with details about the video such as title, description, tags, and more. Finally, it retrieves the cids using a GET request to complete the process.",
+        "type": "comment"
+    },
+    "294": {
+        "file_id": 48,
+        "content": "4. edit and **POST** the final worldline to https://api.bilibili.com/x/stein/graph/save\n## Workflow\nBasically we need a template to handle network requests.\nAnd we need all cookies be prepared beforehand. If it is not necessary to use extra cookies then we are good, leaving the collective work out.\nFinally, a template to do worldline script assignments.",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/README:31-39"
+    },
+    "295": {
+        "file_id": 48,
+        "content": "This code edits and POSTs the final worldline to https://api.bilibili.com/x/stein/graph/save. It requires a template for network requests, all cookies prepared beforehand, and a script to handle worldline assignments.",
+        "type": "comment"
+    },
+    "296": {
+        "file_id": 49,
+        "content": "/poster/bili_interactive_upload/TYPES",
+        "type": "filepath"
+    },
+    "297": {
+        "file_id": 49,
+        "content": "This code defines various types and constants used in a program, including node types, variable types, condition types, action types, text alignment options, track padding width, and inner option types.",
+        "type": "summary"
+    },
+    "298": {
+        "file_id": 49,
+        "content": "            NODE_TYPE_SELECT: 1,\n            NODE_TYPE_POINT: 2,\n            NODE_TYPE_PLAY: 999,\n            VARIABLE_TYPE_NORMAL: 1,\n            VARIABLE_TYPE_RANDOM: 2,\n            CONDITION_TYPE_GREATER_THAN: \"gt\",\n            CONDITION_TYPE_LESS_THAN: \"lt\",\n            CONDITION_TYPE_EQUAL: \"eq\",\n            CONDITION_TYPE_NOT_EQUAL: \"ne\",\n            CONDITION_TYPE_GREATER_OR_EQUAL: \"ge\",\n            CONDITION_TYPE_LESS_OR_EQUAL: \"le\",\n            CONDITION_TYPE_IN_RANGE: \"range\",\n            ACTION_TYPE_ADD: \"add\",\n            ACTION_TYPE_SUBTRACT: \"sub\",\n            ACTION_TYPE_ASSIGNMENT: \"assign\",\n            POINT_TEXT_ALIGN_TOP: 1,\n            POINT_TEXT_ALIGN_RIGHT: 2,\n            POINT_TEXT_ALIGN_BOTTOM: 3,\n            POINT_TEXT_ALIGN_LEFT: 4,\n            TRACK_PADDING_WIDTH: 30,\n            INNER_OPTION_TYPE_NORMAL: 1,\n            INNER_OPTION_TYPE_TEXT: 2",
+        "type": "code",
+        "location": "/poster/bili_interactive_upload/TYPES:1-22"
+    },
+    "299": {
+        "file_id": 49,
+        "content": "This code defines various types and constants used in a program, including node types, variable types, condition types, action types, text alignment options, track padding width, and inner option types.",
+        "type": "comment"
+    }
+}

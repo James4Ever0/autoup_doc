@@ -1,0 +1,10 @@
+{
+    "summary": "This code defines various types and constants used in a program, including node types, variable types, condition types, action types, text alignment options, track padding width, and inner option types.",
+    "details": [
+        {
+            "comment": "This code defines various types and constants used in a program, including node types, variable types, condition types, action types, text alignment options, track padding width, and inner option types.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bili_interactive_upload/TYPES\":0-21",
+            "content": "            NODE_TYPE_SELECT: 1,\n            NODE_TYPE_POINT: 2,\n            NODE_TYPE_PLAY: 999,\n            VARIABLE_TYPE_NORMAL: 1,\n            VARIABLE_TYPE_RANDOM: 2,\n            CONDITION_TYPE_GREATER_THAN: \"gt\",\n            CONDITION_TYPE_LESS_THAN: \"lt\",\n            CONDITION_TYPE_EQUAL: \"eq\",\n            CONDITION_TYPE_NOT_EQUAL: \"ne\",\n            CONDITION_TYPE_GREATER_OR_EQUAL: \"ge\",\n            CONDITION_TYPE_LESS_OR_EQUAL: \"le\",\n            CONDITION_TYPE_IN_RANGE: \"range\",\n            ACTION_TYPE_ADD: \"add\",\n            ACTION_TYPE_SUBTRACT: \"sub\",\n            ACTION_TYPE_ASSIGNMENT: \"assign\",\n            POINT_TEXT_ALIGN_TOP: 1,\n            POINT_TEXT_ALIGN_RIGHT: 2,\n            POINT_TEXT_ALIGN_BOTTOM: 3,\n            POINT_TEXT_ALIGN_LEFT: 4,\n            TRACK_PADDING_WIDTH: 30,\n            INNER_OPTION_TYPE_NORMAL: 1,\n            INNER_OPTION_TYPE_TEXT: 2"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "summary": "This code executes a Python script named \"cookie_dumper.py\" and then uses sed command to replace specific configurations in \"config_demo.yaml\" file with the ones found in \"bilibili_cookies.sed\". The updated configuration is saved as \"config.yaml\" under the \"$poster_prefix\".",
+    "details": [
+        {
+            "comment": "This code executes a Python script named \"cookie_dumper.py\" and then uses sed command to replace specific configurations in \"config_demo.yaml\" file with the ones found in \"bilibili_cookies.sed\". The updated configuration is saved as \"config.yaml\" under the \"$poster_prefix\".",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/cookie_dumper.sh\":0-3",
+            "content": "#!/bin/bash\n#config_prefix=poster/bilibiliupload\npython3 cookie_dumper.py\n#sed -f .confidential/bilibili_cookies.sed $config_prefix/config_demo.yaml > $poster_prefix/config.yaml "
+        }
+    ]
+}

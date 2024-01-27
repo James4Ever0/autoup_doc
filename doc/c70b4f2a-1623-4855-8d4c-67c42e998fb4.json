@@ -1,0 +1,10 @@
+{
+    "summary": "This script is copying and renaming files, replacing original with source. It backs up the original file by appending \".bak\" to its name before overwriting it with the source file.",
+    "details": [
+        {
+            "comment": "This script is copying and renaming files, replacing original with source. It backs up the original file by appending \".bak\" to its name before overwriting it with the source file.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bilibiliupload/apply_patch.sh\":0-4",
+            "content": "#!/bin/bash\norig=\"usr/lib/python3.8/http/cookiejar.py\"\nsrc=\"cookiejar.py\"\ncp $orig $orig.bak\ncp $src $orig"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "summary": "These are dependencies for a project, used by various Python libraries to handle audio and video processing, text-to-speech, network analysis, language processing, and more.",
+    "details": [
+        {
+            "comment": "These are dependencies for a project, used by various Python libraries to handle audio and video processing, text-to-speech, network analysis, language processing, and more.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/requirements.txt\":0-17",
+            "content": "moviepy\nexrex\nnetworkx\nvidgear\nscikit-video\njieba\nnltk\npyttsx3\ntones\npydub\nlibrosa\npyacoustics\npyAudioAnalysis\npyaudio\npraat-parselmouth\ncrepe\naupyom\nspacy"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "summary": "This code imports necessary libraries, loads a sound file, calculates the RMS (Root Mean Square) value of the audio signal, and then plots it using matplotlib.",
+    "details": [
+        {
+            "comment": "This code imports necessary libraries, loads a sound file, calculates the RMS (Root Mean Square) value of the audio signal, and then plots it using matplotlib.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/generator/singing/rmse.py\":0-15",
+            "content": "import librosa\nimport librosa.feature\ntarget = \"sample.wav\"\nld = librosa.load(target)\nsample = librosa.feature.rms(ld[0])\n#print(sample)\nimport matplotlib.pyplot as plt\nplt.plot(sample.T)\nplt.show()"
+        }
+    ]
+}

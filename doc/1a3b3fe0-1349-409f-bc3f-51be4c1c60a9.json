@@ -1,0 +1,15 @@
+{
+    "summary": "This Bilibili video upload automation code handles video and skeleton file uploads with specific parameters, retrieves cids via GET requests, and edits final worldline for POST to a specific API endpoint.",
+    "details": [
+        {
+            "comment": "This code outlines an interactive video upload automation process on Bilibili, involving steps to upload the video and skeleton with specific parameters. It starts by uploading videos and covers, then uploading a skeleton file with details about the video such as title, description, tags, and more. Finally, it retrieves the cids using a GET request to complete the process.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bili_interactive_upload/README\":0-28",
+            "content": "# General Interactive Video Upload Automation\n## Basic routine\n1. upload videos via https://member.bilibili.com/preupload, and along with the only cover.\n2. upload skeleton via https://member.bilibili.com/x/vu/web/add?csrf=, according to this format:\n```json\n{\"copyright\":1, // 1 for copyright, 2 for copyleft\n\"videos\":\n[{\"filename\":\"m201214(no file extension)\",\"title\":\"pic\",\"desc\":\"\",\"cid\":0},{\"filename\":\"mfilename\",\"title\": \"final\",\"desc\":\"\",\"cid\":0},{\"filename\": \"mxx\",\"title\":\"sxx\",\"desc\":\"\",\"cid\":0}] //the cid will be assigned later by bilibili.\n,\"no_reprint\":1,\n\"interactive\":1,\n\"tid\":171,\n\"cover\":\"//i0.xx.com/xx.jpg\",\n\"title\":\"interactive_video_final\",\n\"tag\":\"\u4e92\u52a8\u89c6\u9891\",\n\"desc_format_id\":39, // not sure about this one. it says we can use chinese downtick to specify the game names prefixed by \"related games:\".\n\"desc\":\"\",\n\"dynamic\":\"#\u4e92\u52a8\u89c6\u9891#\",\n\"open_elec\":1, //allow to get financial support.\n\"subtitle\":{\"open\":1,\"lan\":\"\"}, //language not specified.\n\"up_close_reply\":false,\n\"up_close_danmu\":false\n}\n```\n3. **GET** cids from https://member.bilibili.com/x/web/archive/view?bvid=<bv_id>"
+        },
+        {
+            "comment": "This code edits and POSTs the final worldline to https://api.bilibili.com/x/stein/graph/save. It requires a template for network requests, all cookies prepared beforehand, and a script to handle worldline assignments.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bili_interactive_upload/README\":30-38",
+            "content": "4. edit and **POST** the final worldline to https://api.bilibili.com/x/stein/graph/save\n## Workflow\nBasically we need a template to handle network requests.\nAnd we need all cookies be prepared beforehand. If it is not necessary to use extra cookies then we are good, leaving the collective work out.\nFinally, a template to do worldline script assignments."
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "summary": "This code loads an audio file, computes the mel-frequency spectrogram, displays it as a visualization with decibel scale and color bar, and sets the title.",
+    "details": [
+        {
+            "comment": "This code loads an audio file, computes the mel-frequency spectrogram, displays it as a visualization with decibel scale and color bar, and sets the title.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/generator/singing/mel_spec.py\":0-28",
+            "content": "import librosa\nimport librosa.display\ntarget = \"sample.wav\"\ny, sr = librosa.load(target)\nS = librosa.feature.melspectrogram(y=y, sr=sr)\nimport matplotlib.pyplot as plt\nimport numpy as np\nfig, ax = plt.subplots()\nS_dB = librosa.power_to_db(S, ref=np.max)\nimg = librosa.display.specshow(S_dB, x_axis='time',\n                         y_axis='mel', sr=sr,\n                         fmax=8000, ax=ax)\nfig.colorbar(img, ax=ax, format='%+2.0f dB')\nax.set(title='Mel-frequency spectrogram')\nplt.show()"
+        }
+    ]
+}

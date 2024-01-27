@@ -1,0 +1,10 @@
+{
+    "summary": "This script runs a Python program to fetch cookies, then uses sed to replace the config file's demo values with actual ones from the generated cookie file.",
+    "details": [
+        {
+            "comment": "This script runs a Python program to fetch cookies, then uses sed to replace the config file's demo values with actual ones from the generated cookie file.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/cookie_getter.sh\":0-3",
+            "content": "#!/bin/bash\nconfig_prefix=poster/bilibiliupload\npython3 cookie_getter.py\nsed -f .confidential/bilibili_cookies.sed $config_prefix/config_demo.yaml > $config_prefix/config.yaml "
+        }
+    ]
+}

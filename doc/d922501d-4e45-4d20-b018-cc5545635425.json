@@ -1,0 +1,15 @@
+{
+    "summary": "The code includes functions for text manipulation like random string concatenation, injection, and spacing. It also features `censor()` using 'profanity' library and `markov()` utilizing Markov chain generator to generate new sentences.",
+    "details": [
+        {
+            "comment": "Code snippets for various text manipulation functions including random string concatenation, random injection, spacing, random spacing, leet speak conversion, and random leet replacement.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bilibiliupload/title_tweaker.py\":0-49",
+            "content": "import jieba\nimport random\nfrom better_profanity import profanity\nimport l33t\nfrom mText import Markov\n# this is just demostration.\nsysrand = random.SystemRandom()\ndef randomConcat(x,limit=80):\n    if len(x)>limit:\n        y = random.choice(list(range(len(x)-limit)))\n        return x[y:y+limit]\n    return x\ndef minmax(_min,_max):\n    assert _max>_min\n    _range = _max-_min\n    return sysrand.random()*_range+_min\ndef randomInject(string,x):\n    l = len(string)\n    lp = list(range(0,l))\n    sysrand.shuffle(lp)\n    f = lp[0]\n    a, b = string[0:f], string[f:l]\n    return a+x+b\ndef spacing(string,space):\n    assert len(space)>1\n    return space.join(string)\ndef randomSpacing(string,space,gfactor):\n    out = \"\"\n    for x in string:\n        factor = gfactor()\n        factor = round(factor)\n        assert factor>=1\n        out += x+space*factor\n    return out\ndef leetspeak(string):\n    return l33t.l33t(string)\ndef randomLeet(string,k=0.5):\n    y=\"\"\n    for x in string:\n        if sysrand.random()>k:\n            x=leetspeak(x)\n        y+=x"
+        },
+        {
+            "comment": "Function `censor()` uses the 'profanity' library to censor a given string, while `markov()` initializes and utilizes a Markov chain generator from the Markov class to create a new sentence based on the provided input.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bilibiliupload/title_tweaker.py\":50-58",
+            "content": "    return y\ndef censor(string):\n    return profanity.censor(string)\ndef markov(string):\n    mk = Markov()\n    mk.add_to_dict(string)\n    return mk.create_sentence()"
+        }
+    ]
+}

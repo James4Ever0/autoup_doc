@@ -1,0 +1,5 @@
+#!/usr/bin/python3
+
+from flvlib3.scripts import debug_flv
+debug_flv.main()
+

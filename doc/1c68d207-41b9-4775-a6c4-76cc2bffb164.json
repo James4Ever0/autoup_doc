@@ -1,0 +1,15 @@
+{
+    "summary": "This Python script reads a file, randomly selects pictures if needed, runs baidu_spider.js on encoded base64 picture names using electron.cmd, counts image files in the \"celeb_pictures\" directory, and prints messages based on image availability.",
+    "details": [
+        {
+            "comment": "This code is a Python script that reads a file, randomly selects pictures (if needed), and uses electron.cmd to run baidu_spider.js on the selected picture names encoded in base64. It also counts the total number of image files in the \"celeb_pictures\" directory and prints it out if realtime is set to True. The script imports several libraries for encoding, randomization, and file operations.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/collector/celeb_picture_collect/collect_pics.py\":0-43",
+            "content": "# coding: UTF-8\nimport sys\nimport os\n# import time\nimport base64\nimport random\nimport pickle\nimport urllib.parse\nsysrand = random.SystemRandom()\ndef escaped(string):\n    result = urllib.parse.quote(string.encode(\"utf-8\"))\n    return result\ndef encoded(string):\n    return base64.urlsafe_b64encode(string.encode(\"utf-8\")).decode(\"utf-8\")\n# you would just randomly select pictures?\n# nope.\ndef countPic(dir=\"celeb_pictures\",minCount=100,realtime=False):\n    ct=os.listdir(dir)\n    ct = [x for x in ct if x.endswith(\".jpeg\") or x.endswith(\".jpg\") or x.endswith(\".png\")]\n    lct = len(ct)\n    print(\"total number:\",lct)\n    if realtime:\n        return lct\n    else:\n        return lct<minCount\nk=[]\na = sys.argv[1:]\nassert len(a) == 1\n# maybe it just open the shit with wrong encoding.\nwith open(a[0],\"r\", encoding='utf-8') as f:\n    # k = f.read().split(\"\\r\\n\")\n    for line in f:\n        k.append(line)\nk = list(set(k))\nif countPic():\n    sysrand.shuffle(k)\n    for x in k:\n        if countPic():\n        # print(\"picture real name\",x)\n            os.system(\"electron.cmd baidu_spider.js {}\".format(encoded(x)))"
+        },
+        {
+            "comment": "If the image is already available in abundance, this code will print \"picture is plenty.\" It checks if an image exists and prints the message accordingly.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/collector/celeb_picture_collect/collect_pics.py\":44-47",
+            "content": "        else:\n            print(\"picture is plenty.\")\nelse:\n    print(\"picture is plenty.\")"
+        }
+    ]
+}

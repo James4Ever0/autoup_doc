@@ -1,0 +1,10 @@
+{
+    "summary": "This script finds all directories containing the \"__pycache__\" suffix within the current directory and its subdirectories, then deletes them recursively using xargs and the \"rm -rf\" command.",
+    "details": [
+        {
+            "comment": "This script finds all directories containing the \"__pycache__\" suffix within the current directory and its subdirectories, then deletes them recursively using xargs and the \"rm -rf\" command.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bilibiliupload/clean_cache.sh\":0-1",
+            "content": "#!/bin/bash\nfind | grep __pycache__ | xargs rm -rf"
+        }
+    ]
+}

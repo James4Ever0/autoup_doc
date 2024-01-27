@@ -1,0 +1,15 @@
+{
+    "summary": "The code reads an audio file, extracts first channel samples, creates a window function, convolves it with samples, finds peaks in convolution, and plots the peaks. The absolute values of 'abs0' and 'ar1' are plotted and peaks can be aligned and extracted.",
+    "details": [
+        {
+            "comment": "Code reads an audio file, extracts the first channel's samples, creates a rectangular window function, convolves it with the sample, finds peaks in the resulting convolution, and plots the peaks.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/generator/singing/np_conv.py\":0-44",
+            "content": "import numpy as np\nimport librosa\ndef plot(sound):\n    plt.plot(sound)\n    plt.show()\nimport matplotlib.pyplot as plt\n# here's the problem. it has the time converted.\ndef findpeaks(ar1):\n    from scipy.signal import find_peaks\n    # distance is useful.\n    peaks, _ = find_peaks(ar1, height = 0, distance=150)\n    return peaks, ar1[peaks]\n#    plt.plot(ar1)\n#    plt.plot(peaks,ar1[peaks],\"x\")\n#    plt.show()\ntarget = \"sample.wav\"\nsound = librosa.load(target)\ntotal = 1000\ncenter = 0.2\nside = (1-center)/2\nside0,center0 = int(side*total),int(total*center)\nar0 = np.array([0 for _ in range(side0)]+[1 for _ in range(center0)]+[0 for _ in range(side0)])\nabs0 = np.absolute(sound[0])\nar1 = np.convolve(abs0,ar0,\"valid\")\nlocation, peaks = findpeaks(sound[0])\npeaks_diff = np.diff(peaks)\n#plot(peaks_diff)\n#plot(peaks)\nfrom scipy.signal import find_peaks\nnpeaks = -1*peaks\npks0, _ =  find_peaks(npeaks)\npks1 =  npeaks[pks0]\nplt.plot(npeaks)\nplt.plot(pks0,pks1,\"x\")\nplt.show()\n# i can invert it.\n# nearly the same.\n#plot(ar1)\n# do this several times?"
+        },
+        {
+            "comment": "This code snippet is plotting the absolute values of 'abs0' and 'ar1'. The peaks can be aligned and repeated to extract their values.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/generator/singing/np_conv.py\":45-48",
+            "content": "#plot(abs0)\n#plot(ar1)\n# you can line up those peaks and do it again.\n# how to get peak values?"
+        }
+    ]
+}

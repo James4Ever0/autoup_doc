@@ -1,0 +1,10 @@
+{
+    "summary": "Starts a daemon process that can be stopped, restarted, or the uploader only can be run. Uses asyncio for asynchronous execution.",
+    "details": [
+        {
+            "comment": "Starts a daemon process that can be stopped, restarted, or the uploader only can be run. Uses asyncio for asynchronous execution.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/poster/bilibiliupload/Bilibili.py\":0-29",
+            "content": "#!/usr/bin/python3\n# coding:utf8\nimport asyncio\nimport sys\nimport common\nfrom engine import main\nfrom common.Daemon import Daemon\nif __name__ == '__main__':\n    sys.excepthook = common.new_hook\n    daemon = Daemon('watch_process.pid')\n    if len(sys.argv) == 2:\n        if 'start' == sys.argv[1]:\n            daemon.start()\n        elif 'stop' == sys.argv[1]:\n            daemon.stop()\n        elif 'restart' == sys.argv[1]:\n            daemon.restart()\n        else:\n            print('unknown command')\n            sys.exit(2)\n        sys.exit(0)\n    elif len(sys.argv) == 1:\n        # how do you run the uploader only, or to disable it?\n        asyncio.run(main())\n    else:\n        print('usage: %s start|stop|restart' % sys.argv[0])\n        sys.exit(2)"
+        }
+    ]
+}

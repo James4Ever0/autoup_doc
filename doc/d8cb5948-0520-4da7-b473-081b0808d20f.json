@@ -1,0 +1,10 @@
+{
+    "summary": "Missing dynamic scraping for group, personal, and Qzone features.",
+    "details": [
+        {
+            "comment": "Missing dynamic scraping for group, personal, and Qzone features.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/collector/qq_mirai_bot/README\":0-2",
+            "content": "dynamic scraping is still missing.\nincluding group dynamic, personal dynamic, qzone."
+        }
+    ]
+}

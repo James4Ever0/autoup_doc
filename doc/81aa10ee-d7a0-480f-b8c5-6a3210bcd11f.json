@@ -1,0 +1,15 @@
+{
+    "summary": "This code converts Baidu (BV) and AliVideo (av) IDs, providing functions for bv2av and av2bv conversions. It also replaces BV URLs with AliVideo URLs using the bvUrl2AvUrl function.",
+    "details": [
+        {
+            "comment": "This code converts between Baidu Video IDs (BV) and AliVideo IDs (av). It provides functions for bv2av and av2bv conversions. The bvUrl2AvUrl function replaces BV URLs with corresponding aliVideo URLs. If the command format is incorrect, it prints a help message.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/tools/bv2av.js\":0-40",
+            "content": "var args = process.argv;\nvar table = 'fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF',\n  tr = {};\nfor (var i = 0; i < 58; i++) {\n  tr[table[i]] = i;\n}\nvar s = [11, 10, 3, 8, 4, 6],\n  xor = 177451812,\n  add = 8728348608;\nfunction bv2av(x) {\n  var r = 0;\n  for (var i = 0; i < 6; i++) {\n    r += tr[x[s[i]]] * 58 ** i;\n  }\n  return (r - add) ^ xor;\n}\nfunction av2bv(x) {\n  x = (x ^ xor) + add;\n  r = 'BV1  4 1 7  '.split('');\n  for (var i = 0; i < 6; i++) {\n    r[s[i]] = table[Math.floor(x / 58 ** i) % 58];\n  }\n  return r.join('');\n}\nfunction bvUrl2AvUrl(url) {\n  return url.replace(/\\/video\\/(BV([a-zA-Z0-9]+))/, function (str, bv) {\n    var avCode = bv2av(bv);\n    return str.replace(bv, 'av' + avCode);\n  });\n}\nargs.shift()\nargs.shift()\nfunction print_help(){console.log(\"command format: (-bv2av BV<remainder>)|(-av2bv av<remainder>)\");}\nif (args.length!==2){print_help();}\nelse {\nif (args[0] == \"-bv2av\"){if (args[1].startsWith(\"BV\")){console.log(\"av\"+bv2av(args[1]))}else{print_help();}}\n\telse if (args[0] == \"-av2bv\"){"
+        },
+        {
+            "comment": "This code snippet checks if the second argument of a function starts with \"av\". If it does, it calls av2bv() function to convert \"av\" to \"bv\". If not, or if the argument is missing, it prints help information.",
+            "location": "\"/media/root/Prima/works/generated_docs/autoup_doc/src/tools/bv2av.js\":40-42",
+            "content": "if (args[1].startsWith(\"av\")){console.log(av2bv(args[1].substring(2,args[1].length)))}else{print_help()}}\n\telse{print_help()}\n}"
+        }
+    ]
+}
