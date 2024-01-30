@@ -1,7 +1,7 @@
 {
     "url": {
         "full": "https://gitee.com/x00e0d991e368/auto-up",
-        "partial": "/x00e0d991e368/auto-up"
+        "partial": "x00e0d991e368/auto-up"
     },
     "file_mapping": {
         "0": {
@@ -172,7 +172,7 @@
         "33": {
             "filepath": "/generator/faceswap/README.md",
             "entry_id": 202,
-            "language_id": "markdown"
+            "language_id": "plain-text"
         },
         "34": {
             "filepath": "/generator/singing/demo_song.py",
@@ -237,7 +237,7 @@
         "46": {
             "filepath": "/poster/README.md",
             "entry_id": 282,
-            "language_id": "markdown"
+            "language_id": "plain-text"
         },
         "47": {
             "filepath": "/poster/bili_interactive_upload/BRIEF",
