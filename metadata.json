@@ -7,7 +7,7 @@
         "0": {
             "filepath": "/README.md",
             "entry_id": 0,
-            "language_id": "plain-text"
+            "language_id": "markdown"
         },
         "1": {
             "filepath": "/bilibiliupload_failsafe.sh",
@@ -17,7 +17,7 @@
         "2": {
             "filepath": "/collector/bili_info_collect/README.md",
             "entry_id": 14,
-            "language_id": "markdown"
+            "language_id": "plain-text"
         },
         "3": {
             "filepath": "/collector/celeb_picture_collect/baidu_spider.js",
@@ -137,7 +137,7 @@
         "26": {
             "filepath": "/generator/README.md",
             "entry_id": 164,
-            "language_id": "plain-text"
+            "language_id": "markdown"
         },
         "27": {
             "filepath": "/generator/danmaku_filter/extract_danmaku.py",
@@ -172,7 +172,7 @@
         "33": {
             "filepath": "/generator/faceswap/README.md",
             "entry_id": 202,
-            "language_id": "plain-text"
+            "language_id": "markdown"
         },
         "34": {
             "filepath": "/generator/singing/demo_song.py",
@@ -342,7 +342,7 @@
         "67": {
             "filepath": "/poster/uploader/README.md",
             "entry_id": 424,
-            "language_id": "markdown"
+            "language_id": "plain-text"
         },
         "68": {
             "filepath": "/poster/uploader/bilibili.py",
